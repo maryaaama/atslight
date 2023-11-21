@@ -1,4 +1,4 @@
-import NavBar from "../..//components/navBar/navBar";
+import NavBar from "../../components/navBar/navBar";
 import Button from "../../components/button/button";
 import CandidateCard from "../../components/candidateCard/candidateCard";
 export default function candidates() {

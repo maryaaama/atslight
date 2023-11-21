@@ -21,8 +21,7 @@ export const CandidateCard = () => {
       <img
         src={Image1}
         alt="person"
-        style={{ height: "90px", width: "90px" }}
-        className="rounded-xl m-1.5 border shadow w-[26%]"
+        className="rounded-xl m-1.5 border shadow w-[90px] h-[90px]"
       />
       <div className="w-[46%] m-1 pb-4">
         <h2 className="pb-4">محمد علیپور</h2>

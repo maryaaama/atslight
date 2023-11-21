@@ -35,9 +35,7 @@ export default function Company() {
                 <img
                   src={file}
                   alt=""
-                  className="p-2"
-                  style={{width:"180px" , height:"100px"}}
-                />
+                  className="p-2  w-[180px]  h-[100px]"                />
               </label>
             </section>
           </div>

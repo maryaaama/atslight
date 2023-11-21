@@ -23,7 +23,7 @@ export default function OrganizationChart() {
         id="name"
         className="h-11 text-center text-10  border-2  border-gray2 focus:border-gray2 text-sm rounded-lg block w-full p-6  "
       />
-      <div className=" h-14 w-[0.1rem] bg-gray2 m-auto"></div>
+      <div className=" h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
       <button
         className="w-full border-2 border-gray2 rounded-lg p-6 h-11
        text-gray2 flex items-center justify-center hover:bg-opacity-80"
@@ -31,7 +31,7 @@ export default function OrganizationChart() {
       >
         مدیریت فروش
       </button>
-      <div className="h-14 w-[0.1rem] bg-gray2 m-auto"></div>
+      <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
       <button className="w-full border-2 border-gray2 rounded-lg p-6 h-11 bg-opabg-opacity-80 text-gray2 flex items-center justify-center">
         افزودن شغل جدید +
       </button>
