@@ -1,12 +1,11 @@
-import Image from "next/image";
-import Logo from "../../../public/image/logo.png";
-import { useRouter } from "next/navigation";
+import Logo from "../../image/logo.png";
+import { useNavigate } from 'react-router-dom';
 
 export default function OrganizationChart() {
-  const router = useRouter();
+  const navigate = useNavigate();
   return (
     <div className="relative z-0 px-2 m-auto lg:max-w-[30%] max-w-[90%] my-10">
-      <Image src={Logo} alt="Logo" className="h-40 w-auto m-auto" priority />
+      <img src={Logo} alt="Logo" className="h-40 w-auto m-auto" />
       <h1 className="text-center font-bold text-xl mt-2">
         استودیو منابع انسانی کارجو+
       </h1>
@@ -28,7 +27,7 @@ export default function OrganizationChart() {
       <button
         className="w-full border-2 border-gray2 rounded-lg p-6 h-11
        text-gray2 flex items-center justify-center hover:bg-opacity-80"
-        onClick={() => router.push("/candidates")}
+        onClick={() => navigate("/candidates")}
       >
         مدیریت فروش
       </button>

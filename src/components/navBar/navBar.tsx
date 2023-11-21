@@ -1,14 +1,15 @@
 import { FaArrowRight } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import { useNavigate } from 'react-router-dom';
 interface data {
   name: string;
 }
 export default function NavBar({ name }: data) {
-  const router = useRouter();
+  const navigate = useNavigate();
+
   return (
     <nav className="flex justify-start p-2 bg-white border-b">
       <div className="flex">
-        <button type="button" onClick={() => router.back()}>
+        <button type="button" onClick={() => navigate(-1)}>
           <FaArrowRight />
         </button>
         <p className="mr-4">{name}</p>

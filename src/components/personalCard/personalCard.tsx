@@ -1,6 +1,5 @@
 import React from "react";
-import Image from "next/image";
-import Image1 from "../../../public/image/image1.png";
+import Image1 from "../../image/image1.png";
 import Button from "../button/button";
 
 const PersonalCard = () => {
@@ -14,7 +13,7 @@ const PersonalCard = () => {
       </div>
       <div className="w-full flex flex-row-2 justify-between items-center gap-10">
         <div className="w-1/2 h-28 rounded-sm shadow-xl shadow-slate-300 mx-6">
-          <Image
+          <img
             alt="person"
             src={Image1}
             className="rounded-2xl w-full h-full m-auto p-0"
