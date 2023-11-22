@@ -1,21 +1,20 @@
 import "@mantine/carousel/styles.css";
 import { Carousel } from "@mantine/carousel";
 import { MantineProvider } from "@mantine/core";
-import { useRouter } from "next/navigation";
+import { useNavigate } from 'react-router-dom';
 import { FaCheck as NextIcon, FaTimes as PrevIcon } from "react-icons/fa";
 import { useState } from "react";
-import Logo from "../../../public/image/logo.png";
-import Image from "next/image";
+import Logo from "../../image/logo.png";
 
 export default function Slider() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [first, setFirst] = useState(1);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const handleLastSlideClick = () => {
     setFirst(0);
     if (currentSlide === 2) {
-      router.push("/signin");
+      navigate("/signin");
     }
   };
 
@@ -46,7 +45,7 @@ export default function Slider() {
         >
           <Carousel.Slide className="bg-yellow-300/100 w-9 h-screen flex justify-center items-center text-center">
             <div className="w-full lg:w-1/2 h-80 overflow-hidden ">
-              <Image src={Logo} alt="..." className="m-auto" width={150} />
+              <img src={Logo} alt="..." className="m-auto w-[150px]"/>
               <h1 className="font-bold pb-4 text-white">بازار کار</h1>
               <p className="px-5 text-white text-sm">
                 موتور جستجوی مشاغل ایران به صورت هوشمند تمامی آگهی های شغلی را
@@ -56,7 +55,7 @@ export default function Slider() {
           </Carousel.Slide>
           <Carousel.Slide className="bg-sky-500/75 w-9 h-screen flex justify-center items-center text-center">
             <div className="w-full lg:w-1/2 h-80 overflow-hidden">
-              <Image src={Logo} alt="..." className="m-auto" width={150} />
+              <img src={Logo} alt="..." className="m-auto  w-[150px]"/>
               <h1 className="font-bold pb-4 text-white">کارجو پلاس</h1>
               <p className="px-5 text-white text-sm">
                 شبکه اجتماعی کارجوپلاس به کارجوها و کارفرمایان در مراحل مخلتف
@@ -73,7 +72,7 @@ export default function Slider() {
             id="last"
           >
             <div className="w-full lg:w-1/2 h-80 overflow-hidden">
-              <Image src={Logo} alt="..." className="m-auto" width={150} />
+              <img src={Logo} alt="..." className="m-auto  w-[150px]" />
               <h1 className="font-bold pb-4 text-white">استخدام</h1>
               <p className="px-5 text-white text-sm">
                 استودیو کارجو+ جایی است که مجموعه ای از خدمات و نرم افزار های

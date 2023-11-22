@@ -1,19 +1,19 @@
 
-import "../globals.css";
+// import "../globals.css";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from 'react-router-dom';
 import Countdown from "react-countdown";
 
 export default function Signup() {
   const [data, setData] = useState("");
   const [err, setErr] = useState("");
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const clickHandlear = () => {
     if (!data.trim()) {
       setErr("وارد کردن کد الزامیست");
     } else {
-      router.push("/company");
+      navigate("/company");
     }
   };
   const Completionist = () => (
@@ -74,7 +74,7 @@ export default function Signup() {
               <Countdown date={Date.now() + 119000} renderer={renderer} />
 
               <button
-                onClick={() => router.push("/signin")}
+                onClick={() => navigate("/signin")}
                 className="flex w-1/2 justify-center m-auto border bg-back shadow-md rounded-md px-1.5 py-1.5 text-xs font-semibold leading-6 text-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
               >
                 ویرایش شماره

@@ -1,19 +1,16 @@
 import NavBar from "../../components/navBar/navBar";
-import Image, { StaticImageData } from "next/image";
 import { ChangeEvent, useState } from "react";
-import DefaultImage from "../../../public/image/upload.png";
-import Link from "next/link";
+import DefaultImage from "../../image/upload.png";
+import { Link } from 'react-router-dom';
 
 export default function Company() {
-  const [file, setFile] = useState<StaticImageData>(DefaultImage);
+  const [file, setFile] = useState(DefaultImage);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const selectedFile = event.target.files?.[0];
     if (selectedFile) {
       if (selectedFile.type.startsWith("image/")) {
-        setFile(
-          URL.createObjectURL(selectedFile) as unknown as StaticImageData
-        );
+        setFile(URL.createObjectURL(selectedFile));
       } else {
         alert("فایل نامعتبر!!! لطفا فایل با فرمت درست را وارد کنید");
       }
@@ -35,14 +32,10 @@ export default function Company() {
                   id="upload"
                   className="hidden"
                 />
-                <Image
-                  width={180}
-                  height={100}
+                <img
                   src={file}
                   alt=""
-                  className="p-2"
-                  priority
-                />
+                  className="p-2  w-[180px]  h-[100px]"                />
               </label>
             </section>
           </div>
@@ -68,7 +61,7 @@ export default function Company() {
             className={
               "p-[12px] my-4 font-bold flex items-center justify-center w-full bg-primary text-white border border-gray1 rounded-lg shadow"
             }
-            href={"/organization"}
+            to={"/organization"}
           >
             {" "}
             ذخیره

@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
+import Candidate from './routes/candidate/page';
+import Candidates from './routes/candidates/page';
+import Company from './routes/company/page';
+import Organization from './routes/organization/page';
+import Signin from './routes/signin/page';
+import Verify from './routes/verify/page';
+import Slider from './components/slider/slider'
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Slider />} />
+      <Route path="Candidate" element={<Candidate />} />
+      <Route path="Candidates" element={<Candidates />} />
+      <Route path="Company" element={<Company />} />
+      <Route path="Organization" element={<Organization />} />
+      <Route path="Signin" element={<Signin />} />
+      <Route path="Verify" element={<Verify />} />
+
+
+    </Routes>
   );
 }
 

@@ -1,14 +1,14 @@
-import "../globals.css";
+// import "../globals.css";
 import { SyntheticEvent, useState } from "react";
-import { KavehNegar } from "../../api/kavehNegar";
+// import { KavehNegar } from "../../api/kavehNegar";
 
 export default function Home() {
   const [data, setData] = useState("");
-  const { sendSms, err } = KavehNegar();
+  // const { sendSms, err } = KavehNegar();
 
-  const clickHandler = () => {
-    sendSms({ data });
-  };
+  // const clickHandler = () => {
+  //   sendSms({ data });
+  // };
 
   return (
     <main>
@@ -37,20 +37,20 @@ export default function Home() {
               placeholder="0912XXXXXXX"
               className="my-2 pl-2 text-sm  text-left block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray2 placeholder:text-gray2 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:leading-8"
             />
-            <span className="text-red-600 text-xs">{err}</span>
+            {/* <span className="text-red-600 text-xs">{err}</span> */}
             <p className="text-slate-500 text-xs mt-2">
               شرایط استفاده از خدمات و حریم خصوصی این سرویس را می‌پذیرم.
             </p>
           </div>
 
           <div className="flex w-full mt-8">
-            <button
+            {/* <button
               type="submit"
               onClick={clickHandler}
               className="flex w-full justify-center rounded-md bg-primary py-1.5 text-sm font-semibold leading-8 text-white shadow-sm hover:bg-opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
             >
               تایید
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
