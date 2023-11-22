@@ -30,10 +30,10 @@ const PersonalCard = () => {
       </div>
       <div className="w-full flex border-b py-4 gap-10">
         <div className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-2 font-normal bg-gray-100">
-          <Button name="رزومه" />
+          <Button name="رزومه" className={""} />
         </div>
         <div className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-2 font-normal bg-gray-100">
-          <Button name="مدارک" />
+          <Button name="مدارک" className={""} />
         </div>
       </div>
     </div>

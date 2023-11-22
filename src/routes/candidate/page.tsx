@@ -36,10 +36,10 @@ export default function candidate() {
       </div>
       <div className="w-full flex border-t py-5">
         <div className="w-1/2 text-center border border-slate-300 rounded-md shadow mx-6 py-2 font-normal bg-gray-100">
-          <Button name="رد صلاحیت" />
+          <Button name="رد صلاحیت" className={""} />
         </div>
         <div className="w-1/2 text-center border border-slate-300 rounded-md shadow mx-6 py-2 font-normal bg-primary text-white">
-          <Button name="استخدام" />
+          <Button name="استخدام" className={""} />
         </div>
       </div>
       <div className="flex flex-row py-4 px-3 justify-between border-t">

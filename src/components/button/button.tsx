@@ -4,7 +4,7 @@ interface data {
   name: string
 }
 
-const Button = ({ className, name }: any) => {
+const Button = ({ className, name }: data) => {
   return (
     <div>
       <button
