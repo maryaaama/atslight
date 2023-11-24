@@ -1,0 +1,21 @@
+ mutation UpdateCompany($input: UpdateCompanyInput!) {
+    updateCompany(input: $input) {
+      company {
+        nodeId
+        id
+        translations {
+          nodes {
+            nodeId
+            name
+            lang
+          }
+        }
+        languages
+        category
+        companySize
+        customWebsiteHost
+        logoUrl
+      }
+    }
+  }
+`
