@@ -1,0 +1,37 @@
+  query Jobs(
+    $filter: JobFilter
+    $orderBy: [JobsOrderBy!]
+    $first: Int
+    $offset: Int
+  ) {
+    jobs(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
+      nodes {
+        nodeId
+        id
+        translations {
+          nodes {
+            lang
+            nodeId
+            title
+          }
+        }
+        status
+        department {
+          nodeId
+          translations {
+            nodes {
+              nodeId
+              lang
+              title
+            }
+          }
+        }
+        canManageCandidates
+      }
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+  }
+`

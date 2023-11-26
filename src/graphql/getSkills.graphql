@@ -1,0 +1,10 @@
+export const GET_SKILLS = gql`
+  query Skills($filter: SkillFilter, $first: Int) {
+    skills(filter: $filter, first: $first) {
+      nodes {
+        nodeId
+        title
+      }
+    }
+  }
+`
