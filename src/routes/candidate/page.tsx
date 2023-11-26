@@ -2,8 +2,10 @@ import Button from "../../components/button/button";
 import NavBar from "../../components/navBar/navBar";
 import PersonalCard from "../../components/personalCard/personalCard";
 import StarRating from "../../components/starRating/starRating";
+import { useState } from "react";
 
-export default function candidate() {
+export default function Candidate() {
+
   return (
     <main>
       <NavBar name={"مدیر فروش"} />
@@ -55,6 +57,7 @@ export default function candidate() {
           className="m-auto text-center border border-slate-300 p-2 text-sm rounded-md shadow font-normal bg-gray-100"
           name={"قرار روی تقویم"}
         />
+   
       </div>
     </main>
   );
