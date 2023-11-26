@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Image1 from "../../image/image1.png";
 import Button from "../button/button";
+import Modal from "../../components/modal/modal";
 
 const PersonalCard = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="flex flex-col mx-auto">
       <div className="my-2">
@@ -19,7 +22,10 @@ const PersonalCard = () => {
             className="rounded-2xl w-full h-full m-auto p-0"
           />
         </div>
-        <div className="flex h-28 w-1/2 flex-col mx-6 border rounded-2xl justify-between shadow-sm shadow-slate-100">
+        <div
+          onClick={() => setOpen(true)}
+          className="flex h-28 w-1/2 flex-col mx-6 border rounded-2xl justify-between shadow-sm shadow-slate-100 cursor-pointer"
+        >
           <h1 className="text-base mx-1 my-1 text-gray2 justify-center text-center">
             نمایش توضیحات
           </h1>
@@ -36,6 +42,7 @@ const PersonalCard = () => {
           <Button name="مدارک" className={""} />
         </div>
       </div>
+      <Modal open={open} setOpen={setOpen} request={undefined} />
     </div>
   );
 };
