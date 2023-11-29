@@ -35,7 +35,7 @@ export default function Company() {
                 <img
                   src={file}
                   alt=""
-                  className="p-2  w-[180px]  h-[100px]"                />
+                  className="p-2 w-44 h-40"/>
               </label>
             </section>
           </div>
@@ -63,7 +63,6 @@ export default function Company() {
             }
             to={"/organization"}
           >
-            {" "}
             ذخیره
           </Link>
         </div>
