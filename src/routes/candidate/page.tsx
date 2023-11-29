@@ -1,3 +1,4 @@
+import "../../index.css";
 import Button from "../../components/button/button";
 import NavBar from "../../components/navBar/navBar";
 import PersonalCard from "../../components/personalCard/personalCard";

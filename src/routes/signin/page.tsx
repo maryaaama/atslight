@@ -1,4 +1,4 @@
-// import "../globals.css";
+import "../../index.css";
 import { SyntheticEvent, useState } from "react";
 // import { KavehNegar } from "../../api/kavehNegar";
 
