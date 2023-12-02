@@ -1,10 +1,30 @@
 import "../../index.css";
 import { SyntheticEvent, useState } from "react";
+import { gql, useQuery } from '@apollo/client';
 // import { KavehNegar } from "../../api/kavehNegar";
 
 export default function Home() {
   const [data, setData] = useState("");
+  const GET_COMPANIES = gql`
+  query Companies {
+    companies {
+      nodes {
+        id
+        nodeId
+        translations {
+          nodes {
+            nodeId
+            lang
+            name
+          }
+        }
+      }
+    }
+  }
+`;
   // const { sendSms, err } = KavehNegar();
+  const { data: bgdata } = useQuery(GET_COMPANIES)
+  console.log(bgdata);
 
   // const clickHandler = () => {
   //   sendSms({ data });
