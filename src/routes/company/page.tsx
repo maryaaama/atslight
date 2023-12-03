@@ -2,9 +2,24 @@ import NavBar from "../../components/navBar/navBar";
 import { ChangeEvent, useState } from "react";
 import DefaultImage from "../../image/upload.png";
 import { Link } from 'react-router-dom';
+import { useMutation } from "@apollo/client";
+import { CREATE_COMPANY } from "../../graphql/mutation";
+import LoadingButton from "../../components/button/LoadingButton.jsx";
 
 export default function Company() {
   const [file, setFile] = useState(DefaultImage);
+  const [business, setBusiness] = useState("");
+  const [manager, setManager] = useState("");
+
+  function CreateCompany(){
+    const [createUser,{loading,data,error,called}]=useMutation(CREATE_COMPANY,
+      {
+        variables:{
+          input:{business},
+        },
+      }
+      );
+  }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const selectedFile = event.target.files?.[0];
@@ -46,6 +61,8 @@ export default function Company() {
               className="shadow-sm border-2 border-gray1 rounded-lg p-2 outline-none focus:border-gray2"
               name="business"
               id="business"
+              value={business}
+              onChange={(e)=>setBusiness(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -55,8 +72,13 @@ export default function Company() {
               className="shadow-sm border-2 border-gray1 rounded-lg p-2 outline-none focus:border-gray2"
               name="manager"
               id="manager"
+              value={manager}
+              onChange={(e)=>setManager(e.target.value)}
             />
           </div>
+          <button   className={
+              "p-[12px] my-4 font-bold flex items-center justify-center w-full bg-primary text-white border border-gray1 rounded-lg shadow"
+            }> <LoadingButton /> </button>
           <Link
             className={
               "p-[12px] my-4 font-bold flex items-center justify-center w-full bg-primary text-white border border-gray1 rounded-lg shadow"
