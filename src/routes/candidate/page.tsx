@@ -4,9 +4,18 @@ import NavBar from "../../components/navBar/navBar";
 import PersonalCard from "../../components/personalCard/personalCard";
 import StarRating from "../../components/starRating/starRating";
 import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_CANDIDATE } from "../../graphql/queries";
+import { useCandidateQuery } from "../../graphql/generated/graphql";
+
 
 export default function Candidate() {
-
+  const { data, loading, error } = useCandidateQuery({
+      variables: {
+         id: 1},
+     });
+     console.log("candidate" ,data);
+     
   return (
     <main>
       <NavBar name={"مدیر فروش"} />

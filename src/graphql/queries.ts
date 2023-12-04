@@ -17,3 +17,13 @@ export const GET_COMPANIES = gql`
     }
   }
 `;
+
+export const GET_CANDIDATE = gql`
+  query Candidate ($id:Int!) {
+    candidate (id:$id) {
+        id,
+        photoUrl,
+        resumeUr
+    }
+  }
+`;
