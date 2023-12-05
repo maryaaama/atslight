@@ -24,9 +24,9 @@ import {
         })
       : false;
   
-    if (token && permissionError) {
-      window.location.href = '/logout';
-    }
+    // if (token && permissionError) {
+    //   window.location.href = '/logout';
+    // }
   });
   
   type CacheIdGetter = IdGetterObj & {

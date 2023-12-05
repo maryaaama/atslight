@@ -33882,6 +33882,13 @@ export type CompaniesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CompaniesQuery = { __typename?: 'Query', companies?: { __typename?: 'CompaniesConnection', nodes: Array<{ __typename?: 'Company', id: number, nodeId: string, translations: { __typename?: 'CompanyTranslationsConnection', nodes: Array<{ __typename?: 'CompanyTranslation', nodeId: string, lang: Language, name: string }> } }> } | null };
 
+export type CandidateQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type CandidateQuery = { __typename?: 'Query', candidate?: { __typename?: 'Candidate', id: number, photoUrl?: string | null, birthday?: any | null } | null };
+
 
 export const CompaniesDocument = gql`
     query Companies {
@@ -33932,3 +33939,45 @@ export type CompaniesQueryHookResult = ReturnType<typeof useCompaniesQuery>;
 export type CompaniesLazyQueryHookResult = ReturnType<typeof useCompaniesLazyQuery>;
 export type CompaniesSuspenseQueryHookResult = ReturnType<typeof useCompaniesSuspenseQuery>;
 export type CompaniesQueryResult = Apollo.QueryResult<CompaniesQuery, CompaniesQueryVariables>;
+export const CandidateDocument = gql`
+    query Candidate($id: Int!) {
+  candidate(id: $id) {
+    id
+    photoUrl
+    birthday
+  }
+}
+    `;
+
+/**
+ * __useCandidateQuery__
+ *
+ * To run a query within a React component, call `useCandidateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCandidateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCandidateQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useCandidateQuery(baseOptions: Apollo.QueryHookOptions<CandidateQuery, CandidateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CandidateQuery, CandidateQueryVariables>(CandidateDocument, options);
+      }
+export function useCandidateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CandidateQuery, CandidateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CandidateQuery, CandidateQueryVariables>(CandidateDocument, options);
+        }
+export function useCandidateSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<CandidateQuery, CandidateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<CandidateQuery, CandidateQueryVariables>(CandidateDocument, options);
+        }
+export type CandidateQueryHookResult = ReturnType<typeof useCandidateQuery>;
+export type CandidateLazyQueryHookResult = ReturnType<typeof useCandidateLazyQuery>;
+export type CandidateSuspenseQueryHookResult = ReturnType<typeof useCandidateSuspenseQuery>;
+export type CandidateQueryResult = Apollo.QueryResult<CandidateQuery, CandidateQueryVariables>;
