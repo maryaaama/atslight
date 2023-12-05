@@ -11,24 +11,20 @@ export default function Company() {
   const [manager, setManager] = useState("");
   const [isClick,setIsClick]=useState(false);
 
-  const [updateCompanyMutation] = useUpdateCompanyMutation()
-    // {   
-    // variables: {
-    //        input: {
-    //   id,
-    //   patch: {
-    //     translations: translations.map(({ name, lang }) => ({
-    //       name,
-    //       lang,
-    //     })),
-    //     customWebsiteHost: customWebsiteHost || null,
-    //     logoExternalId: logo?.externalId,
-    //     ...patch,
-    //   },
-    // },
-    //    },
-    //  }
-  
+//   const [updateCompanyMutation,{data,error,loading,called}] = useUpdateCompanyMutation()
+
+//   const clickHandeler =()=>{
+//     updateCompanyMutation({
+//       variables:{
+//         input:{
+//           id:2 ,
+//             patch:{
+//             }
+//         }
+//       }
+//     })
+//   }
+// console.log("company",data,called,loading,error)
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const selectedFile = event.target.files?.[0];

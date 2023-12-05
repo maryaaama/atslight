@@ -15,7 +15,7 @@ const PersonalCard = () => {
         </p>
       </div>
       <div className="w-full flex flex-row-2 justify-between items-center gap-10">
-        <div className="w-1/2 h-28 rounded-sm shadow-xl shadow-slate-300 mx-6">
+        <div className="w-1/2 h-28 sm:h-40 rounded-sm shadow-xl shadow-slate-300 mx-6">
           <img
             alt="person"
             src={Image1}
@@ -24,7 +24,7 @@ const PersonalCard = () => {
         </div>
         <div
           onClick={() => setOpen(true)}
-          className="flex h-28 w-1/2 flex-col mx-6 border rounded-2xl justify-between shadow-sm shadow-slate-100 cursor-pointer"
+          className="flex h-28 sm:h-40 w-1/2 flex-col mx-6 border rounded-2xl justify-between shadow-sm shadow-slate-100 cursor-pointer"
         >
           <h1 className="text-base mx-1 my-1 text-gray2 justify-center text-center">
             نمایش توضیحات

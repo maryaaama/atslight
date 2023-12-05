@@ -3,16 +3,19 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Countdown from "react-countdown";
+import LoadingButton from "../../components/button/LoadingButton";
 
 export default function Signup() {
   const [data, setData] = useState("");
   const [err, setErr] = useState("");
+  const [isClick,setIsClick]=useState(false);
   const navigate = useNavigate();
 
   const clickHandlear = () => {
     if (!data.trim()) {
       setErr("وارد کردن کد الزامیست");
     } else {
+      setIsClick(true)
       navigate("/company");
     }
   };
@@ -88,7 +91,10 @@ export default function Signup() {
             onClick={clickHandlear}
             className="flex w-full justify-center rounded-md bg-primary py-1.5 text-sm font-semibold leading-8 text-white shadow-sm hover:bg-opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
           >
-            ورود
+             {isClick?
+                 <LoadingButton />:
+                 "ورود"
+                }
           </button>
         </div>
       </div>
