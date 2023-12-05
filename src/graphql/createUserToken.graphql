@@ -1,9 +1,0 @@
-  mutation CreateJob($input: CreateJobInput!) {
-    createJob(input: $input) {
-      job {
-        nodeId
-        id
-      }
-    }
-  }
-`

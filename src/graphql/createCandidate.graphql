@@ -1,9 +1,0 @@
-  mutation CreateCandidate($input: CreateCandidateInput!) {
-    createCandidate(input: $input) {
-      candidate {
-        nodeId
-        id
-      }
-    }
-  }
-`
