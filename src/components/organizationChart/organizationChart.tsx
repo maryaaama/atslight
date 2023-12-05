@@ -11,7 +11,7 @@ export default function OrganizationChart() {
       </h1>
       <label
         htmlFor="name"
-        className="font-mono text-sm text-gray2
+        className="text-sm text-gray2
     bg-white relative px-1 top-3 -left-2 w-auto p-2.5 "
       >
         مدیریت:
