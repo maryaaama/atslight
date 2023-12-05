@@ -2,24 +2,20 @@ import NavBar from "../../components/navBar/navBar";
 import { ChangeEvent, useState } from "react";
 import DefaultImage from "../../image/upload.png";
 import { Link } from 'react-router-dom';
-import { useMutation } from "@apollo/client";
-import { CREATE_COMPANY } from "../../graphql/mutation";
 import LoadingButton from "../../components/button/LoadingButton.jsx";
+import { useUpdateCompanyMutation } from "../../graphql/generated/graphql";
 
 export default function Company() {
   const [file, setFile] = useState(DefaultImage);
   const [business, setBusiness] = useState("");
   const [manager, setManager] = useState("");
+  const [isClick,setIsClick]=useState(false);
 
-  function CreateCompany(){
-    const [createUser,{loading,data,error,called}]=useMutation(CREATE_COMPANY,
-      {
-        variables:{
-          input:{business},
-        },
-      }
-      );
-  }
+  const [updateCompanyMutation, { data, loading, error }] = useUpdateCompanyMutation({   
+    variables: {
+          input: manager
+       },
+     });
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const selectedFile = event.target.files?.[0];
@@ -35,7 +31,7 @@ export default function Company() {
   return (
     <div className="h-screen w-screen">
       <NavBar name={"ساخت حساب کاربری"} />
-      <form action="post" className="h-screen max-md:w-screen max-w-xl mx-auto my-32">
+      <form action="post" className="h-screen max-md:w-screen max-w-xl mx-auto md:my-32">
         <div className="flex mt-4 flex-col gap-4 mx-6">
           <p className="">تصویر لوگو</p>
           <div className="shadow-xl w-fit rounded-lg">
@@ -76,16 +72,18 @@ export default function Company() {
               onChange={(e)=>setManager(e.target.value)}
             />
           </div>
-          <button   className={
-              "p-[12px] my-4 font-bold flex items-center justify-center w-full bg-primary text-white border border-gray1 rounded-lg shadow"
-            }> <LoadingButton /> </button>
           <Link
-            className={
-              "p-[12px] my-4 font-bold flex items-center justify-center w-full bg-primary text-white border border-gray1 rounded-lg shadow"
-            }
+          className="my-4"
             to={"/organization"}
           >
-            ذخیره
+             <button
+              onClick={()=>setIsClick(true)}
+              className={"p-[12px]  font-bold flex items-center justify-center w-full bg-primary text-white border border-gray1 rounded-lg shadow"}>
+                {isClick?
+                 <LoadingButton />:
+                 "ذخیره"
+                }
+                 </button>
           </Link>
         </div>
       </form>
