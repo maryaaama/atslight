@@ -9,7 +9,7 @@ export const CandidateCard = () => {
   return (
     <span
       onClick={() => navigate("/candidate")}
-      className="flex w-full m-1 border rounded-md bg-back shadow-sm hover:bg-gray-100 hover:shadow-lg items-center"
+      className="flex w-auto m-1 border rounded-md bg-back shadow-sm hover:bg-gray-100 hover:shadow-lg items-center"
     >
       {/* <Image
         className="rounded-xl m-1.5 border shadow w-[26%]"
