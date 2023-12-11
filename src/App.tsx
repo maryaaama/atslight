@@ -8,6 +8,7 @@ import Signin from './routes/signin/page';
 import Verify from './routes/verify/page';
 import Slider from './components/slider/slider'
 import { useCompaniesQuery } from './graphql/generated/graphql';
+import PrivacyPolicy from './routes/privacy-policy/page';
 
 
 
@@ -24,6 +25,7 @@ function App() {
       <Route path="Organization" element={<Organization />} />
       <Route path="Signin" element={<Signin />} />
       <Route path="Verify" element={<Verify />} />
+      <Route path="privacy-policy" element={<PrivacyPolicy />} />
     </Routes>
 
   );
