@@ -59,7 +59,7 @@ export default function Home() {
             />
             {/* <span className="text-red-600 text-xs">{err}</span> */}
             <p className="text-slate-500 text-xs mt-2">
-              شرایط استفاده از خدمات و حریم خصوصی این <span className="text-blue-700"><a href="/privacy-policy" target="_blank">سرویس </a></span>را می‌پذیرم.
+              شرایط استفاده از خدمات و حریم خصوصی این <span className="text-blue-700 text-sm"><a href="/privacy-policy" target="_blank">سرویس </a></span>را می‌پذیرم.
             </p>
           </div>
 
