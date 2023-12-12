@@ -14,7 +14,7 @@ export default function Candidate() {
   //     variables: {
   //        id: 1},
   //    });
-  //    console.log("candidate" ,data);
+    //  console.log("candidate" ,data);
      const [loading, setLoading] = useState(true);
 
      useEffect(() => {
