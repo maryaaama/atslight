@@ -64,7 +64,7 @@ export const GET_JOBS = gql`
     }
   }
 }`;
- export const GET_USER=gql`
+ export const GET_USER = gql`
  query Users(
   $first: Int
   $offset: Int
@@ -85,6 +85,7 @@ export const GET_JOBS = gql`
       }
     }
   }
+<<<<<<< HEAD
 }`;
 
 export const GET_CANDIDATES=gql`
@@ -117,3 +118,6 @@ export const GET_CANDIDATES=gql`
     }
   }
 }`;
+=======
+}`;
+>>>>>>> f34d353 (link سرویسto privacy-policy)
