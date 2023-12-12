@@ -23,7 +23,7 @@ export const GET_CANDIDATE = gql`
     candidate (id:$id) {
         id,
         photoUrl,
-        resumeUr
+        resumeUrl
     }
   }
 `;
@@ -81,6 +81,37 @@ export const GET_JOBS = gql`
           lang
           fullname
           initials
+        }
+      }
+    }
+  }
+}`;
+
+export const GET_CANDIDATES=gql`
+ query Candidates{
+  candidates{
+    nodes {
+      id
+      translations {
+        nodes {
+          candidate {
+            photoUrl
+            translations {
+              nodes {
+                name
+                candidateId
+              }
+            }
+            jobs {
+              nodes {
+                translations {
+                  nodes {
+                    title
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

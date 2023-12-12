@@ -13,6 +13,7 @@ import PrivacyPolicy from './routes/privacy-policy/page';
 
 
 
+import EmptyPage from './routes/emptyPage/page';
 function App() {
   const { data: bgdata } = useCompaniesQuery()
   console.log(bgdata);
@@ -26,6 +27,7 @@ function App() {
       <Route path="Signin" element={<Signin />} />
       <Route path="Verify" element={<Verify />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="emptyPage" element={<EmptyPage />} />
     </Routes>
 
   );
