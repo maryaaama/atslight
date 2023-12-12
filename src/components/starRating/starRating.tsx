@@ -9,14 +9,12 @@ const StarRating = () => {
   };
 
   return (
-    <div>
       <StarRatingComponent
         name="star"
         starCount={5}
         value={rate}
         onStarClick={onClickHandler}
       />
-    </div>
   );
 };
 export default StarRating;

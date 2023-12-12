@@ -33877,6 +33877,13 @@ export type UpdateWebsiteOnWebsiteFileForWebsiteFilesWebsiteIdFkeyPatch = {
   textColor?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type UpdateCompanyMutationVariables = Exact<{
+  input: UpdateCompanyInput;
+}>;
+
+
+export type UpdateCompanyMutation = { __typename?: 'Mutation', updateCompany?: { __typename?: 'UpdateCompanyPayload', company?: { __typename?: 'Company', nodeId: string, id: number, languages: Array<Language | null>, category: CompanyCategory, companySize: CompanySize, customWebsiteHost?: string | null, logoUrl?: string | null, translations: { __typename?: 'CompanyTranslationsConnection', nodes: Array<{ __typename?: 'CompanyTranslation', nodeId: string, name: string, lang: Language }> } } | null } | null };
+
 export type CompaniesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -33915,6 +33922,54 @@ export type CandidatesQueryVariables = Exact<{ [key: string]: never; }>;
 export type CandidatesQuery = { __typename?: 'Query', candidates?: { __typename?: 'CandidatesConnection', nodes: Array<{ __typename?: 'Candidate', id: number, translations: { __typename?: 'CandidateTranslationsConnection', nodes: Array<{ __typename?: 'CandidateTranslation', candidate?: { __typename?: 'Candidate', photoUrl?: string | null, translations: { __typename?: 'CandidateTranslationsConnection', nodes: Array<{ __typename?: 'CandidateTranslation', name: string, candidateId: number }> }, jobs: { __typename?: 'CandidateJobsByJobsApplicationCandidateIdAndJobIdManyToManyConnection', nodes: Array<{ __typename?: 'Job', translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', title: string }> } }> } } | null }> } }> } | null };
 
 
+export const UpdateCompanyDocument = gql`
+    mutation UpdateCompany($input: UpdateCompanyInput!) {
+  updateCompany(input: $input) {
+    company {
+      nodeId
+      id
+      translations {
+        nodes {
+          nodeId
+          name
+          lang
+        }
+      }
+      languages
+      category
+      companySize
+      customWebsiteHost
+      logoUrl
+    }
+  }
+}
+    `;
+export type UpdateCompanyMutationFn = Apollo.MutationFunction<UpdateCompanyMutation, UpdateCompanyMutationVariables>;
+
+/**
+ * __useUpdateCompanyMutation__
+ *
+ * To run a mutation, you first call `useUpdateCompanyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateCompanyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateCompanyMutation, { data, loading, error }] = useUpdateCompanyMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateCompanyMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCompanyMutation, UpdateCompanyMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateCompanyMutation, UpdateCompanyMutationVariables>(UpdateCompanyDocument, options);
+      }
+export type UpdateCompanyMutationHookResult = ReturnType<typeof useUpdateCompanyMutation>;
+export type UpdateCompanyMutationResult = Apollo.MutationResult<UpdateCompanyMutation>;
+export type UpdateCompanyMutationOptions = Apollo.BaseMutationOptions<UpdateCompanyMutation, UpdateCompanyMutationVariables>;
 export const CompaniesDocument = gql`
     query Companies {
   companies {

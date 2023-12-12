@@ -2,9 +2,31 @@ import NavBar from "../../components/navBar/navBar";
 import { ChangeEvent, useState } from "react";
 import DefaultImage from "../../image/upload.png";
 import { Link } from 'react-router-dom';
+import LoadingButton from "../../components/button/LoadingButton.jsx";
+import { CompanyCategory, useUpdateCompanyMutation } from "../../graphql/generated/graphql";
 
 export default function Company() {
   const [file, setFile] = useState(DefaultImage);
+  const [business, setBusiness] = useState("");
+  const [manager, setManager] = useState("");
+  const [isClick,setIsClick]=useState(false);
+
+  const [updateCompanyMutation,{data,error,loading,called}] = useUpdateCompanyMutation()
+
+  const clickHandeler =()=>{
+    updateCompanyMutation({
+      variables:{
+        input:{
+          id:2 ,
+            patch:{
+              category:CompanyCategory.Educational
+            }
+        }
+      }
+    })
+  }
+  
+console.log("company",data,called,loading,error)
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const selectedFile = event.target.files?.[0];
@@ -20,7 +42,7 @@ export default function Company() {
   return (
     <div className="h-screen w-screen">
       <NavBar name={"ساخت حساب کاربری"} />
-      <form action="post" className="h-screen max-md:w-screen max-w-xl mx-auto my-32">
+      <form action="post" className="h-screen max-md:w-screen max-w-xl mx-auto md:my-32">
         <div className="flex mt-4 flex-col gap-4 mx-6">
           <p className="">تصویر لوگو</p>
           <div className="shadow-xl w-fit rounded-lg">
@@ -46,6 +68,8 @@ export default function Company() {
               className="shadow-sm border-2 border-gray1 rounded-lg p-2 outline-none focus:border-gray2"
               name="business"
               id="business"
+              value={business}
+              onChange={(e)=>setBusiness(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -55,15 +79,22 @@ export default function Company() {
               className="shadow-sm border-2 border-gray1 rounded-lg p-2 outline-none focus:border-gray2"
               name="manager"
               id="manager"
+              value={manager}
+              onChange={(e)=>setManager(e.target.value)}
             />
           </div>
           <Link
-            className={
-              "p-[12px] my-4 font-bold flex items-center justify-center w-full bg-primary text-white border border-gray1 rounded-lg shadow"
-            }
+          className="my-4"
             to={"/organization"}
           >
-            ذخیره
+             <button
+              onClick={()=>setIsClick(true)}
+              className={"p-[12px]  font-bold flex items-center justify-center w-full bg-primary text-white border border-gray1 rounded-lg shadow"}>
+                {isClick?
+                 <LoadingButton />:
+                 "ذخیره"
+                }
+                 </button>
           </Link>
         </div>
       </form>

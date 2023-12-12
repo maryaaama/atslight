@@ -9,7 +9,7 @@ export const CandidateCard = () => {
   return (
     <span
       onClick={() => navigate("/candidate")}
-      className="flex w-full m-1 border rounded-md bg-back shadow-sm hover:bg-gray-100 hover:shadow-lg items-center"
+      className="flex w-auto m-1 border rounded-md bg-back shadow-sm hover:bg-gray-100 hover:shadow-lg items-center"
     >
       {/* <Image
         className="rounded-xl m-1.5 border shadow w-[26%]"
@@ -29,7 +29,7 @@ export const CandidateCard = () => {
       </div>
       <div className="w-[28%] mx-1 my-0 py-2 rounded-xl shadow bg-white">
         <h1 className="w-full text-center m-auto text-lg py-2">70%</h1>
-        <div className="w-full text-center m-auto p-0.5">
+        <div className="w-full md:text-2xl text-center m-auto p-0.5">
           <StarRating />
         </div>
       </div>
