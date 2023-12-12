@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from "react";
 import DefaultImage from "../../image/upload.png";
 import { Link } from 'react-router-dom';
 import LoadingButton from "../../components/button/LoadingButton.jsx";
-import { useUpdateCompanyMutation } from "../../graphql/generated/graphql";
+import { CompanyCategory, useUpdateCompanyMutation } from "../../graphql/generated/graphql";
 
 export default function Company() {
   const [file, setFile] = useState(DefaultImage);
@@ -11,20 +11,22 @@ export default function Company() {
   const [manager, setManager] = useState("");
   const [isClick,setIsClick]=useState(false);
 
-//   const [updateCompanyMutation,{data,error,loading,called}] = useUpdateCompanyMutation()
+  const [updateCompanyMutation,{data,error,loading,called}] = useUpdateCompanyMutation()
 
-//   const clickHandeler =()=>{
-//     updateCompanyMutation({
-//       variables:{
-//         input:{
-//           id:2 ,
-//             patch:{
-//             }
-//         }
-//       }
-//     })
-//   }
-// console.log("company",data,called,loading,error)
+  const clickHandeler =()=>{
+    updateCompanyMutation({
+      variables:{
+        input:{
+          id:2 ,
+            patch:{
+              category:CompanyCategory.Educational
+            }
+        }
+      }
+    })
+  }
+  
+console.log("company",data,called,loading,error)
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const selectedFile = event.target.files?.[0];
