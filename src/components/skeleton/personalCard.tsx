@@ -1,6 +1,6 @@
 const PersonalCardSkeleton = () => {
   return (
-    <div>
+    <div className="sm:h-11/12 max-sm:w-screen max-w-lg mx-auto sm:border sm:mt-8 sm:rounded-lg sm:items-center">
       <div className="mt-10 mb-3 mr-2 animate-pulse">
         <div className=" h-4 w-1/2 bg-gray-300 rounded"></div>
         <div className=" h-2 w-1/2 bg-gray-300 rounded my-3"></div>
