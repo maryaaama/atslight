@@ -33884,6 +33884,13 @@ export type UpdateCompanyMutationVariables = Exact<{
 
 export type UpdateCompanyMutation = { __typename?: 'Mutation', updateCompany?: { __typename?: 'UpdateCompanyPayload', company?: { __typename?: 'Company', nodeId: string, id: number, languages: Array<Language | null>, category: CompanyCategory, companySize: CompanySize, customWebsiteHost?: string | null, logoUrl?: string | null, translations: { __typename?: 'CompanyTranslationsConnection', nodes: Array<{ __typename?: 'CompanyTranslation', nodeId: string, name: string, lang: Language }> } } | null } | null };
 
+export type CreatePresignedUploadLinkMutationVariables = Exact<{
+  input: CreatePresignedUploadLinkInput;
+}>;
+
+
+export type CreatePresignedUploadLinkMutation = { __typename?: 'Mutation', createPresignedUploadLink?: { __typename?: 'CreatePresignedUploadLinkPayload', getURL: string, postURL: string, formData: any, fileKey: any } | null };
+
 export type CompaniesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -33970,6 +33977,42 @@ export function useUpdateCompanyMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateCompanyMutationHookResult = ReturnType<typeof useUpdateCompanyMutation>;
 export type UpdateCompanyMutationResult = Apollo.MutationResult<UpdateCompanyMutation>;
 export type UpdateCompanyMutationOptions = Apollo.BaseMutationOptions<UpdateCompanyMutation, UpdateCompanyMutationVariables>;
+export const CreatePresignedUploadLinkDocument = gql`
+    mutation createPresignedUploadLink($input: CreatePresignedUploadLinkInput!) {
+  createPresignedUploadLink(input: $input) {
+    getURL
+    postURL
+    formData
+    fileKey
+  }
+}
+    `;
+export type CreatePresignedUploadLinkMutationFn = Apollo.MutationFunction<CreatePresignedUploadLinkMutation, CreatePresignedUploadLinkMutationVariables>;
+
+/**
+ * __useCreatePresignedUploadLinkMutation__
+ *
+ * To run a mutation, you first call `useCreatePresignedUploadLinkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePresignedUploadLinkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPresignedUploadLinkMutation, { data, loading, error }] = useCreatePresignedUploadLinkMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreatePresignedUploadLinkMutation(baseOptions?: Apollo.MutationHookOptions<CreatePresignedUploadLinkMutation, CreatePresignedUploadLinkMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePresignedUploadLinkMutation, CreatePresignedUploadLinkMutationVariables>(CreatePresignedUploadLinkDocument, options);
+      }
+export type CreatePresignedUploadLinkMutationHookResult = ReturnType<typeof useCreatePresignedUploadLinkMutation>;
+export type CreatePresignedUploadLinkMutationResult = Apollo.MutationResult<CreatePresignedUploadLinkMutation>;
+export type CreatePresignedUploadLinkMutationOptions = Apollo.BaseMutationOptions<CreatePresignedUploadLinkMutation, CreatePresignedUploadLinkMutationVariables>;
 export const CompaniesDocument = gql`
     query Companies {
   companies {

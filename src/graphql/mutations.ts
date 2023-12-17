@@ -22,3 +22,12 @@ export const UPDATE_COMPANY = gql`
     }
   }
 `;
+export const CREATE_PRESIGND_UPLOAD_LINK = gql`
+mutation createPresignedUploadLink($input: CreatePresignedUploadLinkInput!) {
+  createPresignedUploadLink(input: $input) {
+    getURL
+    postURL
+    formData
+    fileKey
+  }
+}`

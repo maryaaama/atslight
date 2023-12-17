@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from "react";
 import DefaultImage from "../../image/upload.png";
 import { Link } from 'react-router-dom';
 import LoadingButton from "../../components/button/LoadingButton.jsx";
-import { CompanyCategory, Language, useUpdateCompanyMutation } from "../../graphql/generated/graphql";
+import { CompanyCategory, Language, useUpdateCompanyMutation, useCreatePresignedUploadLinkMutation } from "../../graphql/generated/graphql";
 
 export default function Company() {
   const [file, setFile] = useState(DefaultImage);
@@ -11,6 +11,7 @@ export default function Company() {
   const [isClick,setIsClick]=useState(false);
 
   const [updateCompanyMutation,{data,error,loading,called}] = useUpdateCompanyMutation()
+  const [CreatePresignedUploadLinkMutation] = useCreatePresignedUploadLinkMutation()
 
   const clickHandeler =()=>{
     // console.log("cliced");
@@ -20,6 +21,7 @@ export default function Company() {
         input:{
           id:700 ,
             patch:{
+              logoExternalId:"",
               translations:[{name:business,lang:Language.Fa}]
               // category:CompanyCategory.Educational
             }
@@ -27,11 +29,13 @@ export default function Company() {
       }
     })
   }
-  
-console.log("company",data,called,loading,error)
+
+// console.log("company",data,called,loading,error)
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const selectedFile = event.target.files?.[0];
+    console.log(selectedFile);
+    
     if (selectedFile) {
       if (selectedFile.type.startsWith("image/")) {
         setFile(URL.createObjectURL(selectedFile));
