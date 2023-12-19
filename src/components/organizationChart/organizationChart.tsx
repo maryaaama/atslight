@@ -38,7 +38,9 @@ const[manager,setManager]=useState("")
           >
             مدیریت فروش
           </button> */}
-          <button className="w-full border-2 border-gray2 rounded-lg p-6 h-11 bg-opabg-opacity-80 text-gray2 flex items-center justify-center">
+          <button 
+            onClick={() => navigate("/jobs")}
+          className="w-full border-2 border-gray2 rounded-lg p-6 h-11 bg-opabg-opacity-80 text-gray2 flex items-center justify-center">
             افزودن شغل جدید +
           </button>
         </div>
