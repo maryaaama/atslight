@@ -16,9 +16,10 @@ const[manager,setManager]=useState("")
         <div className="relative group mt-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
          <label
            htmlFor="name"
-           className="transform transition-all absolute text-gray2 top-0 right-2 h-full flex items-center pl-2 text-sm 
-           group-focus-within:text-base peer-valid:text-base group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full 
-           peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0 group-focus-within:text-black">
+           className={
+            manager?
+            "absolute -mt-6 pr-2 text-base h-1/2":
+           "transform transition-all absolute text-gray2 top-0 right-2 h-full flex items-center pl-2 text-sm group-focus-within:text-base peer-valid:text-base group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0 group-focus-within:text-black"}>
            مدیریت
          </label>
          <input

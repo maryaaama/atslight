@@ -2,8 +2,9 @@ import NavBar from "../navBar/navBar";
 import PersonalCardSkeleton from "./personalCard";
 const CandidateSkeleton = () => {
   return (
-    <main className="animate-pulse">
+    <main>
       <NavBar name={"مدیر فروش"} />
+      <div className="animate-pulse">
       <PersonalCardSkeleton />
       <div className="sm:h-11/12 max-sm:w-screen max-w-lg mx-auto sm:border sm:mt-8 sm:rounded-lg sm:items-center animate-pulse my-3">
         <div className="flex justify-between mx-6 my-2 lg:gap-x-96 gap-x-12 mt-3">
@@ -43,6 +44,7 @@ const CandidateSkeleton = () => {
             <div className="h-2 w-14 bg-gray-100 rounded"></div>
           </div>
         </div>
+      </div>
       </div>
     </main>
   );
