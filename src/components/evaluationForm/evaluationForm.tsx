@@ -10,7 +10,7 @@ const EvaluationForm = () => {
         <p className="ml-8 text-right w-52 h-22 overflow-y-hidden verflow-auto break-words">
           ارزیابی رزومه
         </p>
-        <div className="mt-6 md:mt-0">
+        <div className="mt-6 md:mt-0 text-2xl">
           <StarRating  starClick={undefined}/>
         </div>
       </div>
@@ -25,7 +25,7 @@ const EvaluationForm = () => {
         <p className="ml-8 text-right w-52 h-22 overflow-y-hidden verflow-auto break-words">
           جمع بندی
         </p>
-        <div className="mt-6 md:mt-0">
+        <div className="mt-6 md:mt-0 text-2xl">
           <StarRating  starClick={undefined}/>
         </div>
       </div>
