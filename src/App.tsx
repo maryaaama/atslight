@@ -10,10 +10,6 @@ import Slider from './components/slider/slider'
 import { useCompaniesQuery } from './graphql/generated/graphql';
 import PrivacyPolicy from './routes/privacy-policy/page';
 import Jobs from './routes/jobs/page';
-
-
-
-
 import EmptyPage from './routes/emptyPage/page';
 function App() {
   const { data: bgdata } = useCompaniesQuery()

@@ -30,7 +30,7 @@ export const CandidateCard = () => {
       <div className="w-[28%] mx-1 my-0 py-2 rounded-xl shadow bg-white">
         <h1 className="w-full text-center m-auto text-lg py-2">70%</h1>
         <div className="w-full md:text-2xl text-center m-auto p-0.5">
-          <StarRating />
+          <StarRating starClick={undefined}/>
         </div>
       </div>
     </span>

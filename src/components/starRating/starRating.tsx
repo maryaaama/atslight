@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import StarRatingComponent from "react-star-rating-component";
-import Modal from "../modal/modal";
-import EvaluationForm from "../evaluationForm/evaluationForm";
-
-const StarRating = () => {
+interface StarRatingProps {
+  starClick: any;
+}
+const StarRating = ({ starClick }: StarRatingProps) => {
   const [rate, setRate] = useState(0);
-  const [open, setOpen] = useState(false);
-
 
   const onClickHandler = (rateValue: number) => {
-    // setRate(rateValue);
-    setOpen(true)
+    if (starClick) {
+      starClick();
+    } else {
+      setRate(rateValue);
+    }
   };
 
   return (
@@ -21,11 +22,7 @@ const StarRating = () => {
         value={rate}
         onStarClick={onClickHandler}
       />
-      <Modal open={open} setOpen={setOpen} request={undefined} >
-        <EvaluationForm/>
-        </Modal>
     </>
-
   );
 };
 export default StarRating;

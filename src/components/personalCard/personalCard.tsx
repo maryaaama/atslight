@@ -42,7 +42,7 @@ const PersonalCard = () => {
           <Button name="مدارک" className={""} />
         </div>
       </div>
-      <Modal open={open} setOpen={setOpen} request={undefined} />
+      <Modal open={open} setOpen={setOpen} request={undefined} children={undefined}/>
     </div>
   );
 };
