@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image1 from "../../image/image1.png";
 import Button from "../button/button";
 import Modal from "../../components/modal/modal";
+import PersonalCardList from "../personalCardList/personalCardList";
 
 const PersonalCard = () => {
   const [open, setOpen] = useState(false);
@@ -42,7 +43,9 @@ const PersonalCard = () => {
           <Button name="مدارک" className={""} />
         </div>
       </div>
-      <Modal open={open} setOpen={setOpen} request={undefined} />
+      <Modal open={open} setOpen={setOpen} request={undefined}>
+        <PersonalCardList/>
+      </Modal>
     </div>
   );
 };

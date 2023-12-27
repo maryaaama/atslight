@@ -6,9 +6,10 @@ interface ModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   request: any;
+  children:any;
 }
 
-export default function Modal({ open, setOpen, request }: ModalProps) {
+export default function Modal({ open, setOpen, request,children }: ModalProps) {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -16,6 +17,7 @@ export default function Modal({ open, setOpen, request }: ModalProps) {
         className="fixed inset-0 z-10 overflow-y-auto h-full w-full"
         onClose={() => setOpen(false)}
       >
+       
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -40,16 +42,20 @@ export default function Modal({ open, setOpen, request }: ModalProps) {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="flex flex-col transform overflow-hidden sm:rounded-lg rounded-none bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 w-full sm:w-full max-w-full sm:p-6">
-                <div className="absolute right-0 top-0 pr-4 pt-4 sm:block">
+                <div className="absolute left-2 top-0 pr-4 pt-4 sm:block">
                   <button
                     type="button"
-                    className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="text-left rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     onClick={() => setOpen(false)}
                   >
+                    
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
+                <br></br>
+                {children}
                 <div className="container mx-auto my-auto">{request}</div>
+                
               </Dialog.Panel>
             </Transition.Child>
           </div>
