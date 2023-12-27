@@ -50,7 +50,7 @@ export default function Signup() {
     <div className="flex flex-col h-[95vh] sm:h-auto sm:my-36">
       <div className=" flex h-full flex-col px-4 py-8 sm:mx-auto sm:w-full sm:max-w-sm sm:border sm:shadow-md sm:rounded-md sm:border-gray-200">
         <div className="flex flex-1 flex-col px-2">
-          <h2 className="font-semibold text-xl">احراز هویت کاربر</h2>
+          <h2 className="font-semibold text-xl">تأیید شماره موبایل</h2>
           <div>
             <div className="flex flex-col py-5">
               <label
