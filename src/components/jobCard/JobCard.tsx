@@ -12,7 +12,7 @@ export const JobCard = () => {
       <div className="w-[46%]">
         <h2 className="pr-2">مدیر فروش</h2>
       </div>
-      <Modal open={open} setOpen={setOpen} request={undefined} />
+      <Modal open={open} setOpen={setOpen} request={undefined} children={undefined} />
     </span>
   );
 };
