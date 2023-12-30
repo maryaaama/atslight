@@ -11,7 +11,7 @@ const PersonalCard = () => {
     <div className="flex flex-col mx-auto">
       <div className="my-2">
         <h1 className="text-lg font-bold mx-2">نام و نام خانوادگی</h1>
-        <p className="text-base font-light text-gray2 mx-2 my-1">
+        <p className="text-base font-normal text-gray2 mx-2 my-1">
           مدیر فروش و بازاریابی
         </p>
       </div>
@@ -27,19 +27,17 @@ const PersonalCard = () => {
           onClick={() => setOpen(true)}
           className="flex h-28 sm:h-40 w-1/2 flex-col mx-6 border rounded-2xl justify-between shadow-sm shadow-slate-100 cursor-pointer"
         >
-          <h1 className="text-base mx-1 my-1 text-gray2 justify-center text-center">
-            نمایش توضیحات
+          <h1 className="text-base my-auto text-gray2 justify-center text-center leading-7 font-bold">
+            نمایش<br />
+            توضیحات
           </h1>
-          <p className="text-lg mx-1 my-1 self-center text-red-950 font-extrabold text-center">
-            انطباق ۷۵٪
-          </p>
-        </div>
+         </div>
       </div>
       <div className="w-full flex border-b py-4 gap-10">
-        <div className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-2 font-normal bg-gray-100">
+        <div className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-3 font-semibold bg-gray-100">
           <Button name="رزومه" className={""} />
         </div>
-        <div className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-2 font-normal bg-gray-100">
+        <div className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-3 font-semibold bg-gray-100">
           <Button name="مدارک" className={""} />
         </div>
       </div>
