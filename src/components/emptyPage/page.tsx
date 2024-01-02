@@ -1,8 +1,8 @@
-import NavBar from "../../components/navBar/navBar";
+import NavBar from "../navBar/navBar";
 const EmptyPage = () => {
   return (
     <main>
-        <NavBar name={"عدم وجود اطلاعات"}/>
+      <NavBar name={"عدم وجود اطلاعات"} />
       <div className="w-full border-b border-t">
         <div className="flex items-center justify-center h-screen">
           <div className="text-center">
