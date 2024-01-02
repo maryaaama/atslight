@@ -52,7 +52,7 @@ export default function Company() {
         <div className="flex mt-4 flex-col gap-4 mx-6">
           <p className="">تصویر لوگو</p>
           <div className="shadow-xl w-fit rounded-lg">
-            <section className="container w-fit items-start border-[2px] border-gray1 border-dashed rounded-lg">
+            <section className="container w-fit items-start border border-gray1 border-dashed rounded-lg">
               <label htmlFor="upload" className="cursor-pointe">
                 <input
                   type="file"
@@ -84,7 +84,7 @@ export default function Company() {
           >
              <button
               onClick={()=>clickHandeler()}
-              className={"p-[12px]  font-bold flex items-center justify-center w-full bg-primary text-white border border-gray1 rounded-lg shadow"}>
+              className={"p-3 font-bold flex items-center justify-center w-full bg-primary text-white border border-gray1 rounded-lg shadow"}>
                 {isClick?
                  <LoadingButton />:
                  "ذخیره"

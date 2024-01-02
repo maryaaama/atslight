@@ -9,7 +9,7 @@ const PersonalCard = () => {
 
   return (
     <div className="flex flex-col mx-auto">
-      <div className="my-2">
+      <div className="m-4">
         <h1 className="text-lg font-bold mx-2">نام و نام خانوادگی</h1>
         <p className="text-base font-normal text-gray2 mx-2 my-1">
           مدیر فروش و بازاریابی
