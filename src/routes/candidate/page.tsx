@@ -69,9 +69,9 @@ export default function Candidate() {
             <Button name="استخدام" className={""} />
           </div>
         </div>
-        <div className="flex flex-row py-4 px-3 justify-between border-t">
+        <div className="flex flex-row py-5 px-3 justify-between border-t">
           <Button
-            className="w-1/2 mx-6 text-center rounded-md shadow py-3 m-auto border border-slate-300 p-3 text-sm bg-[#b23226] text-white font-semibold"
+            className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-[#b23226] text-white"
             name={"تماس تلفنی"}
           />
           <Button
