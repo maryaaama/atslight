@@ -10,7 +10,6 @@ import Slider from './components/slider/slider'
 import { useCompaniesQuery } from './graphql/generated/graphql';
 import PrivacyPolicy from './routes/privacy-policy/page';
 import Jobs from './routes/jobs/page';
-import EmptyPage from './routes/emptyPage/page';
 function App() {
   const { data: bgdata } = useCompaniesQuery()
   console.log(bgdata);
@@ -24,7 +23,6 @@ function App() {
       <Route path="Signin" element={<Signin />} />
       <Route path="Verify" element={<Verify />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
-      <Route path="emptyPage" element={<EmptyPage />} />
       <Route path="jobs" element={<Jobs />} />
     </Routes>
 
