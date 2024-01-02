@@ -9,14 +9,14 @@ const PersonalCard = () => {
 
   return (
     <div className="flex flex-col mx-auto">
-      <div className="my-2">
+      <div className="m-4">
         <h1 className="text-lg font-bold mx-2">نام و نام خانوادگی</h1>
         <p className="text-base font-normal text-gray2 mx-2 my-1">
           مدیر فروش و بازاریابی
         </p>
       </div>
       <div className="w-full flex flex-row-2 justify-between items-center gap-10">
-        <div className="w-1/2 h-28 sm:h-40 rounded-sm shadow-xl shadow-slate-300 mx-6">
+        <div className="w-1/2 h-32 sm:h-40 rounded-2xl shadow-md shadow-slate-200 mx-6 border">
           <img
             alt="person"
             src={Image1}
@@ -25,7 +25,7 @@ const PersonalCard = () => {
         </div>
         <div
           onClick={() => setOpen(true)}
-          className="flex h-28 sm:h-40 w-1/2 flex-col mx-6 border rounded-2xl justify-between shadow-sm shadow-slate-100 cursor-pointer"
+          className="flex h-32 sm:h-40 w-1/2 flex-col mx-6 border rounded-2xl justify-between shadow-sm shadow-slate-200 cursor-pointer"
         >
           <h1 className="text-base my-auto text-gray2 justify-center text-center leading-7 font-bold">
             نمایش<br />

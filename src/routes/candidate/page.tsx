@@ -71,7 +71,7 @@ export default function Candidate() {
         </div>
         <div className="flex flex-row py-4 px-3 justify-between border-t">
           <Button
-            className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md bg-[#b23226] text-white shadow font-semibold"
+            className="w-1/2 mx-6 text-center rounded-md shadow py-3 m-auto border border-slate-300 p-3 text-sm bg-[#b23226] text-white font-semibold"
             name={"تماس تلفنی"}
           />
           <Button

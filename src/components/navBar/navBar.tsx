@@ -10,9 +10,13 @@ export default function NavBar({ name }: data) {
     <nav className="flex justify-start p-2 bg-white border-b">
       <div className="flex">
         <button type="button" onClick={() => navigate(-1)}>
-          <FaArrowRight />
+          <div className="flex">
+            <div className="my-auto">
+             <FaArrowRight />
+            </div>    
+            <p className="mr-2">{name}</p>
+          </div>
         </button>
-        <p className="mr-4">{name}</p>
       </div>
     </nav>
   );

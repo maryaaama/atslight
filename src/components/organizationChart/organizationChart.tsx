@@ -19,7 +19,7 @@ const[manager,setManager]=useState("")
            className={
             manager?
             "absolute -mt-6 pr-2 text-base h-1/2":
-           "transform transition-all absolute text-gray2 top-0 right-2 h-full flex items-center pl-2 text-sm group-focus-within:text-base peer-valid:text-base group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0 group-focus-within:text-black"}>
+           "transform transition-all absolute text-gray2 top-0 right-3 h-full flex items-center text-sm group-focus-within:text-base peer-valid:text-base group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0 group-focus-within:text-black"}>
            مدیریت
          </label>
          <input
@@ -28,7 +28,7 @@ const[manager,setManager]=useState("")
            name="name"
            value={manager}
            id="name"
-           className="w-full h-11  px-4 text-sm peer outline-none  border-2 border-gray2 rounded-lg p-6"/>
+           className="w-full h-11 px-4 text-sm peer outline-none border-2 border-gray2 rounded-lg py-6"/>
         </div>
           <div className=" h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
           {/* <button
