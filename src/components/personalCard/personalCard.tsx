@@ -10,8 +10,8 @@ const PersonalCard = () => {
   return (
     <div className="flex flex-col mx-auto">
       <div className="m-4">
-        <h1 className="text-lg font-bold mx-2">نام و نام خانوادگی</h1>
-        <p className="text-base font-normal text-gray2 mx-2 my-1">
+        <h1 className="text-xl font-bold mx-2">نام و نام خانوادگی</h1>
+        <p className="text-lg font-normal text-gray2 mx-2 my-1">
           مدیر فروش و بازاریابی
         </p>
       </div>
@@ -27,7 +27,7 @@ const PersonalCard = () => {
           onClick={() => setOpen(true)}
           className="flex h-32 sm:h-40 w-1/2 flex-col mx-6 border rounded-2xl justify-between shadow-sm shadow-slate-200 cursor-pointer"
         >
-          <h1 className="text-base my-auto text-gray2 justify-center text-center leading-7 font-bold">
+          <h1 className="text-lg my-auto text-gray2 justify-center text-center leading-7 font-bold">
             نمایش<br />
             توضیحات
           </h1>
