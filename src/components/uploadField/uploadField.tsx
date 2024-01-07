@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useField, useFormikContext } from 'formik';
-import { UploadedFile } from '../types';
-import { id, useFileUploader } from '../utils';
+import { 
+ } from '../../types';
+import { id, useFileUploader } from '../../utils';
 
 interface Props {
   name: string;
