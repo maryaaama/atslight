@@ -22,10 +22,12 @@ export default function Company() {
       await createCompanyMutation({
         variables: {
           input: {
-            translations: [{ name: business, lang: Language.Fa }],
+            translations: [
+              { name: business, lang: Language.Fa },{ name: business, lang: Language.En } // Add English translation
+          ],
             category:CompanyCategory.Retailer,
             companySize: CompanySize.MoreThan_200,
-            languages: [Language.Fa]
+            languages: [Language.Fa,Language.En]
           },
         },
       });
