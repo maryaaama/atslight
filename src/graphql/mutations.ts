@@ -22,6 +22,16 @@ export const UPDATE_COMPANY = gql`
     }
   }
 `;
+export const CREATE_COMPANY = gql`
+  mutation CreateCompany($input: CreateCompanyInput!) {
+    createCompany(input: $input) {
+      company {
+        nodeId
+        id
+      }
+    }
+  }
+`;
 export const CREATE_PRESIGND_UPLOAD_LINK = gql`
 mutation createPresignedUploadLink($input: CreatePresignedUploadLinkInput!) {
   createPresignedUploadLink(input: $input) {

@@ -69,6 +69,15 @@ export type AssignJobsPayload = {
   query?: Maybe<Query>;
 };
 
+export type AuthWithPhoneNumberInput = {
+  phoneNumber: Scalars['String']['input'];
+};
+
+export type AuthWithPhoneNumberPayload = {
+  __typename?: 'AuthWithPhoneNumberPayload';
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’ */
 export type BooleanFilter = {
   /** Not equal to the specified value, treating null like an ordinary value. */
@@ -6633,6 +6642,24 @@ export type CreateUserTokenInput = {
 /** The output of our `createUserToken` mutation. */
 export type CreateUserTokenPayload = {
   __typename?: 'CreateUserTokenPayload';
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  userToken?: Maybe<UserToken>;
+};
+
+/** All input for the `createUserTokenWithPhone` mutation. */
+export type CreateUserTokenWithPhoneInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  code: Scalars['String']['input'];
+  phone: Scalars['String']['input'];
+};
+
+/** The output of our `createUserTokenWithPhone` mutation. */
+export type CreateUserTokenWithPhonePayload = {
+  __typename?: 'CreateUserTokenWithPhonePayload';
   /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -17834,6 +17861,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   acceptInvitation?: Maybe<AcceptInvitationPayload>;
   assignJobs?: Maybe<AssignJobsPayload>;
+  authWithPhoneNumber?: Maybe<AuthWithPhoneNumberPayload>;
   copyFileToTemp?: Maybe<CopyFileToTempPayload>;
   /** Creates a single `Candidate`. */
   createCandidate?: Maybe<CreateCandidatePayload>;
@@ -17965,6 +17993,7 @@ export type Mutation = {
   /** Creates a single `UserInvitation`. */
   createUserInvitation?: Maybe<CreateUserInvitationPayload>;
   createUserToken?: Maybe<CreateUserTokenPayload>;
+  createUserTokenWithPhone?: Maybe<CreateUserTokenWithPhonePayload>;
   /** Creates a single `UserTranslation`. */
   createUserTranslation?: Maybe<CreateUserTranslationPayload>;
   /** Creates a single `WebsiteFile`. */
@@ -18255,6 +18284,12 @@ export type MutationAcceptInvitationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationAssignJobsArgs = {
   input: AssignJobsInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationAuthWithPhoneNumberArgs = {
+  input: AuthWithPhoneNumberInput;
 };
 
 
@@ -18669,6 +18704,12 @@ export type MutationCreateUserInvitationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateUserTokenArgs = {
   input: CreateUserTokenInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateUserTokenWithPhoneArgs = {
+  input: CreateUserTokenWithPhoneInput;
 };
 
 
@@ -33884,6 +33925,13 @@ export type UpdateCompanyMutationVariables = Exact<{
 
 export type UpdateCompanyMutation = { __typename?: 'Mutation', updateCompany?: { __typename?: 'UpdateCompanyPayload', company?: { __typename?: 'Company', nodeId: string, id: number, languages: Array<Language | null>, category: CompanyCategory, companySize: CompanySize, customWebsiteHost?: string | null, logoUrl?: string | null, translations: { __typename?: 'CompanyTranslationsConnection', nodes: Array<{ __typename?: 'CompanyTranslation', nodeId: string, name: string, lang: Language }> } } | null } | null };
 
+export type CreateCompanyMutationVariables = Exact<{
+  input: CreateCompanyInput;
+}>;
+
+
+export type CreateCompanyMutation = { __typename?: 'Mutation', createCompany?: { __typename?: 'CreateCompanyPayload', company?: { __typename?: 'Company', nodeId: string, id: number } | null } | null };
+
 export type CreatePresignedUploadLinkMutationVariables = Exact<{
   input: CreatePresignedUploadLinkInput;
 }>;
@@ -33977,6 +34025,42 @@ export function useUpdateCompanyMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateCompanyMutationHookResult = ReturnType<typeof useUpdateCompanyMutation>;
 export type UpdateCompanyMutationResult = Apollo.MutationResult<UpdateCompanyMutation>;
 export type UpdateCompanyMutationOptions = Apollo.BaseMutationOptions<UpdateCompanyMutation, UpdateCompanyMutationVariables>;
+export const CreateCompanyDocument = gql`
+    mutation CreateCompany($input: CreateCompanyInput!) {
+  createCompany(input: $input) {
+    company {
+      nodeId
+      id
+    }
+  }
+}
+    `;
+export type CreateCompanyMutationFn = Apollo.MutationFunction<CreateCompanyMutation, CreateCompanyMutationVariables>;
+
+/**
+ * __useCreateCompanyMutation__
+ *
+ * To run a mutation, you first call `useCreateCompanyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCompanyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCompanyMutation, { data, loading, error }] = useCreateCompanyMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateCompanyMutation(baseOptions?: Apollo.MutationHookOptions<CreateCompanyMutation, CreateCompanyMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateCompanyMutation, CreateCompanyMutationVariables>(CreateCompanyDocument, options);
+      }
+export type CreateCompanyMutationHookResult = ReturnType<typeof useCreateCompanyMutation>;
+export type CreateCompanyMutationResult = Apollo.MutationResult<CreateCompanyMutation>;
+export type CreateCompanyMutationOptions = Apollo.BaseMutationOptions<CreateCompanyMutation, CreateCompanyMutationVariables>;
 export const CreatePresignedUploadLinkDocument = gql`
     mutation createPresignedUploadLink($input: CreatePresignedUploadLinkInput!) {
   createPresignedUploadLink(input: $input) {

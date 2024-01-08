@@ -1,6 +1,5 @@
 import { EventType, Gender, JobField, JobStatus, MilitaryStatus, PipelineStageType } from "./graphql/generated/graphql";
 
-
 export const genderOptions = [
     { label: 'نامشخص', value: '' },
     { label: 'مرد', value: Gender.Male },
