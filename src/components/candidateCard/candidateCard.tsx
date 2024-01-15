@@ -1,9 +1,14 @@
 import Image1 from "../../image/image1.png";
 import StarRating from "../starRating/starRating";
 import { useNavigate } from 'react-router-dom';
+import { useCandidatesQuery } from "../../graphql/generated/graphql";
+interface candidatesProps {
+  name: any;
+  job:any;
+  photo:any
+ }
 
-
-export const CandidateCard = () => {
+export const CandidateCard: React.FC<candidatesProps> = ({name , job, photo}) => {
   const navigate = useNavigate();
 
   return (
@@ -19,13 +24,13 @@ export const CandidateCard = () => {
         alt={"person"}
       /> */}
       <img
-        src={Image1}
+        src={photo}
         alt="person"
         className="rounded-xl m-1.5 border shadow-sm w-[90px] h-[90px]"
       />
       <div className="w-[46%] m-1 pb-4">
-        <h2 className="pb-4 font-semibold text-lg">محمد علیپور</h2>
-        <p className="text-sm text-gray2 font-normal">طراح و اجرای برنامه فروش</p>
+        <h2 className="pb-4 font-semibold text-lg">{name} </h2>
+        <p className="text-sm text-gray2 font-normal">{job}</p>
       </div>
       <div className="w-[26%] h-[90px] md:w-[20%] m-1 py-2 border rounded-xl shadow-sm bg-white">
         <h1 className="w-full text-center m-auto text-xl py-2 font-medium">70%</h1>

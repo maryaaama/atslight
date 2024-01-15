@@ -1,34 +1,29 @@
 import NavBar from "../../components/navBar/navBar";
 import Button from "../../components/button/button";
 import CandidateCard from "../../components/candidateCard/candidateCard";
-// import { useCandidatesQuery } from "../../graphql/generated/graphql";
+import { useCandidatesQuery } from "../../graphql/generated/graphql";
 import { useEffect, useState } from "react";
 import CandidatesSkeleton from "../../components/skeleton/candidates";
 //TOAST
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 export default function Candidates() {
-  const cardCount = Array.from({ length: 6 });
-  const [loading, setLoading] = useState(true);
+ 
 
   const notify = () => toast.info("you clicked on button");
   const clickHandler =()=>{
     notify()
   }
 
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setLoading(false);
-    }, 2000); 
- 
-    return () => clearTimeout(timerId);
-  }, []);
-  // const { data, loading, error } = useCandidatesQuery({
-  //   variables: {
+  const { data, loading, error } = useCandidatesQuery({
+    variables: {
   
-  //  },
-  //  });
+   },
+   });
+   console.log("data" , data);
+      
 
   return (
     loading ? <CandidatesSkeleton/>:
@@ -42,8 +37,12 @@ export default function Candidates() {
         <button onClick={clickHandler}>ویرایش آگهی استخدام</button>
       </div>
       </div>
-    {cardCount.map((_, index) => (
-      <CandidateCard key={index} />
+    {data?.candidates?.nodes.map((node) => (
+      <CandidateCard  name ={node.translations.nodes.map(node=>node.candidate?.translations.nodes.map(name=>name.name))} 
+      job ={node.translations.nodes.map(node=>node.candidate?.jobs.nodes.map(node=>node.translations.nodes.map(node=>node.title)))}
+      photo={node.translations.nodes.map(node=>node.candidate?.photoUrl)} 
+        
+      />
       ))}
       </div>
   </main>
