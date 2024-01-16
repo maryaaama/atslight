@@ -1,32 +1,36 @@
-import NavBar from "../../components/navBar/navBar"
-import JobCard from "../../components/jobCard/JobCard";
-import { useEffect, useState } from "react";
+import {
+  useJobsQuery,
+} from "../../graphql/generated/graphql";
+import NavBar from "../../components/navBar/navBar";
 import JobSkeleton from "../../components/skeleton/Job";
 
-
 export default function Jobs() {
-const cardCount = Array.from({ length: 12 });
-  const [loading, setLoading] = useState(true);
+  const { data, loading, error } = useJobsQuery({});
 
+  if (loading) {
+    return <JobSkeleton />;
+  }
 
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setLoading(false);
-    }, 2000); 
- 
-    return () => clearTimeout(timerId);
-  }, []);
+  if (error) {
+    return <div>Error fetching data</div>;
+  }
 
+  const jobs = data?.jobs?.nodes || [];
+  console.log(jobs);
   return (
-    loading ? <JobSkeleton/>:
     <main className="md:h-screen">
-    <NavBar name={"آگهی های شغلی"} />
-    <div className="sm:h-11/12 md:p-4 md:h-[85%] md:overflow-auto  max-sm:w-screen max-w-xl mx-auto sm:border sm:mt-8 sm:rounded-lg sm:items-center sm:shadow-lg"
-     >
-    {cardCount.map((_, index) => (
-      <JobCard key={index} />
-      ))}
+      <NavBar name={"آگهی های شغلی"} />
+      <div className="sm:h-11/12 md:p-4 md:h-[85%] md:overflow-auto max-sm:w-screen max-w-xl mx-auto sm:border sm:mt-8 sm:rounded-lg sm:items-center sm:shadow-lg">
+        <ul>
+          {jobs.map((job) => (
+            <li key={job.id}>
+              {job.translations.nodes.length > 0 ? job.translations.nodes[0].title : ""}
+            </li>
+          ))}
+        </ul>
       </div>
-  </main>
-);
+    </main>
+    
+  );
+  
 }
