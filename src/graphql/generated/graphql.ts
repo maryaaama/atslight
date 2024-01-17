@@ -29901,7 +29901,7 @@ export type User = Node & {
   messages: MessagesConnection;
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
   nodeId: Scalars['ID']['output'];
-  phoneNumber: Scalars['String']['output'];
+  phoneNumber?: Maybe<Scalars['String']['output']>;
   photoNormalUrl?: Maybe<Scalars['String']['output']>;
   photoThumbUrl?: Maybe<Scalars['String']['output']>;
   /** Reads and enables pagination through a set of `PipelineStageUser`. */
@@ -33939,18 +33939,6 @@ export type CreatePresignedUploadLinkMutationVariables = Exact<{
 
 export type CreatePresignedUploadLinkMutation = { __typename?: 'Mutation', createPresignedUploadLink?: { __typename?: 'CreatePresignedUploadLinkPayload', getURL: string, postURL: string, formData: any, fileKey: any } | null };
 
-export type CompaniesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CompaniesQuery = { __typename?: 'Query', companies?: { __typename?: 'CompaniesConnection', nodes: Array<{ __typename?: 'Company', id: number, nodeId: string, translations: { __typename?: 'CompanyTranslationsConnection', nodes: Array<{ __typename?: 'CompanyTranslation', nodeId: string, lang: Language, name: string }> } }> } | null };
-
-export type CandidateQueryVariables = Exact<{
-  id: Scalars['Int']['input'];
-}>;
-
-
-export type CandidateQuery = { __typename?: 'Query', candidate?: { __typename?: 'Candidate', id: number, photoUrl?: string | null, resumeUrl?: string | null } | null };
-
 export type JobsQueryVariables = Exact<{
   filter?: InputMaybe<JobFilter>;
   orderBy?: InputMaybe<Array<JobsOrderBy> | JobsOrderBy>;
@@ -33971,10 +33959,20 @@ export type UsersQueryVariables = Exact<{
 
 export type UsersQuery = { __typename?: 'Query', users?: { __typename?: 'UsersConnection', nodes: Array<{ __typename?: 'User', id: number, nodeId: string, translations: { __typename?: 'UserTranslationsConnection', nodes: Array<{ __typename?: 'UserTranslation', nodeId: string, lang: Language, fullname?: string | null, initials?: string | null }> } }> } | null };
 
-export type CandidatesQueryVariables = Exact<{ [key: string]: never; }>;
+export type CandidatesQueryVariables = Exact<{
+  filter?: InputMaybe<CandidateFilter>;
+  orderBy?: InputMaybe<Array<CandidatesOrderBy> | CandidatesOrderBy>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
 
 
-export type CandidatesQuery = { __typename?: 'Query', candidates?: { __typename?: 'CandidatesConnection', nodes: Array<{ __typename?: 'Candidate', id: number, translations: { __typename?: 'CandidateTranslationsConnection', nodes: Array<{ __typename?: 'CandidateTranslation', candidate?: { __typename?: 'Candidate', photoUrl?: string | null, translations: { __typename?: 'CandidateTranslationsConnection', nodes: Array<{ __typename?: 'CandidateTranslation', name: string, candidateId: number }> }, jobs: { __typename?: 'CandidateJobsByJobsApplicationCandidateIdAndJobIdManyToManyConnection', nodes: Array<{ __typename?: 'Job', translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', title: string }> } }> } } | null }> } }> } | null };
+export type CandidatesQuery = { __typename?: 'Query', candidates?: { __typename?: 'CandidatesConnection', nodes: Array<{ __typename?: 'Candidate', id: number, nodeId: string, emails?: Array<string | null> | null, phones?: Array<string | null> | null, photoUrl?: string | null, translations: { __typename?: 'CandidateTranslationsConnection', nodes: Array<{ __typename?: 'CandidateTranslation', lang: Language, nodeId: string, name: string }> }, jobs: { __typename?: 'CandidateJobsByJobsApplicationCandidateIdAndJobIdManyToManyConnection', nodes: Array<{ __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', lang: Language, nodeId: string, title: string }> } }> } }> } | null };
+
+export type CurrentSessionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CurrentSessionQuery = { __typename?: 'Query', currentUser?: { __typename?: 'User', nodeId: string, id: number, emailVerified: boolean, translations: { __typename?: 'UserTranslationsConnection', nodes: Array<{ __typename?: 'UserTranslation', nodeId: string, lang: Language, fullname?: string | null, initials?: string | null, firstname: string, lastname: string }> }, roles: { __typename?: 'UserRolesByCompanyUserUserIdAndRoleIdManyToManyConnection', nodes: Array<{ __typename?: 'Role', id: number, nodeId: string, abilities: Array<Roleability | null>, isAdmin: boolean, translations: { __typename?: 'RoleTranslationsConnection', nodes: Array<{ __typename?: 'RoleTranslation', nodeId: string, lang: Language, title: string }> } }> } } | null, currentCompany?: { __typename?: 'Company', nodeId: string, id: number, websiteUrl?: string | null, languages: Array<Language | null>, category: CompanyCategory, companySize: CompanySize, logoUrl?: string | null, customWebsiteHost?: string | null, translations: { __typename?: 'CompanyTranslationsConnection', nodes: Array<{ __typename?: 'CompanyTranslation', nodeId: string, lang: Language, name: string }> }, activeInvoice?: { __typename?: 'Invoice', nodeId: string, deletedAt?: any | null, subscription?: { __typename?: 'Subscription', nodeId: string, maxJobs?: number | null, maxCandidates?: number | null } | null } | null } | null, currentUserCompanies?: { __typename?: 'CompaniesConnection', nodes: Array<{ __typename?: 'Company', nodeId: string, id: number, translations: { __typename?: 'CompanyTranslationsConnection', nodes: Array<{ __typename?: 'CompanyTranslation', nodeId: string, lang: Language, name: string }> } }> } | null };
 
 
 export const UpdateCompanyDocument = gql`
@@ -34097,97 +34095,6 @@ export function useCreatePresignedUploadLinkMutation(baseOptions?: Apollo.Mutati
 export type CreatePresignedUploadLinkMutationHookResult = ReturnType<typeof useCreatePresignedUploadLinkMutation>;
 export type CreatePresignedUploadLinkMutationResult = Apollo.MutationResult<CreatePresignedUploadLinkMutation>;
 export type CreatePresignedUploadLinkMutationOptions = Apollo.BaseMutationOptions<CreatePresignedUploadLinkMutation, CreatePresignedUploadLinkMutationVariables>;
-export const CompaniesDocument = gql`
-    query Companies {
-  companies {
-    nodes {
-      id
-      nodeId
-      translations {
-        nodes {
-          nodeId
-          lang
-          name
-        }
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useCompaniesQuery__
- *
- * To run a query within a React component, call `useCompaniesQuery` and pass it any options that fit your needs.
- * When your component renders, `useCompaniesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCompaniesQuery({
- *   variables: {
- *   },
- * });
- */
-export function useCompaniesQuery(baseOptions?: Apollo.QueryHookOptions<CompaniesQuery, CompaniesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CompaniesQuery, CompaniesQueryVariables>(CompaniesDocument, options);
-      }
-export function useCompaniesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CompaniesQuery, CompaniesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CompaniesQuery, CompaniesQueryVariables>(CompaniesDocument, options);
-        }
-export function useCompaniesSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<CompaniesQuery, CompaniesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<CompaniesQuery, CompaniesQueryVariables>(CompaniesDocument, options);
-        }
-export type CompaniesQueryHookResult = ReturnType<typeof useCompaniesQuery>;
-export type CompaniesLazyQueryHookResult = ReturnType<typeof useCompaniesLazyQuery>;
-export type CompaniesSuspenseQueryHookResult = ReturnType<typeof useCompaniesSuspenseQuery>;
-export type CompaniesQueryResult = Apollo.QueryResult<CompaniesQuery, CompaniesQueryVariables>;
-export const CandidateDocument = gql`
-    query Candidate($id: Int!) {
-  candidate(id: $id) {
-    id
-    photoUrl
-    resumeUrl
-  }
-}
-    `;
-
-/**
- * __useCandidateQuery__
- *
- * To run a query within a React component, call `useCandidateQuery` and pass it any options that fit your needs.
- * When your component renders, `useCandidateQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCandidateQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useCandidateQuery(baseOptions: Apollo.QueryHookOptions<CandidateQuery, CandidateQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CandidateQuery, CandidateQueryVariables>(CandidateDocument, options);
-      }
-export function useCandidateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CandidateQuery, CandidateQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CandidateQuery, CandidateQueryVariables>(CandidateDocument, options);
-        }
-export function useCandidateSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<CandidateQuery, CandidateQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<CandidateQuery, CandidateQueryVariables>(CandidateDocument, options);
-        }
-export type CandidateQueryHookResult = ReturnType<typeof useCandidateQuery>;
-export type CandidateLazyQueryHookResult = ReturnType<typeof useCandidateLazyQuery>;
-export type CandidateSuspenseQueryHookResult = ReturnType<typeof useCandidateSuspenseQuery>;
-export type CandidateQueryResult = Apollo.QueryResult<CandidateQuery, CandidateQueryVariables>;
 export const JobsDocument = gql`
     query Jobs($filter: JobFilter, $orderBy: [JobsOrderBy!], $first: Int, $offset: Int) {
   jobs(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
@@ -34312,28 +34219,30 @@ export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
 export type UsersSuspenseQueryHookResult = ReturnType<typeof useUsersSuspenseQuery>;
 export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariables>;
 export const CandidatesDocument = gql`
-    query Candidates {
-  candidates {
+    query Candidates($filter: CandidateFilter, $orderBy: [CandidatesOrderBy!], $first: Int, $offset: Int) {
+  candidates(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
     nodes {
       id
+      nodeId
+      emails
+      phones
+      photoUrl
       translations {
         nodes {
-          candidate {
-            photoUrl
-            translations {
-              nodes {
-                name
-                candidateId
-              }
-            }
-            jobs {
-              nodes {
-                translations {
-                  nodes {
-                    title
-                  }
-                }
-              }
+          lang
+          nodeId
+          name
+        }
+      }
+      jobs {
+        nodes {
+          nodeId
+          id
+          translations {
+            nodes {
+              lang
+              nodeId
+              title
             }
           }
         }
@@ -34355,6 +34264,10 @@ export const CandidatesDocument = gql`
  * @example
  * const { data, loading, error } = useCandidatesQuery({
  *   variables: {
+ *      filter: // value for 'filter'
+ *      orderBy: // value for 'orderBy'
+ *      first: // value for 'first'
+ *      offset: // value for 'offset'
  *   },
  * });
  */
@@ -34374,3 +34287,108 @@ export type CandidatesQueryHookResult = ReturnType<typeof useCandidatesQuery>;
 export type CandidatesLazyQueryHookResult = ReturnType<typeof useCandidatesLazyQuery>;
 export type CandidatesSuspenseQueryHookResult = ReturnType<typeof useCandidatesSuspenseQuery>;
 export type CandidatesQueryResult = Apollo.QueryResult<CandidatesQuery, CandidatesQueryVariables>;
+export const CurrentSessionDocument = gql`
+    query CurrentSession {
+  currentUser {
+    nodeId
+    id
+    translations {
+      nodes {
+        nodeId
+        lang
+        fullname
+        initials
+        firstname
+        lastname
+      }
+    }
+    roles {
+      nodes {
+        id
+        nodeId
+        abilities
+        isAdmin
+        translations {
+          nodes {
+            nodeId
+            lang
+            title
+          }
+        }
+      }
+    }
+    emailVerified
+  }
+  currentCompany {
+    nodeId
+    id
+    websiteUrl
+    translations {
+      nodes {
+        nodeId
+        lang
+        name
+      }
+    }
+    languages
+    category
+    companySize
+    logoUrl
+    customWebsiteHost
+    activeInvoice {
+      nodeId
+      deletedAt
+      subscription {
+        nodeId
+        maxJobs
+        maxCandidates
+      }
+    }
+  }
+  currentUserCompanies: companies {
+    nodes {
+      nodeId
+      id
+      translations {
+        nodes {
+          nodeId
+          lang
+          name
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useCurrentSessionQuery__
+ *
+ * To run a query within a React component, call `useCurrentSessionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCurrentSessionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCurrentSessionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCurrentSessionQuery(baseOptions?: Apollo.QueryHookOptions<CurrentSessionQuery, CurrentSessionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CurrentSessionQuery, CurrentSessionQueryVariables>(CurrentSessionDocument, options);
+      }
+export function useCurrentSessionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrentSessionQuery, CurrentSessionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CurrentSessionQuery, CurrentSessionQueryVariables>(CurrentSessionDocument, options);
+        }
+export function useCurrentSessionSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<CurrentSessionQuery, CurrentSessionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<CurrentSessionQuery, CurrentSessionQueryVariables>(CurrentSessionDocument, options);
+        }
+export type CurrentSessionQueryHookResult = ReturnType<typeof useCurrentSessionQuery>;
+export type CurrentSessionLazyQueryHookResult = ReturnType<typeof useCurrentSessionLazyQuery>;
+export type CurrentSessionSuspenseQueryHookResult = ReturnType<typeof useCurrentSessionSuspenseQuery>;
+export type CurrentSessionQueryResult = Apollo.QueryResult<CurrentSessionQuery, CurrentSessionQueryVariables>;

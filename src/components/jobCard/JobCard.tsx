@@ -20,7 +20,7 @@ const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
       onClick={() => setOpen(true)}
       className="flex w-auto m-1 border rounded-md bg-back shadow-sm hover:bg-gray-100 hover:shadow-lg items-center justify-between py-2"
     >
-      <div className="w-[46%]">
+      <div className="text">
         <h2 className="pr-2 font-medium text-lg">{job.translations.nodes[0].title}</h2>
         {/* Additional job details can be displayed here */}
       </div>

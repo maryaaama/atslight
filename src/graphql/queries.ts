@@ -1,32 +1,5 @@
 import gql from "graphql-tag";
 
-export const GET_COMPANIES = gql`
-  query Companies {
-    companies {
-      nodes {
-        id
-        nodeId
-        translations {
-          nodes {
-            nodeId
-            lang
-            name
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const GET_CANDIDATE = gql`
-  query Candidate ($id:Int!) {
-    candidate (id:$id) {
-        id,
-        photoUrl,
-        resumeUrl
-    }
-  }
-`;
 export const GET_JOBS = gql`
  query Jobs(
   $filter: JobFilter
@@ -87,28 +60,41 @@ export const GET_JOBS = gql`
   }
 }`;
 
-export const GET_CANDIDATES=gql`
- query Candidates{
-  candidates{
-    nodes {
-      id
-      translations {
-        nodes {
-          candidate {
-            photoUrl
+export const GET_CANDIDATES = gql`
+  query Candidates(
+    $filter: CandidateFilter
+    $orderBy: [CandidatesOrderBy!]
+    $first: Int
+    $offset: Int
+  ) {
+    candidates(
+      filter: $filter
+      orderBy: $orderBy
+      first: $first
+      offset: $offset
+    ) {
+      nodes {
+        id
+        nodeId
+        emails
+        phones
+        photoUrl
+        translations {
+          nodes {
+            lang
+            nodeId
+            name
+          }
+        }
+        jobs {
+          nodes {
+            nodeId
+            id
             translations {
               nodes {
-                name
-                candidateId
-              }
-            }
-            jobs {
-              nodes {
-                translations {
-                  nodes {
-                    title
-                  }
-                }
+                lang
+                nodeId
+                title
               }
             }
           }
@@ -116,4 +102,77 @@ export const GET_CANDIDATES=gql`
       }
     }
   }
-}`;
+`;
+export const CURRENT_SESSION = gql`
+  query CurrentSession {
+    currentUser {
+      nodeId
+      id
+      translations {
+        nodes {
+          nodeId
+          lang
+          fullname
+          initials
+          firstname
+          lastname
+        }
+      }
+      roles {
+        nodes {
+          id
+          nodeId
+          abilities
+          isAdmin
+          translations {
+            nodes {
+              nodeId
+              lang
+              title
+            }
+          }
+        }
+      }
+      emailVerified
+    }
+    currentCompany {
+      nodeId
+      id
+      websiteUrl
+      translations {
+        nodes {
+          nodeId
+          lang
+          name
+        }
+      }
+      languages
+      category
+      companySize
+      logoUrl
+      customWebsiteHost
+      activeInvoice {
+        nodeId
+        deletedAt
+        subscription {
+          nodeId
+          maxJobs
+          maxCandidates
+        }
+      }
+    }
+    currentUserCompanies: companies {
+      nodes {
+        nodeId
+        id
+        translations {
+          nodes {
+            nodeId
+            lang
+            name
+          }
+        }
+      }
+    }
+  }
+`;
