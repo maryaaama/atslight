@@ -7,12 +7,10 @@ import Organization from './routes/organization/page';
 import Signin from './routes/signin/page';
 import Verify from './routes/verify/page';
 import Slider from './components/slider/slider'
-import { useCompaniesQuery } from './graphql/generated/graphql';
 import PrivacyPolicy from './routes/privacy-policy/page';
 import Jobs from './routes/jobs/page';
 function App() {
-  const { data: bgdata } = useCompaniesQuery()
-  console.log(bgdata);
+
   return (
     <Routes>
       <Route path="/" element={<Slider />} />

@@ -33,7 +33,7 @@ import {
     nodeId?: string;
   } & StoreObject;
   
-  const uri = process.env.REACT_APP_GRAPHQL_ENDPOINT;
+  const uri = "/graphql";
   
   
   const httpLink = new HttpLink({
