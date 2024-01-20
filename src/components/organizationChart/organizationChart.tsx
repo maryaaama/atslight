@@ -6,7 +6,7 @@ import logo from "../../image/logo.png";
 export default function OrganizationChart() {
   const navigate = useNavigate();
   const [manager, setManager] = useState("");
-  const [backupManager, setBackupManager] = useState("");
+  const [user, setUser] = useState("");
 
   const { data, error } = useCurrentSessionQuery();
 
@@ -21,7 +21,7 @@ export default function OrganizationChart() {
   const handleManagerChange = (event: { target: { value: string; }; }) => {
     const newValue = event.target.value;
     setManager(newValue);
-    setBackupManager(newValue);
+    setUser(newValue);
   };
 
   return (
@@ -41,7 +41,7 @@ export default function OrganizationChart() {
           name={currentUser||""}
           value={currentUser||logo}
           id="name"
-          disabled={backupManager !== ""}
+          disabled={user !== ""}
           className="w-full px-4 peer outline-none font-medium border-2 border-gray2 rounded-lg py-3 text-center text-base text-gray-700"
         />
       </div>
