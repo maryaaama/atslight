@@ -15,13 +15,14 @@ interface JobData {
 const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
   const [open, setOpen] = useState(false);
 
+  const jobTitle = job?.translations?.nodes[0]?.title;
   return (
     <span
       onClick={() => setOpen(true)}
       className="flex w-auto m-1 border rounded-md bg-back shadow-sm hover:bg-gray-100 hover:shadow-lg items-center justify-between py-2"
     >
       <div className="text">
-        <h2 className="pr-2 font-medium text-lg">{job.translations.nodes[0].title}</h2>
+        <h2 className="pr-2 font-medium text-lg">{jobTitle}</h2>
         {/* Additional job details can be displayed here */}
       </div>
       {/* Assuming your Modal component expects props like open, setOpen, request, children */}

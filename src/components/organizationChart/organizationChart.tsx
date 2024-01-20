@@ -5,8 +5,9 @@ import { useCurrentSessionQuery } from '../../graphql/generated/graphql';
 import logo from "../../image/logo.png";
 export default function OrganizationChart() {
   const navigate = useNavigate();
-  const [manager, setManager] = useState("");
   const [user, setUser] = useState("");
+  const [manager, setManager] = useState(user);
+  
 
   const { data, error } = useCurrentSessionQuery();
 
