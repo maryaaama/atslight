@@ -6,8 +6,7 @@ import logo from "../../image/logo.png";
 export default function OrganizationChart() {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
-  const [manager, setManager] = useState(user);
-  
+
 
   const { data, error } = useCurrentSessionQuery();
 
@@ -21,7 +20,6 @@ export default function OrganizationChart() {
 
   const handleManagerChange = (event: { target: { value: string; }; }) => {
     const newValue = event.target.value;
-    setManager(newValue);
     setUser(newValue);
   };
 

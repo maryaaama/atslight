@@ -1,5 +1,4 @@
 import JobCardSkeleton from "./JobCard";
-import NavBar from "../navBar/navBar";
 const JobSkeleton = () => {
   const cardCount = Array.from({ length: 12 });
 
