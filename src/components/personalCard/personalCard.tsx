@@ -9,9 +9,9 @@ interface PersonalCardProps {
   job: string;
 }
 
-const PersonalCard: React.FC<PersonalCardProps> = ({ photo, name, job }) => {
+const PersonalCard: React.FC<PersonalCardProps> = ({ photo, name, job, id }) => {
   const [open, setOpen] = useState(false);
-
+  
   return (
     <div className="flex flex-col mx-auto">
       <div className="m-4">

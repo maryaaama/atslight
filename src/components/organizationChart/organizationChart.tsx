@@ -1,22 +1,26 @@
-import { useState } from "react";
-import Logo from "../../image/logo.png";
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCurrentSessionQuery } from '../../graphql/generated/graphql';
-import logo from "../../image/logo.png";
+import { useCurrentSessionQuery, useJobsQuery } from '../../graphql/generated/graphql';
+import Modal from "../modal/modal"; // Update the path accordingly
+import Logo from "../../image/logo.png";
+import JobSkeleton from "../../components/skeleton/Job";
+import JobCard from "../../components/jobCard/JobCard";
+
 export default function OrganizationChart() {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false); // State for managing modal open/close
 
+  const { data: sessionData, error: sessionError } = useCurrentSessionQuery();
+  const { data: jobsData, loading: jobsLoading, error: jobsError } = useJobsQuery();
 
-  const { data, error } = useCurrentSessionQuery();
-
-  if (error) {
-    return <p>Error: {error.message}</p>;
+  if (sessionError || jobsError) {
+    return <p>Error: {sessionError?.message || jobsError?.message}</p>;
   }
 
-  const currentUser = data?.currentUser?.translations.nodes[0].fullname;
-  const currentCompany = data?.currentCompany?.translations.nodes[0].name;
-  const companyLogo = data?.currentCompany?.logoUrl;
+  const currentUser = sessionData?.currentUser?.translations.nodes[0].fullname;
+  const currentCompany = sessionData?.currentCompany?.translations.nodes[0].name;
+  const companyLogo = sessionData?.currentCompany?.logoUrl;
 
   const handleManagerChange = (event: { target: { value: string; }; }) => {
     const newValue = event.target.value;
@@ -37,8 +41,8 @@ export default function OrganizationChart() {
         <input
           onChange={handleManagerChange}
           type="text"
-          name={currentUser||""}
-          value={currentUser||logo}
+          name={currentUser || ""}
+          value={currentUser || Logo}
           id="name"
           disabled={user !== ""}
           className="w-full px-4 peer outline-none font-medium border-2 border-gray2 rounded-lg py-3 text-center text-base text-gray-700"
@@ -50,15 +54,31 @@ export default function OrganizationChart() {
           text-gray2 flex items-center justify-center hover:bg-opacity-80"
         onClick={() => navigate("/candidates")}
       >
-        مدیریت فروش
+        کارشناس
       </button>
       <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
       <button
-        onClick={() => navigate("/jobs")}
+        onClick={() => setModalOpen(true)} // Open the modal when this button is clicked
         className="w-full border-2 border-gray2 rounded-lg p-6 h-11 bg-opacity-80 text-gray2 flex items-center justify-center"
       >
         افزودن شغل جدید +
       </button>
+
+      <Modal open={isModalOpen} setOpen={setModalOpen} request={undefined}>
+        {/* Content to be displayed in the modal */}
+        <h2 className="text-center text-xl font-bold mb-4">آگهی های شغلی</h2>
+        {jobsLoading ? (
+          <JobSkeleton />
+        ) : (
+          jobsData?.jobs?.nodes.map((job) => (
+            <JobCard
+              key={job.id}
+              job={job}
+              // You can add any specific behavior when a job is clicked in the modal
+            />
+          ))
+        )}
+      </Modal>
     </div>
   );
 }
