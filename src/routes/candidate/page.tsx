@@ -4,24 +4,25 @@ import PersonalCard from '../../components/personalCard/personalCard';
 import { useCandidatesQuery } from '../../graphql/generated/graphql';
 import CandidateSkeleton from '../../components/skeleton/candidate';
 import EvaluateModal from '../../components/evaluateModal/evaluateModal';
+import { useParams } from 'react-router-dom';
+import person from "../../image/person.png";
 import Button from '../../components/button/button';
-import person from "../../image/person.png"
+import EmptyPage from '../../components/emptyPage/page';
+
 export default function Candidate() {
   const { data, loading, error } = useCandidatesQuery();
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  const { id } = useParams();
 
   if (error) {
     return <p>Error fetching data</p>;
   }
 
-  const candidate = data?.candidates?.nodes[0];
+  const candidate = data?.candidates?.nodes.find(candidate => String(candidate.id) === id);
 
   if (!candidate) {
-    return <p>Candidate not found</p>;
+    return <EmptyPage/>;
   }
+
   const candidatePhoto = candidate?.photoUrl;
   const candidateTranslations = candidate?.translations?.nodes[0]?.name;
   const candidateJobs = candidate?.jobs.nodes[0]?.translations?.nodes[0]?.title;
@@ -38,7 +39,6 @@ export default function Candidate() {
             name={candidateTranslations}
             job={candidateJobs}
             photo={candidatePhoto||person}
-            id={candidate.id}
           />
           <div className="w-full">
             <div className="flex justify-between mx-6 my-3">

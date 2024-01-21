@@ -1,7 +1,7 @@
 import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 interface data {
-  name: string;
+  name: string|undefined;
 }
 export default function NavBar({ name }: data) {
   const navigate = useNavigate();

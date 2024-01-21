@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import Button from "../button/button";
-import Modal from "../../components/modal/modal";
-import PersonalCardList from "../personalCardList/personalCardList";
+import React, { useState } from 'react';
+import Button from '../button/button';
+import Modal from '../../components/modal/modal';
+import PersonalCardList from '../personalCardList/personalCardList';
+
 interface PersonalCardProps {
-  id: number;
   photo: string;
-  name: string; 
+  name: string;
   job: string;
 }
 
-const PersonalCard: React.FC<PersonalCardProps> = ({ photo, name, job, id }) => {
+const PersonalCard: React.FC<PersonalCardProps> = ({ photo, name, job }) => {
   const [open, setOpen] = useState(false);
-  
+
   return (
     <div className="flex flex-col mx-auto">
       <div className="m-4">

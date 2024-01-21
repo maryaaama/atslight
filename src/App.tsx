@@ -14,7 +14,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Slider />} />
-      <Route path="Candidate" element={<Candidate />} />
+      <Route path="/candidate/:id" Component={Candidate} />
       <Route path="Candidates" element={<Candidates />} />
       <Route path="Company" element={<Company />} />
       <Route path="Organization" element={<Organization />} />

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import StarRating from '../starRating/starRating';
 
 interface CandidateCardProps {
-  id: number;
+  id: number; 
   name: string;
   job: string;
   photo: string;
