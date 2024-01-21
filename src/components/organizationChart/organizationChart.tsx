@@ -66,7 +66,9 @@ export default function OrganizationChart() {
 
       <Modal open={isModalOpen} setOpen={setModalOpen} request={undefined}>
         {/* Content to be displayed in the modal */}
-        <h2 className="text-center text-xl font-bold mb-4">آگهی های شغلی</h2>
+        <div className='w-full mb-5 border-b'>
+        <h3 className="text-center text-xl font-bold mb-2">آگهی های شغلی</h3>
+        </div>
         {jobsLoading ? (
           <JobSkeleton />
         ) : (
