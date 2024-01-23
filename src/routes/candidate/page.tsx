@@ -1,10 +1,10 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useCandidatesQuery } from '../../graphql/generated/graphql';
 import NavBar from '../../components/navBar/navBar';
 import PersonalCard from '../../components/personalCard/personalCard';
-import { useCandidatesQuery } from '../../graphql/generated/graphql';
 import CandidateSkeleton from '../../components/skeleton/candidate';
 import EvaluateModal from '../../components/evaluateModal/evaluateModal';
-import { useParams } from 'react-router-dom';
 import person from "../../image/person.png";
 import Button from '../../components/button/button';
 import EmptyPage from '../../components/emptyPage/page';
@@ -26,6 +26,14 @@ export default function Candidate() {
   const candidatePhoto = candidate?.photoUrl;
   const candidateTranslations = candidate?.translations?.nodes[0]?.name;
   const candidateJobs = candidate?.jobs.nodes[0]?.translations?.nodes[0]?.title;
+  const candidatePhoneNumber = candidate?.phones; 
+
+  const handlePhoneCall = () => {
+    if (candidatePhoneNumber) {
+      window.open(`tel:${candidatePhoneNumber}`);
+    }
+  };
+
 
   return (
     <main>
@@ -77,18 +85,19 @@ export default function Candidate() {
             </div>
           </div>
           <div className="flex flex-row py-5 px-3 justify-between border-t">
-            <Button
-              className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-[#b23226] text-white"
-              name={"تماس تلفنی"}
-            />
-            <Button
+          <button
+                onClick={handlePhoneCall}
+                className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-[#b23226] text-white"
+              > تماس تلفنی
+          </button>
+          <button
               className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100"
-              name={"تماس ویدیویی"}
-            />
-            <Button
+            > تماس ویدیویی
+          </button>
+          <button
               className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100"
-              name={"قرار روی تقویم"}
-            />
+             > قرار روی تقویم
+           </button>
           </div>
         </div>
       )}

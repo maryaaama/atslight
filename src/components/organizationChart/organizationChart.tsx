@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCurrentSessionQuery, useJobsQuery } from '../../graphql/generated/graphql';
-import Modal from "../modal/modal"; // Update the path accordingly
+import Modal from "../modal/modal";
 import Logo from "../../image/logo.png";
 import JobSkeleton from "../../components/skeleton/Job";
 import JobCard from "../../components/jobCard/JobCard";
@@ -9,7 +9,7 @@ import JobCard from "../../components/jobCard/JobCard";
 export default function OrganizationChart() {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
-  const [isModalOpen, setModalOpen] = useState(false); // State for managing modal open/close
+  const [isModalOpen, setModalOpen] = useState(false); 
 
   const { data: sessionData, error: sessionError } = useCurrentSessionQuery();
   const { data: jobsData, loading: jobsLoading, error: jobsError } = useJobsQuery();
