@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Button from "../button/button";
-import Modal from "../../components/modal/modal";
-import PersonalCardList from "../personalCardList/personalCardList";
+import React, { useState } from 'react';
+import Button from '../button/button';
+import Modal from '../../components/modal/modal';
+import PersonalCardList from '../personalCardList/personalCardList';
+
 interface PersonalCardProps {
-  id: number;
   photo: string;
-  name: string; 
+  name: string;
   job: string;
 }
 

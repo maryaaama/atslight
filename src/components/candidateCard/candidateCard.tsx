@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import StarRating from '../starRating/starRating';
 
 interface CandidateCardProps {
-  id: number;
+  id: number; 
   name: string;
   job: string;
   photo: string;
@@ -26,8 +26,8 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ id, name, job, photo }) =
         alt="person"
         className="rounded-xl m-1.5 border shadow-sm w-[90px] h-[90px]"
       />
-      <div className="w-[46%] m-1 pb-4">
-        <h2 className="pb-4 font-semibold text-lg">{name} </h2>
+      <div className="w-[46%] m-1 py-1 items-center flex-col">
+        <h2 className="pb-2 font-semibold text-lg">{name} </h2>
         <p className="text-sm text-gray2 font-normal">{job}</p>
       </div>
       <div className="w-[26%] h-[90px] md:w-[20%] m-1 py-2 border rounded-xl shadow-sm bg-white">

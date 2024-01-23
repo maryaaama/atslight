@@ -176,3 +176,60 @@ export const CURRENT_SESSION = gql`
     }
   }
 `;
+
+export const QUESTIONNAIRES_BY_CANDIDATE_ID = gql`
+  query QuestionnairesByCandidateId($candidateId: Int!) {
+    candidate(id: $candidateId) {
+      nodeId
+      questionnaires(filter: { deletedAt: { isNull: true } }) {
+        nodes {
+          nodeId
+          id
+          translations {
+            nodes {
+              nodeId
+              lang
+              title
+            }
+          }
+          candidateQuestions(
+            filter: { candidateId: { equalTo: $candidateId } }
+          ) {
+            nodes {
+              nodeId
+              id
+              createdAt
+              textValue
+              booleanValue
+              numberValue
+              dateValue
+              questionOption {
+                nodeId
+                id
+                translations {
+                  nodes {
+                    lang
+                    nodeId
+                    value
+                  }
+                }
+              }
+              question {
+                nodeId
+                id
+                type
+                translations {
+                  nodes {
+                    lang
+                    nodeId
+                    title
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
