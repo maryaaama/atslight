@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { FULL_CANDIDATE } from "./fragments";
 
 export const GET_JOBS = gql`
  query Jobs(
@@ -232,4 +233,82 @@ export const QUESTIONNAIRES_BY_CANDIDATE_ID = gql`
       }
     }
   }
+`;
+
+export const GET_JOB_APPLICATIONS = gql`
+  query JobsApplications(
+    $filter: JobsApplicationFilter
+    $orderBy: [JobsApplicationsOrderBy!]
+  ) {
+    jobsApplications(filter: $filter, orderBy: $orderBy) {
+      nodes {
+        id
+        nodeId
+        matchesRank
+        pipelineStageId
+        evaluation
+        candidate {
+          nodeId
+          ...FullCandidate
+        }
+      }
+    }
+  }
+  ${FULL_CANDIDATE}
+`;
+export const GET_CANDIDATE_WITH_APPLICATIONS = gql`
+  query CandidateWithApplications($id: Int!) {
+    candidate(id: $id) {
+      nodeId
+      ...FullCandidate
+      questionnaires(filter: { deletedAt: { isNull: true } }) {
+        nodes {
+          nodeId
+          id
+          translations {
+            nodes {
+              nodeId
+              lang
+              title
+            }
+          }
+          candidateQuestions(filter: { candidateId: { equalTo: $id } }) {
+            nodes {
+              nodeId
+              id
+              createdAt
+              textValue
+              booleanValue
+              numberValue
+              dateValue
+              questionOption {
+                nodeId
+                id
+                translations {
+                  nodes {
+                    lang
+                    nodeId
+                    value
+                  }
+                }
+              }
+              question {
+                nodeId
+                id
+                type
+                translations {
+                  nodes {
+                    lang
+                    nodeId
+                    title
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ${FULL_CANDIDATE}
 `;
