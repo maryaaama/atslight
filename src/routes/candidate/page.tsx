@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-// Import the specific query for fetching candidate with applications
 import { useCandidateWithApplicationsQuery } from '../../graphql/generated/graphql';
 import NavBar from '../../components/navBar/navBar';
 import PersonalCard from '../../components/personalCard/personalCard';
@@ -11,29 +10,27 @@ import Button from '../../components/button/button';
 import EmptyPage from '../../components/emptyPage/page';
 
 export default function Candidate() {
-  const { id } = useParams<{ id: string }>(); // Assuming you're using react-router-dom v5 or above
+  const { id } = useParams<{ id: string }>();
   const candidateId = parseInt(id!); 
 
-  // Use the specific query for a candidate with applications
   const { data, loading, error } = useCandidateWithApplicationsQuery({
     variables: { id: candidateId },
-    skip: !candidateId, // Skip the query if no candidateId is provided
+    skip: !candidateId, 
   });
 
   if (loading) return <CandidateSkeleton />;
   if (error) return <p>Error fetching data</p>;
   if (!data || !data.candidate) return <EmptyPage />;
 
-  // Assuming the query returns an object structured { candidate: { ... } }
   const { candidate } = data;
 
   const candidatePhoto = candidate.photoUrl || person;
   const candidateName = candidate.translations?.nodes[0]?.name || "N/A";
   const candidateJobs = candidate.jobsApplications?.nodes[0]?.job?.translations?.nodes[0]?.title || "N/A";
-  const candidateResumeUrl = candidate.resumeUrl; // Assuming this is the correct path to the resume URL
+  const candidateResumeUrl = candidate.resumeUrl;
 
   const handlePhoneCall = () => {
-    const candidatePhoneNumber = candidate.phones?.[0]; // Assuming phones is an array, adjust as needed
+    const candidatePhoneNumber = candidate.phones?.[0]; 
     if (candidatePhoneNumber) {
       window.open(`tel:${candidatePhoneNumber}`);
     }

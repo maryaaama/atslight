@@ -7,20 +7,17 @@ interface PersonalCardProps {
   photo: string;
   name: string;
   job: string;
-  resumeUrl?: string; // Optional prop for the resume URL
+  resumeUrl?: string; 
 }
 
 const PersonalCard: React.FC<PersonalCardProps> = ({ photo, name, job, resumeUrl }) => {
   const [open, setOpen] = useState(false);
 
-  // Function to download the resume
   const downloadResume = () => {
-    // Check if resume URL is provided
     if (!resumeUrl) {
-      alert('No resume URL provided.');
+      alert('کاندید مورد نظر فاقد رزومه می باشد');
       return;
     }
-    // Logic to download the resume
     const link = document.createElement('a');
     link.href = resumeUrl;
     link.setAttribute('download', `${name}-Resume`);
@@ -56,7 +53,6 @@ const PersonalCard: React.FC<PersonalCardProps> = ({ photo, name, job, resumeUrl
         </div>
       </div>
       <div className="w-full flex border-b py-4 gap-10">
-        {/* Update the onClick handler for the resume download button */}
         <div className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-3 font-semibold bg-gray-100">
           <button name="رزومه" className={""} onClick={downloadResume} >رزومه</button>
         </div>
