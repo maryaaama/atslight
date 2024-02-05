@@ -11,26 +11,30 @@ const EvaluationForm = () => {
           ارزیابی رزومه
         </p>
         <div className="mt-6 md:mt-0 text-5xl">
-          <StarRating  starClick={undefined}/>
+          <StarRating starClick={undefined} />
         </div>
       </div>
 
       <div className="mt-6">
-      <h1 className="text-right text-base text-gray-600 font-medium">نظر</h1>
-      <textarea className="w-full h-20 p-2 border border-slate-400 rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
-        placeholder=""></textarea>
-    </div>
+        <h1 className="text-right text-base text-gray-600 font-medium">نظر</h1>
+        <textarea
+          className="w-full h-20 p-2 border border-slate-400 rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+          placeholder=""
+        ></textarea>
+      </div>
 
       <div className=" font-medium text-base flex flex-col md:flex-row items-start p-4 bg-white rounded relative mt-6">
         <p className="ml-8 text-right w-52 h-22 overflow-y-hidden verflow-auto break-words">
           جمع بندی
         </p>
         <div className="mt-6 md:mt-0 text-5xl">
-          <StarRating  starClick={undefined}/>
+          <StarRating starClick={undefined} />
         </div>
       </div>
       <div className="w-full border-t mt-1">
-        <button className="bg-slate-300 m-5 px-2 py-1 text-base rounded-md">ثبت</button>
+        <button className="bg-slate-300 m-5 px-2 py-1 text-base rounded-md">
+          ثبت
+        </button>
       </div>
     </>
   );

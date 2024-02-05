@@ -6,106 +6,105 @@
   font-family: iranyekan;
   font-style: normal;
   font-weight: bold;
-  src: url('/src/fonts/eot/iranyekanwebbold.eot');
-  src: url('/src/fonts/eot/iranyekanwebbold.eot?#iefix')
-      format('embedded-opentype'),
-    /* IE6-8 */ url('/src/fonts/woff/iranyekanwebbold.woff') format('woff'),
-    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('/src/fonts/ttf/iranyekanwebbold.ttf')
-      format('truetype');
+  src: url("/src/fonts/eot/iranyekanwebbold.eot");
+  src: url("/src/fonts/eot/iranyekanwebbold.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-8 */ url("/src/fonts/woff/iranyekanwebbold.woff") format("woff"),
+    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+      url("/src/fonts/ttf/iranyekanwebbold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: iranyekan;
   font-style: normal;
   font-weight: 100;
-  src: url('/src/fonts/eot/iranyekanwebthin.eot');
-  src: url('/src/fonts/eot/iranyekanwebthin.eot?#iefix')
-      format('embedded-opentype'),
-    /* IE6-8 */ url('/src/fonts/woff/iranyekanwebthin.woff') format('woff'),
-    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('/src/fonts/ttf/iranyekanwebthin.ttf')
-      format('truetype');
+  src: url("/src/fonts/eot/iranyekanwebthin.eot");
+  src: url("/src/fonts/eot/iranyekanwebthin.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-8 */ url("/src/fonts/woff/iranyekanwebthin.woff") format("woff"),
+    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+      url("/src/fonts/ttf/iranyekanwebthin.ttf") format("truetype");
 }
 
 @font-face {
   font-family: iranyekan;
   font-style: normal;
   font-weight: 300;
-  src: url('/src/fonts/eot/iranyekanweblight.eot');
-  src: url('/src/fonts/eot/iranyekanweblight.eot?#iefix')
-      format('embedded-opentype'),
-    /* IE6-8 */ url('/src/fonts/woff/iranyekanweblight.woff') format('woff'),
+  src: url("/src/fonts/eot/iranyekanweblight.eot");
+  src: url("/src/fonts/eot/iranyekanweblight.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-8 */ url("/src/fonts/woff/iranyekanweblight.woff") format("woff"),
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-      url('/src/fonts/ttf/iranyekanweblight.ttf') format('truetype');
+      url("/src/fonts/ttf/iranyekanweblight.ttf") format("truetype");
 }
 
 @font-face {
   font-family: iranyekan;
   font-style: normal;
   font-weight: normal;
-  src: url('/src/fonts/eot/iranyekanwebregular.eot');
-  src: url('/src/fonts/eot/iranyekanwebregular.eot?#iefix')
-      format('embedded-opentype'),
-    /* IE6-8 */ url('/src/fonts/woff/iranyekanwebregular.woff') format('woff'),
+  src: url("/src/fonts/eot/iranyekanwebregular.eot");
+  src: url("/src/fonts/eot/iranyekanwebregular.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-8 */ url("/src/fonts/woff/iranyekanwebregular.woff") format("woff"),
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-      url('/src/fonts/ttf/iranyekanwebregular.ttf') format('truetype');
+      url("/src/fonts/ttf/iranyekanwebregular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: iranyekan;
   font-style: normal;
   font-weight: 500;
-  src: url('/src/fonts/eot/iranyekanwebmedium.eot');
-  src: url('/src/fonts/eot/iranyekanwebmedium.eot?#iefix')
-      format('embedded-opentype'),
-    /* IE6-8 */ url('/src/fonts/woff/iranyekanwebmedium.woff') format('woff'),
+  src: url("/src/fonts/eot/iranyekanwebmedium.eot");
+  src: url("/src/fonts/eot/iranyekanwebmedium.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-8 */ url("/src/fonts/woff/iranyekanwebmedium.woff") format("woff"),
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-      url('/src/fonts/ttf/iranyekanwebmedium.ttf') format('truetype');
+      url("/src/fonts/ttf/iranyekanwebmedium.ttf") format("truetype");
 }
 
 @font-face {
   font-family: iranyekan;
   font-style: normal;
   font-weight: 800;
-  src: url('/src/fonts/eot/iranyekanwebextrabold.eot');
-  src: url('/src/fonts/eot/iranyekanwebextrabold.eot?#iefix')
-      format('embedded-opentype'),
-    /* IE6-8 */ url('/src/fonts/woff/iranyekanwebextrabold.woff') format('woff'),
+  src: url("/src/fonts/eot/iranyekanwebextrabold.eot");
+  src: url("/src/fonts/eot/iranyekanwebextrabold.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-8 */ url("/src/fonts/woff/iranyekanwebextrabold.woff") format("woff"),
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-      url('/src/fonts/ttf/iranyekanwebextrabold.ttf') format('truetype');
+      url("/src/fonts/ttf/iranyekanwebextrabold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: iranyekan;
   font-style: normal;
   font-weight: 900;
-  src: url('/src/fonts/eot/iranyekanwebblack.eot');
-  src: url('/src/fonts/eot/iranyekanwebblack.eot?#iefix')
-      format('embedded-opentype'),
-    /* IE6-8 */ url('/src/fonts/woff/iranyekanwebblack.woff') format('woff'),
+  src: url("/src/fonts/eot/iranyekanwebblack.eot");
+  src: url("/src/fonts/eot/iranyekanwebblack.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-8 */ url("/src/fonts/woff/iranyekanwebblack.woff") format("woff"),
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-      url('/src/fonts/ttf/iranyekanwebblack.ttf') format('truetype');
+      url("/src/fonts/ttf/iranyekanwebblack.ttf") format("truetype");
 }
 
 @font-face {
   font-family: iranyekan;
   font-style: normal;
   font-weight: 950;
-  src: url('/src/fonts/eot/iranyekanwebextrablack.eot');
-  src: url('/src/fonts/eot/iranyekanwebextrablack.eot?#iefix')
-      format('embedded-opentype'),
-    /* IE6-8 */ url('/src/fonts/woff/iranyekanwebextrablack.woff') format('woff'),
+  src: url("/src/fonts/eot/iranyekanwebextrablack.eot");
+  src: url("/src/fonts/eot/iranyekanwebextrablack.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-8 */ url("/src/fonts/woff/iranyekanwebextrablack.woff")
+      format("woff"),
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-      url('/src/fonts/ttf/iranyekanwebextrablack.ttf') format('truetype');
+      url("/src/fonts/ttf/iranyekanwebextrablack.ttf") format("truetype");
 }
-
 
 body {
-margin: 0;  
-font-family: iranyekan !important;
+  margin: 0;
+  font-family: iranyekan !important;
 }
 
-
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

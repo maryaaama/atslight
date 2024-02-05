@@ -1,4 +1,4 @@
-import {JobField } from './graphql/generated/graphql';
+import { JobField } from "./graphql/generated/graphql";
 
 export type FileWithId = {
   file: File;
@@ -17,4 +17,3 @@ export interface Field {
   position: number;
   required: boolean;
 }
-

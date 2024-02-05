@@ -25,13 +25,14 @@ const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
     >
       <div className="text">
         <h2 className="pr-2 font-medium text-lg">{jobTitle}</h2>
-        {/* Additional job details can be displayed here */}
       </div>
-      
-      {/* Uncomment and customize the Modal component integration based on your requirements */}
-      
-      <Modal open={open} setOpen={setOpen} request={undefined} children={undefined} />
-     
+
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        request={undefined}
+        children={undefined}
+      />
     </span>
   );
 };

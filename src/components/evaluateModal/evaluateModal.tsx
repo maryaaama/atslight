@@ -12,9 +12,9 @@ const EvaluateModal = () => {
 
   return (
     <div>
-     <div className="text-3xl">
-      <StarRating starClick={starHandler} /> 
-     </div>
+      <div className="text-3xl">
+        <StarRating starClick={starHandler} />
+      </div>
       <Modal open={open} setOpen={setOpen} request={undefined}>
         <EvaluationForm />
       </Modal>

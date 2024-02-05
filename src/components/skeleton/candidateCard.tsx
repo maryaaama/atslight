@@ -1,9 +1,6 @@
 const CandidateCardSkeleton = () => {
   return (
-    <span
-      className="flex w-auto m-1 rounded-md border justify-between items-center animate-pulse bg-gray-200"
-
-    >
+    <span className="flex w-auto m-1 rounded-md border justify-between items-center animate-pulse bg-gray-200">
       <div className="rounded-xl m-1.5 border w-[90px] h-[90px] bg-gray-300"></div>
       <div className="w-[46%] m-1 pb-4">
         <div className="h-4 bg-gray-300 rounded w-3/4"></div>

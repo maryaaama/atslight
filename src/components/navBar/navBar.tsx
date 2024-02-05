@@ -1,7 +1,7 @@
 import { FaArrowRight } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 interface data {
-  name: string|undefined;
+  name: string | undefined;
 }
 export default function NavBar({ name }: data) {
   const navigate = useNavigate();
@@ -12,8 +12,8 @@ export default function NavBar({ name }: data) {
         <button type="button" onClick={() => navigate(-1)}>
           <div className="flex">
             <div className="my-auto">
-             <FaArrowRight />
-            </div>    
+              <FaArrowRight />
+            </div>
             <p className="mr-2">{name}</p>
           </div>
         </button>

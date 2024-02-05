@@ -1,29 +1,29 @@
 import "../../index.css";
 import { SyntheticEvent, useState } from "react";
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from "@apollo/client";
 // import { KavehNegar } from "../../api/kavehNegar";
 
 export default function Home() {
   const [data, setData] = useState("");
   const GET_COMPANIES = gql`
-  query Companies {
-    companies {
-      nodes {
-        id
-        nodeId
-        translations {
-          nodes {
-            nodeId
-            lang
-            name
+    query Companies {
+      companies {
+        nodes {
+          id
+          nodeId
+          translations {
+            nodes {
+              nodeId
+              lang
+              name
+            }
           }
         }
       }
     }
-  }
-`;
+  `;
   // const { sendSms, err } = KavehNegar();
-  const { data: bgdata } = useQuery(GET_COMPANIES)
+  const { data: bgdata } = useQuery(GET_COMPANIES);
   console.log(bgdata);
 
   // const clickHandler = () => {
@@ -59,7 +59,13 @@ export default function Home() {
             />
             {/* <span className="text-red-600 text-xs">{err}</span> */}
             <p className="text-slate-500 text-xs mt-2">
-              شرایط استفاده از خدمات و حریم خصوصی این <span className="text-blue-700 text-sm"><a href="/privacy-policy" target="_blank">سرویس </a></span>را می‌پذیرم.
+              شرایط استفاده از خدمات و حریم خصوصی این{" "}
+              <span className="text-blue-700 text-sm">
+                <a href="/privacy-policy" target="_blank">
+                  سرویس{" "}
+                </a>
+              </span>
+              را می‌پذیرم.
             </p>
           </div>
 
