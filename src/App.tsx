@@ -1,16 +1,15 @@
-import { Routes, Route } from 'react-router-dom';
-import './App.css';
-import Candidate from './routes/candidate/page';
-import Candidates from './routes/candidates/page';
-import Company from './routes/company/page';
-import Organization from './routes/organization/page';
-import Signin from './routes/signin/page';
-import Verify from './routes/verify/page';
-import Slider from './components/slider/slider'
-import PrivacyPolicy from './routes/privacy-policy/page';
-import Jobs from './routes/jobs/page';
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import Candidate from "./routes/candidate/page";
+import Candidates from "./routes/candidates/page";
+import Company from "./routes/company/page";
+import Organization from "./routes/organization/page";
+import Signin from "./routes/signin/page";
+import Verify from "./routes/verify/page";
+import Slider from "./components/slider/slider";
+import PrivacyPolicy from "./routes/privacy-policy/page";
+import Jobs from "./routes/jobs/page";
 function App() {
-
   return (
     <Routes>
       <Route path="/" element={<Slider />} />
@@ -23,7 +22,6 @@ function App() {
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
       <Route path="jobs" element={<Jobs />} />
     </Routes>
-
   );
 }
 

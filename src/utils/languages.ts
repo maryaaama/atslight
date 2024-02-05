@@ -1,4 +1,4 @@
-import { Language } from '../graphql/generated/graphql';
+import { Language } from "../graphql/generated/graphql";
 
 export const languages = [
   Language.Ar,
@@ -21,10 +21,10 @@ interface TranslationInput<T> {
 export function prepareLanguagesForFormik<T extends {}>(
   defaultValue: T,
   values?: Translation<T>[],
-  langs: Language[] = languages,
+  langs: Language[] = languages
 ): Translation<T>[] {
-  return langs.map(lang => {
-    const val = values?.find(v => v.lang === lang);
+  return langs.map((lang) => {
+    const val = values?.find((v) => v.lang === lang);
     return { ...defaultValue, ...val, lang };
   });
 }
@@ -32,7 +32,7 @@ export function prepareLanguagesForFormik<T extends {}>(
 export function prepareTranslationsForMutation<T extends {}>(
   translations: Translation<T>[] | undefined,
   oldTranslations: Translation<T>[] | undefined,
-  isValid: (translation: T) => boolean,
+  isValid: (translation: T) => boolean
 ) {
   const _translations: TranslationInput<T> = {
     delete: [],
@@ -40,10 +40,10 @@ export function prepareTranslationsForMutation<T extends {}>(
     create: [],
   };
 
-  translations?.forEach(translation => {
+  translations?.forEach((translation) => {
     if (!isValid(translation)) {
       _translations.delete.push(translation.lang);
-    } else if (oldTranslations?.find(t => t.lang === translation.lang)) {
+    } else if (oldTranslations?.find((t) => t.lang === translation.lang)) {
       _translations.update.push(translation);
     } else {
       _translations.create.push(translation);

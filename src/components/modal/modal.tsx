@@ -6,10 +6,15 @@ interface ModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   request: any;
-  children:any;
+  children: any;
 }
 
-export default function Modal({ open, setOpen, request,children }: ModalProps) {
+export default function Modal({
+  open,
+  setOpen,
+  request,
+  children,
+}: ModalProps) {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -17,7 +22,6 @@ export default function Modal({ open, setOpen, request,children }: ModalProps) {
         className="fixed inset-0 z-10 overflow-y-auto h-full w-full"
         onClose={() => setOpen(false)}
       >
-       
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -48,14 +52,12 @@ export default function Modal({ open, setOpen, request,children }: ModalProps) {
                     className="text-left rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     onClick={() => setOpen(false)}
                   >
-                    
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
                 <br></br>
                 {children}
                 <div className="container mx-auto my-auto">{request}</div>
-                
               </Dialog.Panel>
             </Transition.Child>
           </div>

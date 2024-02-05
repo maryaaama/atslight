@@ -1,39 +1,42 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useCandidatesQuery } from '../../graphql/generated/graphql';
-import NavBar from '../../components/navBar/navBar';
-import PersonalCard from '../../components/personalCard/personalCard';
-import CandidateSkeleton from '../../components/skeleton/candidate';
-import EvaluateModal from '../../components/evaluateModal/evaluateModal';
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useCandidateWithApplicationsQuery } from "../../graphql/generated/graphql";
+import NavBar from "../../components/navBar/navBar";
+import PersonalCard from "../../components/personalCard/personalCard";
+import CandidateSkeleton from "../../components/skeleton/candidate";
+import EvaluateModal from "../../components/evaluateModal/evaluateModal";
 import person from "../../image/person.png";
-import Button from '../../components/button/button';
-import EmptyPage from '../../components/emptyPage/page';
+import Button from "../../components/button/button";
+import EmptyPage from "../../components/emptyPage/page";
 
 export default function Candidate() {
-  const { data, loading, error } = useCandidatesQuery();
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
+  const candidateId = parseInt(id!);
 
-  if (error) {
-    return <p>Error fetching data</p>;
-  }
+  const { data, loading, error } = useCandidateWithApplicationsQuery({
+    variables: { id: candidateId },
+    skip: !candidateId,
+  });
 
-  const candidate = data?.candidates?.nodes.find(candidate => String(candidate.id) === id);
+  if (loading) return <CandidateSkeleton />;
+  if (error) return <p>Error fetching data</p>;
+  if (!data || !data.candidate) return <EmptyPage />;
 
-  if (!candidate) {
-    return <EmptyPage/>;
-  }
+  const { candidate } = data;
 
-  const candidatePhoto = candidate?.photoUrl;
-  const candidateTranslations = candidate?.translations?.nodes[0]?.name;
-  const candidateJobs = candidate?.jobs.nodes[0]?.translations?.nodes[0]?.title;
-  const candidatePhoneNumber = candidate?.phones; 
+  const candidatePhoto = candidate.photoUrl || person;
+  const candidateName = candidate.translations?.nodes[0]?.name || "N/A";
+  const candidateJobs =
+    candidate.jobsApplications?.nodes[0]?.job?.translations?.nodes[0]?.title ||
+    "N/A";
+  const candidateResumeUrl = candidate.resumeUrl;
 
   const handlePhoneCall = () => {
+    const candidatePhoneNumber = candidate.phones?.[0];
     if (candidatePhoneNumber) {
       window.open(`tel:${candidatePhoneNumber}`);
     }
   };
-
 
   return (
     <main>
@@ -44,9 +47,10 @@ export default function Candidate() {
         <div className="sm:h-11/12 max-sm:w-screen max-w-lg mx-auto sm:border sm:mt-8 sm:rounded-lg sm:items-center sm:shadow-lg">
           <PersonalCard
             key={candidate.id}
-            name={candidateTranslations}
+            name={candidateName}
             job={candidateJobs}
-            photo={candidatePhoto||person}
+            photo={candidatePhoto || person}
+            resumeUrl={candidateResumeUrl || undefined}
           />
           <div className="w-full">
             <div className="flex justify-between mx-6 my-3">
@@ -85,19 +89,21 @@ export default function Candidate() {
             </div>
           </div>
           <div className="flex flex-row py-5 px-3 justify-between border-t">
-          <button
-                onClick={handlePhoneCall}
-                className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-[#b23226] text-white"
-              > تماس تلفنی
-          </button>
-          <button
-              className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100"
-            > تماس ویدیویی
-          </button>
-          <button
-              className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100"
-             > قرار روی تقویم
-           </button>
+            <button
+              onClick={handlePhoneCall}
+              className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-[#b23226] text-white"
+            >
+              {" "}
+              تماس تلفنی
+            </button>
+            <button className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100">
+              {" "}
+              تماس ویدیویی
+            </button>
+            <button className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100">
+              {" "}
+              قرار روی تقویم
+            </button>
           </div>
         </div>
       )}

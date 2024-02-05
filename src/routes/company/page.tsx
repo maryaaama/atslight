@@ -1,16 +1,23 @@
 import React, { ChangeEvent, useState } from "react";
 import NavBar from "../../components/navBar/navBar";
 import DefaultImage from "../../image/upload.png";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import LoadingButton from "../../components/button/LoadingButton.jsx";
-import { useCreatePresignedUploadLinkMutation, useCreateCompanyMutation, Language, CompanyCategory, CompanySize } from "../../graphql/generated/graphql";
+import {
+  useCreatePresignedUploadLinkMutation,
+  useCreateCompanyMutation,
+  Language,
+  CompanyCategory,
+  CompanySize,
+} from "../../graphql/generated/graphql";
 
 export default function Company() {
   const [file, setFile] = useState(DefaultImage);
   const [business, setBusiness] = useState("");
   const [isClick, setIsClick] = useState(false);
 
-  const [CreatePresignedUploadLinkMutation] = useCreatePresignedUploadLinkMutation();
+  const [CreatePresignedUploadLinkMutation] =
+    useCreatePresignedUploadLinkMutation();
   const [createCompanyMutation] = useCreateCompanyMutation();
 
   const clickHandler = async () => {
@@ -23,11 +30,12 @@ export default function Company() {
         variables: {
           input: {
             translations: [
-              { name: business, lang: Language.Fa },{ name: business, lang: Language.En } // Add English translation
-          ],
-            category:CompanyCategory.Retailer,
+              { name: business, lang: Language.Fa },
+              { name: business, lang: Language.En }, // Add English translation
+            ],
+            category: CompanyCategory.Retailer,
             companySize: CompanySize.MoreThan_200,
-            languages: [Language.Fa,Language.En]
+            languages: [Language.Fa, Language.En],
           },
         },
       });
@@ -70,11 +78,7 @@ export default function Company() {
                   id="upload"
                   className="hidden"
                 />
-                <img
-                  src={file}
-                  alt="logo"
-                  className="p-2 w-44 h-40"
-                />
+                <img src={file} alt="logo" className="p-2 w-44 h-40" />
               </label>
             </section>
           </div>
@@ -89,10 +93,7 @@ export default function Company() {
               onChange={(e) => setBusiness(e.target.value)}
             />
           </div>
-          <Link
-            className="my-4"
-            to={"/organization"}
-          >
+          <Link className="my-4" to={"/organization"}>
             <button
               onClick={() => clickHandler()}
               className={

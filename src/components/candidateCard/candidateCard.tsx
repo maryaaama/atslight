@@ -1,15 +1,20 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import StarRating from '../starRating/starRating';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import StarRating from "../starRating/starRating";
 
 interface CandidateCardProps {
-  id: number; 
+  id: number;
   name: string;
   job: string;
   photo: string;
 }
 
-const CandidateCard: React.FC<CandidateCardProps> = ({ id, name, job, photo }) => {
+const CandidateCard: React.FC<CandidateCardProps> = ({
+  id,
+  name,
+  job,
+  photo,
+}) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -31,7 +36,9 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ id, name, job, photo }) =
         <p className="text-sm text-gray2 font-normal">{job}</p>
       </div>
       <div className="w-[26%] h-[90px] md:w-[20%] m-1 py-2 border rounded-xl shadow-sm bg-white">
-        <h1 className="w-full text-center m-auto text-xl py-2 font-medium">70%</h1>
+        <h1 className="w-full text-center m-auto text-xl py-2 font-medium">
+          70%
+        </h1>
         <div className="w-full md:text-xl text-center m-auto p-0.5">
           <StarRating starClick={undefined} />
         </div>

@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
-import Button from '../button/button';
-import Modal from '../../components/modal/modal';
-import PersonalCardList from '../personalCardList/personalCardList';
+import React, { useState } from "react";
+import Button from "../button/button";
+import Modal from "../../components/modal/modal";
+import PersonalCardList from "../personalCardList/personalCardList";
 
 interface PersonalCardProps {
   photo: string;
   name: string;
   job: string;
+  resumeUrl?: string;
 }
 
-const PersonalCard: React.FC<PersonalCardProps> = ({ photo, name, job }) => {
+const PersonalCard: React.FC<PersonalCardProps> = ({
+  photo,
+  name,
+  job,
+  resumeUrl,
+}) => {
   const [open, setOpen] = useState(false);
+
+  const downloadResume = () => {
+    if (!resumeUrl) {
+      alert("کاندید مورد نظر فاقد رزومه می باشد");
+      return;
+    }
+    const link = document.createElement("a");
+    link.href = resumeUrl;
+    link.setAttribute("download", `${name}-Resume`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="flex flex-col mx-auto">
@@ -39,9 +58,15 @@ const PersonalCard: React.FC<PersonalCardProps> = ({ photo, name, job }) => {
         </div>
       </div>
       <div className="w-full flex border-b py-4 gap-10">
-        <div className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-3 font-semibold bg-gray-100">
-          <Button name="رزومه" className={""} />
-        </div>
+        <button
+          name="رزومه"
+          className={
+            "w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-3 font-semibold bg-gray-100"
+          }
+          onClick={downloadResume}
+        >
+          رزومه
+        </button>
         <div className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-3 font-semibold bg-gray-100">
           <Button name="مدارک" className={""} />
         </div>

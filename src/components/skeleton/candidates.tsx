@@ -1,5 +1,5 @@
 import CandidateCardSkeleton from "./candidateCard";
-  const CandidatesSkeleton = () => {
+const CandidatesSkeleton = () => {
   const cardCount = Array.from({ length: 6 });
 
   return (

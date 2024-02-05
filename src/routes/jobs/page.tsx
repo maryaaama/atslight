@@ -1,7 +1,5 @@
-import React from 'react';
-import {
-  useJobsQuery,
-} from "../../graphql/generated/graphql";
+import React from "react";
+import { useJobsQuery } from "../../graphql/generated/graphql";
 import NavBar from "../../components/navBar/navBar";
 import JobSkeleton from "../../components/skeleton/Job";
 import JobCard from "../../components/jobCard/JobCard";
@@ -20,12 +18,7 @@ export default function Jobs() {
         {loading ? (
           <JobSkeleton />
         ) : (
-          data?.jobs?.nodes.map((job) => (
-            <JobCard
-              key={job.id}
-              job={job}
-            />
-          ))
+          data?.jobs?.nodes.map((job) => <JobCard key={job.id} job={job} />)
         )}
       </div>
     </main>

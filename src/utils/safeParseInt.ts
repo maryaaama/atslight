@@ -1,8 +1,8 @@
 export function safeParseInt(
   s: number | string | undefined | null,
-  radix = 10,
+  radix = 10
 ): number {
-  if (typeof s === 'number') {
+  if (typeof s === "number") {
     return s;
   }
 
