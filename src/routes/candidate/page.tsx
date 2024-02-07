@@ -93,15 +93,18 @@ export default function Candidate() {
               onClick={handlePhoneCall}
               className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-[#b23226] text-white"
             >
-              {" "}
               تماس تلفنی
             </button>
-            <button className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100">
-              {" "}
+            <button
+              disabled
+              className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100"
+            >
               تماس ویدیویی
             </button>
-            <button className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100">
-              {" "}
+            <button
+              disabled
+              className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100"
+            >
               قرار روی تقویم
             </button>
           </div>

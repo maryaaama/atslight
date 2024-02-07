@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "../button/button";
 import Modal from "../../components/modal/modal";
 import PersonalCardList from "../personalCardList/personalCardList";
 
@@ -67,9 +66,12 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
         >
           رزومه
         </button>
-        <div className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-3 font-semibold bg-gray-100">
-          <Button name="مدارک" className={""} />
-        </div>
+        <button
+          disabled
+          className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-3 font-semibold bg-gray-100"
+        >
+          مدارک
+        </button>
       </div>
       <Modal open={open} setOpen={setOpen} request={undefined}>
         <PersonalCardList />
