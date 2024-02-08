@@ -44,7 +44,7 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
         questionValue:
           question.question?.translations.nodes[0]?.title ||
           "No question text available",
-        answer: question.textValue || "No answer provided", // Adjust based on your data structure
+        answer: question.textValue || "No answer provided",
       })),
     })) || [];
 

@@ -3,7 +3,7 @@ import React from "react";
 interface Question {
   id: number;
   questionValue: string;
-  answer: string; // Assuming you have an answer for each question
+  answer: string;
 }
 
 interface Questionnaire {
@@ -12,7 +12,7 @@ interface Questionnaire {
 }
 
 interface PersonalCardListProps {
-  questionnaires: Questionnaire[]; // Now expects multiple questionnaires
+  questionnaires: Questionnaire[];
 }
 
 const PersonalCardList: React.FC<PersonalCardListProps> = ({
