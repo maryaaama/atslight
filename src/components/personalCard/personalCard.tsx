@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Modal from "../../components/modal/modal";
 import PersonalCardList from "../personalCardList/personalCardList";
+import { useCandidateWithApplicationsQuery } from "../../graphql/generated/graphql";
 
 interface PersonalCardProps {
   photo: string;
   name: string;
   job: string;
   resumeUrl?: string;
+  id: number;
 }
 
 const PersonalCard: React.FC<PersonalCardProps> = ({
@@ -14,8 +16,13 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
   name,
   job,
   resumeUrl,
+  id,
 }) => {
   const [open, setOpen] = useState(false);
+
+  const { data, loading, error } = useCandidateWithApplicationsQuery({
+    variables: { id },
+  });
 
   const downloadResume = () => {
     if (!resumeUrl) {
@@ -29,6 +36,17 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
     link.click();
     document.body.removeChild(link);
   };
+  const questionnaires =
+    data?.candidate?.questionnaires.nodes.map((questionnaire) => ({
+      title: questionnaire.translations.nodes[0]?.title || "No title",
+      questions: questionnaire.candidateQuestions.nodes.map((question) => ({
+        id: question.id,
+        questionValue:
+          question.question?.translations.nodes[0]?.title ||
+          "No question text available",
+        answer: question.textValue || "No answer provided", // Adjust based on your data structure
+      })),
+    })) || [];
 
   return (
     <div className="flex flex-col mx-auto">
@@ -40,7 +58,7 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
       <div className="w-full flex flex-row-2 justify-between items-center gap-10">
         <div className="w-1/2 h-32 sm:h-40 rounded-2xl shadow-md shadow-slate-200 mx-6 border">
           <img
-            alt="person"
+            alt="Candidate"
             src={photo}
             className="rounded-2xl w-full h-full m-auto p-0"
           />
@@ -56,12 +74,10 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
           </h1>
         </div>
       </div>
+
       <div className="w-full flex border-b py-4 gap-10">
         <button
-          name="رزومه"
-          className={
-            "w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-3 font-semibold bg-gray-100"
-          }
+          className="w-1/2 mx-6 border text-center border-slate-300 rounded-md shadow py-3 font-semibold bg-gray-100"
           onClick={downloadResume}
         >
           رزومه
@@ -73,8 +89,15 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
           مدارک
         </button>
       </div>
+
       <Modal open={open} setOpen={setOpen} request={undefined}>
-        <PersonalCardList />
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error: {error.message}</p>
+        ) : (
+          <PersonalCardList questionnaires={questionnaires} />
+        )}
       </Modal>
     </div>
   );

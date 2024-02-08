@@ -51,6 +51,7 @@ export default function Candidate() {
             job={candidateJobs}
             photo={candidatePhoto || person}
             resumeUrl={candidateResumeUrl || undefined}
+            id={candidate.id}
           />
           <div className="w-full">
             <div className="flex justify-between mx-6 my-3">

@@ -1,30 +1,38 @@
-const PersonalCardList = () => {
+import React from "react";
+
+interface Question {
+  id: number;
+  questionValue: string;
+  answer: string; // Assuming you have an answer for each question
+}
+
+interface Questionnaire {
+  title: string;
+  questions: Question[];
+}
+
+interface PersonalCardListProps {
+  questionnaires: Questionnaire[]; // Now expects multiple questionnaires
+}
+
+const PersonalCardList: React.FC<PersonalCardListProps> = ({
+  questionnaires,
+}) => {
   return (
     <div>
-      <div className="list-item list-none justify-between py-2 px-1 text-right">
-        <span className="person-name text-lg font-bold">شهر: </span>
-        <span className="name text-base">تهران</span>
-      </div>
-      <div className="list-item list-none justify-between py-2 px-1 text-right">
-        <span className="person-name text-lg font-bold">محدوده محل کار: </span>
-        <span className="name text-base">اکباتان</span>
-      </div>
-      <div className="list-item list-none justify-between py-2 px-1 text-right">
-        <span className="person-name text-lg font-bold">سابقه: </span>
-        <span className="name text-base">۱۰سال</span>
-      </div>
-      <div className="list-item list-none justify-between py-2 px-1 text-right">
-        <span className="person-name text-lg font-bold">وضعیت سربازی: </span>
-        <span className="name text-base">معافیت</span>
-      </div>
-      <div className="list-item list-none justify-between py-2 px-1 text-right">
-        <span className="person-name text-lg font-bold">جنسیت کارجو: </span>
-        <span className="name text-base">مرد</span>
-      </div>
-      <div className="list-item list-none justify-between py-2 px-1 text-right">
-        <span className="person-name text-lg font-bold">سن کارجو: </span>
-        <span className="name text-base">۲۴</span>
-      </div>
+      {questionnaires.map((questionnaire, index) => (
+        <div key={index} className="mb-4">
+          <h2 className="text-xl font-bold mb-4 mr-1 text-right">
+            {questionnaire.title}
+          </h2>
+          {questionnaire.questions.map((question) => (
+            <div key={question.id} className="mb-2 flex">
+              <p className="text-base mx-2">{question.questionValue} :</p>
+              <p className="text-base mx-2">{question.answer}</p>
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };
