@@ -25,10 +25,10 @@ export default function Candidate() {
   const { candidate } = data;
 
   const candidatePhoto = candidate.photoUrl || person;
-  const candidateName = candidate.translations?.nodes[0]?.name || "N/A";
+  const candidateName = candidate.translations?.nodes[0]?.name || "";
   const candidateJobs =
     candidate.jobsApplications?.nodes[0]?.job?.translations?.nodes[0]?.title ||
-    "N/A";
+    "";
   const candidateResumeUrl = candidate.resumeUrl;
 
   const handlePhoneCall = () => {
@@ -51,6 +51,7 @@ export default function Candidate() {
             job={candidateJobs}
             photo={candidatePhoto || person}
             resumeUrl={candidateResumeUrl || undefined}
+            id={candidate.id}
           />
           <div className="w-full">
             <div className="flex justify-between mx-6 my-3">
@@ -93,15 +94,18 @@ export default function Candidate() {
               onClick={handlePhoneCall}
               className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-[#b23226] text-white"
             >
-              {" "}
               تماس تلفنی
             </button>
-            <button className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100">
-              {" "}
+            <button
+              disabled
+              className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100"
+            >
               تماس ویدیویی
             </button>
-            <button className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100">
-              {" "}
+            <button
+              disabled
+              className="m-auto text-center border border-slate-300 p-3 text-sm rounded-md shadow font-semibold bg-gray-100"
+            >
               قرار روی تقویم
             </button>
           </div>

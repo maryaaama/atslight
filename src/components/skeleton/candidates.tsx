@@ -1,6 +1,6 @@
 import CandidateCardSkeleton from "./candidateCard";
 const CandidatesSkeleton = () => {
-  const cardCount = Array.from({ length: 6 });
+  const cardCount = Array.from({ length: 7 });
 
   return (
     <main className="md:h-screen">
