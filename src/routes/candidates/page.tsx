@@ -5,12 +5,16 @@ import { useCandidatesQuery } from "../../graphql/generated/graphql";
 import CandidatesSkeleton from "../../components/skeleton/candidates";
 import { Link } from "react-router-dom";
 import person from "../../image/person.png";
+import EmptyPage from "../../components/emptyPage/page";
 
 export default function Candidates() {
   const { data, loading, error } = useCandidatesQuery();
 
   if (error) {
     return <div>Error fetching data</div>;
+  }
+  if (!data?.candidates) {
+    return <EmptyPage />;
   }
 
   return (
