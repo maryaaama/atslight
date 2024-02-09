@@ -38,13 +38,11 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
   };
   const questionnaires =
     data?.candidate?.questionnaires.nodes.map((questionnaire) => ({
-      title: questionnaire.translations.nodes[0]?.title || "No title",
+      title: questionnaire.translations.nodes[0]?.title || "",
       questions: questionnaire.candidateQuestions.nodes.map((question) => ({
         id: question.id,
-        questionValue:
-          question.question?.translations.nodes[0]?.title ||
-          "No question text available",
-        answer: question.textValue || "No answer provided",
+        questionValue: question.question?.translations.nodes[0]?.title || "",
+        answer: question.textValue || "",
       })),
     })) || [];
 
@@ -68,9 +66,7 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
           className="flex h-32 sm:h-40 w-1/2 flex-col mx-6 border rounded-2xl justify-between shadow-sm shadow-slate-200 cursor-pointer"
         >
           <h1 className="text-lg my-auto text-gray2 justify-center text-center leading-7 font-bold">
-            {name}
-            <br />
-            {job}
+            سایر توضیحات
           </h1>
         </div>
       </div>
@@ -95,6 +91,12 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
           <p>Loading...</p>
         ) : error ? (
           <p>Error: {error.message}</p>
+        ) : !data || !data.candidate || questionnaires.length === 0 ? (
+          <div className="border shadow-sm rounded-lg mt-4">
+            <p className="text-lg text-gray2 font-medium text-center my-4">
+              اطلاعاتی برای نمایش وجود ندارد!
+            </p>
+          </div>
         ) : (
           <PersonalCardList questionnaires={questionnaires} />
         )}

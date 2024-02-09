@@ -24,14 +24,12 @@ export default function Company() {
     try {
       // Your logic for presigned upload link (if needed)
       // await CreatePresignedUploadLinkMutation();
-
-      // Call the CREATE_COMPANY mutation here
       await createCompanyMutation({
         variables: {
           input: {
             translations: [
               { name: business, lang: Language.Fa },
-              { name: business, lang: Language.En }, // Add English translation
+              { name: business, lang: Language.En },
             ],
             category: CompanyCategory.Retailer,
             companySize: CompanySize.MoreThan_200,
@@ -39,11 +37,8 @@ export default function Company() {
           },
         },
       });
-
-      // Continue with other logic after successful mutation
     } catch (error) {
       console.error("Error creating company:", error);
-      // Handle error if necessary
     }
   };
 

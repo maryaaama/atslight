@@ -25,10 +25,10 @@ export default function Candidate() {
   const { candidate } = data;
 
   const candidatePhoto = candidate.photoUrl || person;
-  const candidateName = candidate.translations?.nodes[0]?.name || "N/A";
+  const candidateName = candidate.translations?.nodes[0]?.name || "";
   const candidateJobs =
     candidate.jobsApplications?.nodes[0]?.job?.translations?.nodes[0]?.title ||
-    "N/A";
+    "";
   const candidateResumeUrl = candidate.resumeUrl;
 
   const handlePhoneCall = () => {
