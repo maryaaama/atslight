@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../../components/modal/modal";
 import PersonalCardList from "../personalCardList/personalCardList";
 import { useCandidateWithApplicationsQuery } from "../../graphql/generated/graphql";
+import EmptyState from "../emptyState/emptyState";
 
 interface PersonalCardProps {
   photo: string;
@@ -92,11 +93,7 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
         ) : error ? (
           <p>Error: {error.message}</p>
         ) : !data || !data.candidate || questionnaires.length === 0 ? (
-          <div className="border shadow-sm rounded-lg mt-4">
-            <p className="text-lg text-gray2 font-medium text-center my-4">
-              اطلاعاتی برای نمایش وجود ندارد!
-            </p>
-          </div>
+          <EmptyState />
         ) : (
           <PersonalCardList questionnaires={questionnaires} />
         )}

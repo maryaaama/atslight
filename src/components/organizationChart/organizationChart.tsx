@@ -8,6 +8,7 @@ import Modal from "../modal/modal";
 import Logo from "../../image/logo.png";
 import JobSkeleton from "../../components/skeleton/Job";
 import JobCard from "../../components/jobCard/JobCard";
+import EmptyState from "../emptyState/emptyState";
 
 export default function OrganizationChart() {
   const navigate = useNavigate();
@@ -80,6 +81,8 @@ export default function OrganizationChart() {
         </div>
         {jobsLoading ? (
           <JobSkeleton />
+        ) : !jobsData || !jobsData.jobs || jobsData?.jobs.nodes[0].id === 0 ? (
+          <EmptyState />
         ) : (
           jobsData?.jobs?.nodes.map((job) => <JobCard key={job.id} job={job} />)
         )}

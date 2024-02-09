@@ -26,7 +26,6 @@ const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
       <div className="text">
         <h2 className="pr-2 font-medium text-lg">{jobTitle}</h2>
       </div>
-
       <Modal
         open={open}
         setOpen={setOpen}
