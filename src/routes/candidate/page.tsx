@@ -6,6 +6,7 @@ import CandidateSkeleton from "../../components/skeleton/candidate";
 import EvaluateModal from "../../components/evaluateModal/evaluateModal";
 import person from "../../image/person.png";
 import Button from "../../components/button/button";
+import EmptyState from "../../components/emptyState/emptyState";
 import EmptyPage from "../../components/emptyPage/page";
 import CandidateNav from "../../components/navBar/candidateNav";
 
@@ -19,6 +20,9 @@ export default function Candidate() {
   });
 
   const candidate = data;
+  if (loading) return <CandidateSkeleton />;
+  if (error) return <p>Error fetching data</p>;
+  if (!data || !data.candidate) return <EmptyState />;
 
   const candidatePhoto = candidate?.candidate?.photoUrl || person;
 
