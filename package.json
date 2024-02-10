@@ -64,5 +64,5 @@
     ]
   },
   "devDependencies": {},
-  "proxy": "https://ats.karjoo.plus/"
+  "proxy": "https://ats.karjoo.plus"
 }

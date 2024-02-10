@@ -13,7 +13,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Slider />} />
       <Route path="/candidate/:id" Component={Candidate} />
-      <Route path="Candidates" element={<Candidates />} />
+      <Route path="/candidates/:jobId" element={<Candidates />} />
       <Route path="Company" element={<Company />} />
       <Route path="Organization" element={<Organization />} />
       <Route path="Signin" element={<Signin />} />
