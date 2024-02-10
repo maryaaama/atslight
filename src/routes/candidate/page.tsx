@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useCandidateWithApplicationsQuery } from "../../graphql/generated/graphql";
+import { useCandidateWithApplicationsQuery,useCandidatesQuery } from "../../graphql/generated/graphql";
 import NavBar from "../../components/navBar/navBar";
 import PersonalCard from "../../components/personalCard/personalCard";
 import CandidateSkeleton from "../../components/skeleton/candidate";
@@ -12,6 +12,8 @@ import EmptyPage from "../../components/emptyPage/page";
 export default function Candidate() {
   const { id } = useParams<{ id: string }>();
   const candidateId = parseInt(id!);
+  const { data:candidatedata } = useCandidatesQuery();
+
 
   const { data, loading, error } = useCandidateWithApplicationsQuery({
     variables: { id: candidateId },
@@ -40,7 +42,7 @@ export default function Candidate() {
 
   return (
     <main>
-      <NavBar name={"مدیر فروش"} />
+      <NavBar name={candidatedata?.candidates?.nodes[0].jobs.nodes[0].translations.nodes[0].title} />
       {loading ? (
         <CandidateSkeleton />
       ) : (

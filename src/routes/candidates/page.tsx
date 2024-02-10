@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import person from "../../image/person.png";
 import EmptyPage from "../../components/emptyPage/page";
 
+
 export default function Candidates() {
   const { data, loading, error } = useCandidatesQuery();
 

@@ -1,5 +1,7 @@
 import gql from "graphql-tag";
 import { FULL_CANDIDATE } from "./fragments";
+import * as fragments from './fragment';
+
 
 export const GET_JOBS = gql`
   query Jobs(
@@ -313,4 +315,31 @@ export const GET_CANDIDATE_WITH_APPLICATIONS = gql`
     }
   }
   ${FULL_CANDIDATE}
+`;
+    
+export const GET_CANDIDATES_WITH_APPLICATIONS = gql`
+  query CandidatesWithApplications(
+    $filter: CandidateFilter
+    $orderBy: [CandidatesOrderBy!]
+    $first: Int
+    $offset: Int
+  ) {
+    candidates(
+      filter: $filter
+      orderBy: $orderBy
+      first: $first
+      offset: $offset
+    ) {
+      nodes {
+        nodeId
+        ...FullCandidate
+      }
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+  }
+  ${fragments.FULL_CANDIDATE}
 `;

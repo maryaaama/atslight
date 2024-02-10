@@ -6649,24 +6649,6 @@ export type CreateUserTokenPayload = {
   userToken?: Maybe<UserToken>;
 };
 
-/** All input for the `createUserTokenWithPhone` mutation. */
-export type CreateUserTokenWithPhoneInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  code: Scalars['String']['input'];
-  phone: Scalars['String']['input'];
-};
-
-/** The output of our `createUserTokenWithPhone` mutation. */
-export type CreateUserTokenWithPhonePayload = {
-  __typename?: 'CreateUserTokenWithPhonePayload';
-  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  userToken?: Maybe<UserToken>;
-};
-
 /** All input for the create `UserTranslation` mutation. */
 export type CreateUserTranslationInput = {
   /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
@@ -17993,7 +17975,6 @@ export type Mutation = {
   /** Creates a single `UserInvitation`. */
   createUserInvitation?: Maybe<CreateUserInvitationPayload>;
   createUserToken?: Maybe<CreateUserTokenPayload>;
-  createUserTokenWithPhone?: Maybe<CreateUserTokenWithPhonePayload>;
   /** Creates a single `UserTranslation`. */
   createUserTranslation?: Maybe<CreateUserTranslationPayload>;
   /** Creates a single `WebsiteFile`. */
@@ -18704,12 +18685,6 @@ export type MutationCreateUserInvitationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateUserTokenArgs = {
   input: CreateUserTokenInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateUserTokenWithPhoneArgs = {
-  input: CreateUserTokenWithPhoneInput;
 };
 
 
@@ -29901,7 +29876,7 @@ export type User = Node & {
   messages: MessagesConnection;
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
   nodeId: Scalars['ID']['output'];
-  phoneNumber?: Maybe<Scalars['String']['output']>;
+  phoneNumber: Scalars['String']['output'];
   photoNormalUrl?: Maybe<Scalars['String']['output']>;
   photoThumbUrl?: Maybe<Scalars['String']['output']>;
   /** Reads and enables pagination through a set of `PipelineStageUser`. */
@@ -35016,6 +34991,7 @@ export const CandidateWithApplicationsDocument = gql`
         }
       }
     }
+<<<<<<< HEAD
   }
 }
     ${FullCandidateFragmentDoc}`;
@@ -35025,12 +35001,39 @@ export const CandidateWithApplicationsDocument = gql`
  *
  * To run a query within a React component, call `useCandidateWithApplicationsQuery` and pass it any options that fit your needs.
  * When your component renders, `useCandidateWithApplicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+=======
+    user {
+      nodeId
+      id
+      translations {
+        nodes {
+          nodeId
+          lang
+          fullname
+          initials
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useEvaluationQuery__
+ *
+ * To run a query within a React component, call `useEvaluationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEvaluationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+>>>>>>> f17c136 (make navbar dynamic and add two new queries)
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
+<<<<<<< HEAD
  * const { data, loading, error } = useCandidateWithApplicationsQuery({
+=======
+ * const { data, loading, error } = useEvaluationQuery({
+>>>>>>> f17c136 (make navbar dynamic and add two new queries)
  *   variables: {
  *      id: // value for 'id'
  *   },
