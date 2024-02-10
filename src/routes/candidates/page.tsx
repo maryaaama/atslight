@@ -2,11 +2,12 @@ import React, { useMemo } from "react";
 import {
   useCandidatesQuery,
   useEvaluationsQuery,
+  useCandidateWithApplicationsQuery,
 } from "../../graphql/generated/graphql";
 import NavBar from "../../components/navBar/navBar";
 import CandidateCard from "../../components/candidateCard/candidateCard";
 import CandidatesSkeleton from "../../components/skeleton/candidates";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import person from "../../image/person.png";
 import EmptyState from "../../components/emptyState/emptyState";
 
