@@ -55,7 +55,7 @@ export default function OrganizationChart() {
         <input
           onChange={handleManagerChange}
           type="text"
-          name={currentUser || ""}
+          name={currentUser || "مدیر"}
           value={currentUser || Logo}
           id="name"
           disabled={user !== ""}
