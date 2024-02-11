@@ -3,7 +3,7 @@ import PersonalCardSkeleton from "./personalCard";
 const CandidateSkeleton = () => {
   return (
     <main>
-      <NavBar name={"مدیر فروش"} />
+      <NavBar name={"loading..."} />
       <div className="animate-pulse">
         <PersonalCardSkeleton />
         <div className="sm:h-11/12 max-sm:w-screen max-w-lg mx-auto sm:border sm:mt-8 sm:rounded-lg sm:items-center animate-pulse my-3">

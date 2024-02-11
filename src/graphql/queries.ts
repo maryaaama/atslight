@@ -1,7 +1,5 @@
 import gql from "graphql-tag";
 import { FULL_CANDIDATE } from "./fragments";
-import * as fragments from './fragment';
-
 
 export const GET_JOBS = gql`
   query Jobs(
@@ -316,7 +314,7 @@ export const GET_CANDIDATE_WITH_APPLICATIONS = gql`
   }
   ${FULL_CANDIDATE}
 `;
-    
+
 export const GET_CANDIDATES_WITH_APPLICATIONS = gql`
   query CandidatesWithApplications(
     $filter: CandidateFilter
@@ -341,5 +339,5 @@ export const GET_CANDIDATES_WITH_APPLICATIONS = gql`
       }
     }
   }
-  ${fragments.FULL_CANDIDATE}
+  ${FULL_CANDIDATE}
 `;

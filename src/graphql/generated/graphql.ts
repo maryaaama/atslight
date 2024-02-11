@@ -6649,6 +6649,24 @@ export type CreateUserTokenPayload = {
   userToken?: Maybe<UserToken>;
 };
 
+/** All input for the `createUserTokenWithPhone` mutation. */
+export type CreateUserTokenWithPhoneInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  code: Scalars['String']['input'];
+  phone: Scalars['String']['input'];
+};
+
+/** The output of our `createUserTokenWithPhone` mutation. */
+export type CreateUserTokenWithPhonePayload = {
+  __typename?: 'CreateUserTokenWithPhonePayload';
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  userToken?: Maybe<UserToken>;
+};
+
 /** All input for the create `UserTranslation` mutation. */
 export type CreateUserTranslationInput = {
   /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
@@ -17975,6 +17993,7 @@ export type Mutation = {
   /** Creates a single `UserInvitation`. */
   createUserInvitation?: Maybe<CreateUserInvitationPayload>;
   createUserToken?: Maybe<CreateUserTokenPayload>;
+  createUserTokenWithPhone?: Maybe<CreateUserTokenWithPhonePayload>;
   /** Creates a single `UserTranslation`. */
   createUserTranslation?: Maybe<CreateUserTranslationPayload>;
   /** Creates a single `WebsiteFile`. */
@@ -18685,6 +18704,12 @@ export type MutationCreateUserInvitationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateUserTokenArgs = {
   input: CreateUserTokenInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateUserTokenWithPhoneArgs = {
+  input: CreateUserTokenWithPhoneInput;
 };
 
 
@@ -29876,7 +29901,7 @@ export type User = Node & {
   messages: MessagesConnection;
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
   nodeId: Scalars['ID']['output'];
-  phoneNumber: Scalars['String']['output'];
+  phoneNumber?: Maybe<Scalars['String']['output']>;
   photoNormalUrl?: Maybe<Scalars['String']['output']>;
   photoThumbUrl?: Maybe<Scalars['String']['output']>;
   /** Reads and enables pagination through a set of `PipelineStageUser`. */
@@ -33977,6 +34002,16 @@ export type CandidateWithApplicationsQueryVariables = Exact<{
 
 export type CandidateWithApplicationsQuery = { __typename?: 'Query', candidate?: { __typename?: 'Candidate', nodeId: string, id: number, canEdit?: boolean | null, photoUrl?: string | null, resumeUrl?: string | null, language: Language, gender?: Gender | null, emails?: Array<string | null> | null, phones?: Array<string | null> | null, socialLinks?: Array<string | null> | null, links?: Array<string | null> | null, militaryStatus?: MilitaryStatus | null, birthday?: any | null, createdAt: any, questionnaires: { __typename?: 'CandidateQuestionnairesByCandidateQuestionnaireCandidateIdAndQuestionnaireIdManyToManyConnection', nodes: Array<{ __typename?: 'Questionnaire', nodeId: string, id: number, translations: { __typename?: 'QuestionnaireTranslationsConnection', nodes: Array<{ __typename?: 'QuestionnaireTranslation', nodeId: string, lang: Language, title: string }> }, candidateQuestions: { __typename?: 'CandidateQuestionsConnection', nodes: Array<{ __typename?: 'CandidateQuestion', nodeId: string, id: number, createdAt: any, textValue?: string | null, booleanValue?: boolean | null, numberValue?: number | null, dateValue?: any | null, questionOption?: { __typename?: 'QuestionOption', nodeId: string, id: number, translations: { __typename?: 'QuestionOptionTranslationsConnection', nodes: Array<{ __typename?: 'QuestionOptionTranslation', lang: Language, nodeId: string, value: string }> } } | null, question?: { __typename?: 'Question', nodeId: string, id: number, type: QuestionType, translations: { __typename?: 'QuestionTranslationsConnection', nodes: Array<{ __typename?: 'QuestionTranslation', lang: Language, nodeId: string, title: string }> } } | null }> } }> }, translations: { __typename?: 'CandidateTranslationsConnection', nodes: Array<{ __typename?: 'CandidateTranslation', lang: Language, nodeId: string, name: string }> }, tags: { __typename?: 'CandidateTagsConnection', nodes: Array<{ __typename?: 'CandidateTag', nodeId: string, tag?: { __typename?: 'Tag', nodeId: string, title: string } | null }> }, sources: { __typename?: 'CandidateTagsConnection', nodes: Array<{ __typename?: 'CandidateTag', nodeId: string, tag?: { __typename?: 'Tag', nodeId: string, title: string } | null }> }, jobsApplications: { __typename?: 'JobsApplicationsConnection', nodes: Array<{ __typename?: 'JobsApplication', nodeId: string, disqualifyReasonId?: number | null, evaluation?: number | null, pipelineStage?: { __typename?: 'PipelineStage', nodeId: string, type: PipelineStageType, translations: { __typename?: 'PipelineStageTranslationsConnection', nodes: Array<{ __typename?: 'PipelineStageTranslation', lang: Language, nodeId: string, title: string }> } } | null, job?: { __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', lang: Language, nodeId: string, title: string }> } } | null }> }, evaluations: { __typename?: 'EvaluationsConnection', nodes: Array<{ __typename?: 'Evaluation', id: number, nodeId: string, point: number, createdAt: any, user?: { __typename?: 'User', nodeId: string, id: number, translations: { __typename?: 'UserTranslationsConnection', nodes: Array<{ __typename?: 'UserTranslation', nodeId: string, lang: Language, fullname?: string | null, initials?: string | null }> } } | null, job?: { __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', nodeId: string, lang: Language, title: string }> } } | null, draftEvaluation?: { __typename?: 'DraftEvaluation', nodeId: string, pipelineStage?: { __typename?: 'PipelineStage', nodeId: string, translations: { __typename?: 'PipelineStageTranslationsConnection', nodes: Array<{ __typename?: 'PipelineStageTranslation', nodeId: string, lang: Language, title: string }> } } | null } | null, scorecards: { __typename?: 'EvaluationScorecardsByEvaluationScorecardEvaluationIdAndScorecardIdManyToManyConnection', nodes: Array<{ __typename?: 'Scorecard', nodeId: string, translations: { __typename?: 'ScorecardTranslationsConnection', nodes: Array<{ __typename?: 'ScorecardTranslation', nodeId: string, lang: Language, title: string }> } }> }, eventDraftEvaluation?: { __typename?: 'EventDraftEvaluation', nodeId: string, id: number, event?: { __typename?: 'Event', nodeId: string, id: number, title: string } | null } | null }> }, candidateDraftEvaluations: { __typename?: 'DraftEvaluationsConnection', nodes: Array<{ __typename?: 'DraftEvaluation', nodeId: string, id: number, userIds: Array<number | null>, scorecardIds: Array<number | null>, jobId: number, candidateId: number, createdAt: any, job?: { __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', nodeId: string, lang: Language, title: string }> } } | null, pipelineStage?: { __typename?: 'PipelineStage', nodeId: string, translations: { __typename?: 'PipelineStageTranslationsConnection', nodes: Array<{ __typename?: 'PipelineStageTranslation', nodeId: string, lang: Language, title: string }> } } | null, scorecards: { __typename?: 'ScorecardsConnection', nodes: Array<{ __typename?: 'Scorecard', nodeId: string, translations: { __typename?: 'ScorecardTranslationsConnection', nodes: Array<{ __typename?: 'ScorecardTranslation', nodeId: string, lang: Language, title: string }> } }> } }> }, candidateEventDraftEvaluations: { __typename?: 'EventDraftEvaluationsConnection', nodes: Array<{ __typename?: 'EventDraftEvaluation', id: number, nodeId: string, userIds: Array<number | null>, scorecardIds: Array<number | null>, createdAt: any, event?: { __typename?: 'Event', nodeId: string, title: string, startTime: any, endTime: any, type: EventType, description?: string | null } | null, scorecards: { __typename?: 'ScorecardsConnection', nodes: Array<{ __typename?: 'Scorecard', nodeId: string, translations: { __typename?: 'ScorecardTranslationsConnection', nodes: Array<{ __typename?: 'ScorecardTranslation', nodeId: string, lang: Language, title: string }> } }> } }> } } | null };
 
+export type CandidatesWithApplicationsQueryVariables = Exact<{
+  filter?: InputMaybe<CandidateFilter>;
+  orderBy?: InputMaybe<Array<CandidatesOrderBy> | CandidatesOrderBy>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type CandidatesWithApplicationsQuery = { __typename?: 'Query', candidates?: { __typename?: 'CandidatesConnection', totalCount: number, nodes: Array<{ __typename?: 'Candidate', nodeId: string, id: number, canEdit?: boolean | null, photoUrl?: string | null, resumeUrl?: string | null, language: Language, gender?: Gender | null, emails?: Array<string | null> | null, phones?: Array<string | null> | null, socialLinks?: Array<string | null> | null, links?: Array<string | null> | null, militaryStatus?: MilitaryStatus | null, birthday?: any | null, createdAt: any, translations: { __typename?: 'CandidateTranslationsConnection', nodes: Array<{ __typename?: 'CandidateTranslation', lang: Language, nodeId: string, name: string }> }, tags: { __typename?: 'CandidateTagsConnection', nodes: Array<{ __typename?: 'CandidateTag', nodeId: string, tag?: { __typename?: 'Tag', nodeId: string, title: string } | null }> }, sources: { __typename?: 'CandidateTagsConnection', nodes: Array<{ __typename?: 'CandidateTag', nodeId: string, tag?: { __typename?: 'Tag', nodeId: string, title: string } | null }> }, jobsApplications: { __typename?: 'JobsApplicationsConnection', nodes: Array<{ __typename?: 'JobsApplication', nodeId: string, disqualifyReasonId?: number | null, evaluation?: number | null, pipelineStage?: { __typename?: 'PipelineStage', nodeId: string, type: PipelineStageType, translations: { __typename?: 'PipelineStageTranslationsConnection', nodes: Array<{ __typename?: 'PipelineStageTranslation', lang: Language, nodeId: string, title: string }> } } | null, job?: { __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', lang: Language, nodeId: string, title: string }> } } | null }> }, evaluations: { __typename?: 'EvaluationsConnection', nodes: Array<{ __typename?: 'Evaluation', id: number, nodeId: string, point: number, createdAt: any, user?: { __typename?: 'User', nodeId: string, id: number, translations: { __typename?: 'UserTranslationsConnection', nodes: Array<{ __typename?: 'UserTranslation', nodeId: string, lang: Language, fullname?: string | null, initials?: string | null }> } } | null, job?: { __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', nodeId: string, lang: Language, title: string }> } } | null, draftEvaluation?: { __typename?: 'DraftEvaluation', nodeId: string, pipelineStage?: { __typename?: 'PipelineStage', nodeId: string, translations: { __typename?: 'PipelineStageTranslationsConnection', nodes: Array<{ __typename?: 'PipelineStageTranslation', nodeId: string, lang: Language, title: string }> } } | null } | null, scorecards: { __typename?: 'EvaluationScorecardsByEvaluationScorecardEvaluationIdAndScorecardIdManyToManyConnection', nodes: Array<{ __typename?: 'Scorecard', nodeId: string, translations: { __typename?: 'ScorecardTranslationsConnection', nodes: Array<{ __typename?: 'ScorecardTranslation', nodeId: string, lang: Language, title: string }> } }> }, eventDraftEvaluation?: { __typename?: 'EventDraftEvaluation', nodeId: string, id: number, event?: { __typename?: 'Event', nodeId: string, id: number, title: string } | null } | null }> }, candidateDraftEvaluations: { __typename?: 'DraftEvaluationsConnection', nodes: Array<{ __typename?: 'DraftEvaluation', nodeId: string, id: number, userIds: Array<number | null>, scorecardIds: Array<number | null>, jobId: number, candidateId: number, createdAt: any, job?: { __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', nodeId: string, lang: Language, title: string }> } } | null, pipelineStage?: { __typename?: 'PipelineStage', nodeId: string, translations: { __typename?: 'PipelineStageTranslationsConnection', nodes: Array<{ __typename?: 'PipelineStageTranslation', nodeId: string, lang: Language, title: string }> } } | null, scorecards: { __typename?: 'ScorecardsConnection', nodes: Array<{ __typename?: 'Scorecard', nodeId: string, translations: { __typename?: 'ScorecardTranslationsConnection', nodes: Array<{ __typename?: 'ScorecardTranslation', nodeId: string, lang: Language, title: string }> } }> } }> }, candidateEventDraftEvaluations: { __typename?: 'EventDraftEvaluationsConnection', nodes: Array<{ __typename?: 'EventDraftEvaluation', id: number, nodeId: string, userIds: Array<number | null>, scorecardIds: Array<number | null>, createdAt: any, event?: { __typename?: 'Event', nodeId: string, title: string, startTime: any, endTime: any, type: EventType, description?: string | null } | null, scorecards: { __typename?: 'ScorecardsConnection', nodes: Array<{ __typename?: 'Scorecard', nodeId: string, translations: { __typename?: 'ScorecardTranslationsConnection', nodes: Array<{ __typename?: 'ScorecardTranslation', nodeId: string, lang: Language, title: string }> } }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean } } | null };
+
 export const FullCandidateFragmentDoc = gql`
     fragment FullCandidate on Candidate {
   id
@@ -34991,7 +35026,6 @@ export const CandidateWithApplicationsDocument = gql`
         }
       }
     }
-<<<<<<< HEAD
   }
 }
     ${FullCandidateFragmentDoc}`;
@@ -35001,39 +35035,12 @@ export const CandidateWithApplicationsDocument = gql`
  *
  * To run a query within a React component, call `useCandidateWithApplicationsQuery` and pass it any options that fit your needs.
  * When your component renders, `useCandidateWithApplicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
-=======
-    user {
-      nodeId
-      id
-      translations {
-        nodes {
-          nodeId
-          lang
-          fullname
-          initials
-        }
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useEvaluationQuery__
- *
- * To run a query within a React component, call `useEvaluationQuery` and pass it any options that fit your needs.
- * When your component renders, `useEvaluationQuery` returns an object from Apollo Client that contains loading, error, and data properties
->>>>>>> f17c136 (make navbar dynamic and add two new queries)
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
-<<<<<<< HEAD
  * const { data, loading, error } = useCandidateWithApplicationsQuery({
-=======
- * const { data, loading, error } = useEvaluationQuery({
->>>>>>> f17c136 (make navbar dynamic and add two new queries)
  *   variables: {
  *      id: // value for 'id'
  *   },
@@ -35055,3 +35062,54 @@ export type CandidateWithApplicationsQueryHookResult = ReturnType<typeof useCand
 export type CandidateWithApplicationsLazyQueryHookResult = ReturnType<typeof useCandidateWithApplicationsLazyQuery>;
 export type CandidateWithApplicationsSuspenseQueryHookResult = ReturnType<typeof useCandidateWithApplicationsSuspenseQuery>;
 export type CandidateWithApplicationsQueryResult = Apollo.QueryResult<CandidateWithApplicationsQuery, CandidateWithApplicationsQueryVariables>;
+export const CandidatesWithApplicationsDocument = gql`
+    query CandidatesWithApplications($filter: CandidateFilter, $orderBy: [CandidatesOrderBy!], $first: Int, $offset: Int) {
+  candidates(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
+    nodes {
+      nodeId
+      ...FullCandidate
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+    }
+  }
+}
+    ${FullCandidateFragmentDoc}`;
+
+/**
+ * __useCandidatesWithApplicationsQuery__
+ *
+ * To run a query within a React component, call `useCandidatesWithApplicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCandidatesWithApplicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCandidatesWithApplicationsQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      orderBy: // value for 'orderBy'
+ *      first: // value for 'first'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useCandidatesWithApplicationsQuery(baseOptions?: Apollo.QueryHookOptions<CandidatesWithApplicationsQuery, CandidatesWithApplicationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CandidatesWithApplicationsQuery, CandidatesWithApplicationsQueryVariables>(CandidatesWithApplicationsDocument, options);
+      }
+export function useCandidatesWithApplicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CandidatesWithApplicationsQuery, CandidatesWithApplicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CandidatesWithApplicationsQuery, CandidatesWithApplicationsQueryVariables>(CandidatesWithApplicationsDocument, options);
+        }
+export function useCandidatesWithApplicationsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<CandidatesWithApplicationsQuery, CandidatesWithApplicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<CandidatesWithApplicationsQuery, CandidatesWithApplicationsQueryVariables>(CandidatesWithApplicationsDocument, options);
+        }
+export type CandidatesWithApplicationsQueryHookResult = ReturnType<typeof useCandidatesWithApplicationsQuery>;
+export type CandidatesWithApplicationsLazyQueryHookResult = ReturnType<typeof useCandidatesWithApplicationsLazyQuery>;
+export type CandidatesWithApplicationsSuspenseQueryHookResult = ReturnType<typeof useCandidatesWithApplicationsSuspenseQuery>;
+export type CandidatesWithApplicationsQueryResult = Apollo.QueryResult<CandidatesWithApplicationsQuery, CandidatesWithApplicationsQueryVariables>;

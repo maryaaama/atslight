@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   useCurrentSessionQuery,
@@ -9,39 +9,36 @@ import Logo from "../../image/logo.png";
 import JobSkeleton from "../../components/skeleton/Job";
 import JobCard from "../../components/jobCard/JobCard";
 import EmptyState from "../emptyState/emptyState";
+import { JobStatus } from "../../graphql/generated/graphql";
 
 export default function OrganizationChart() {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const { data: sessionData, error: sessionError } = useCurrentSessionQuery();
+  const { data: sessionData } = useCurrentSessionQuery();
   const {
     data: jobsData,
     loading: jobsLoading,
     error: jobsError,
   } = useJobsQuery();
 
-  if (sessionError || jobsError) {
-    return <p>Error: {sessionError?.message || jobsError?.message}</p>;
-  }
-
   const currentUser = sessionData?.currentUser?.translations.nodes[0].fullname;
+
   const currentCompany =
     sessionData?.currentCompany?.translations.nodes[0].name;
+
   const companyLogo = sessionData?.currentCompany?.logoUrl;
+
+  const publicJobs = jobsData?.jobs?.nodes.filter(
+    (job) => job.status === JobStatus.Published
+  );
 
   const handleManagerChange = (event: { target: { value: string } }) => {
     const newValue = event.target.value;
     setUser(newValue);
   };
-  if (jobsLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500  "></div>
-      </div>
-    );
-  }
+
   return (
     <div className="relative z-0 px-2 m-auto lg:max-w-[30%] max-w-[90%] my-10">
       <img
@@ -66,14 +63,28 @@ export default function OrganizationChart() {
         />
       </div>
       <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
-      <button
-        className="w-full border-2 border-gray2 rounded-lg p-6 h-11
-          text-gray2 flex items-center justify-center hover:bg-opacity-80"
-        onClick={() => navigate("/candidates")}
-      >
-        کارشناس
-      </button>
-      <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
+      {jobsError ? (
+        <>error</>
+      ) : jobsLoading ? (
+        <div className="flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500  "></div>
+        </div>
+      ) : publicJobs && publicJobs.length > 0 ? (
+        publicJobs.map((job) => (
+          <>
+            <button
+              key={job.id}
+              className="mb-2 w-full border-2 border-gray2 rounded-lg p-2 h-11 text-gray2 flex items-center justify-center hover:bg-opacity-80"
+              onClick={() => navigate(`/candidates/`)}
+            >
+              {job?.translations.nodes[0].title}
+            </button>
+            <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
+          </>
+        ))
+      ) : (
+        "n/a"
+      )}
       <button
         onClick={() => setModalOpen(true)}
         className="w-full border-2 border-gray2 rounded-lg p-6 h-11 bg-opacity-80 text-gray2 flex items-center justify-center"
