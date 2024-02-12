@@ -38,7 +38,12 @@ export default function OrganizationChart() {
     const newValue = event.target.value;
     setUser(newValue);
   };
-
+  if (jobsLoading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500  "></div>
+      </div>
+    );
   return (
     <div className="relative z-0 px-2 m-auto lg:max-w-[30%] max-w-[90%] my-10">
       <img
@@ -65,10 +70,6 @@ export default function OrganizationChart() {
       <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
       {jobsError ? (
         <>error</>
-      ) : jobsLoading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500  "></div>
-        </div>
       ) : publicJobs && publicJobs.length > 0 ? (
         publicJobs.map((job) => (
           <>

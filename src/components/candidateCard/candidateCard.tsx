@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import StarRating from "../starRating/starRating";
+import DisabledStarRating from "../starRating/disabledStarRating";
 
 interface CandidateCardProps {
   id: number;
   name: string;
   job: string;
   photo: string;
+  averageEvaluation: number;
 }
 
 const CandidateCard: React.FC<CandidateCardProps> = ({
@@ -14,6 +15,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
   name,
   job,
   photo,
+  averageEvaluation,
 }) => {
   const navigate = useNavigate();
 
@@ -40,7 +42,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
           70%
         </h1>
         <div className="w-full md:text-xl text-center m-auto p-0.5">
-          <StarRating starClick={undefined} />
+          <DisabledStarRating rating={averageEvaluation} />
         </div>
       </div>
     </span>
