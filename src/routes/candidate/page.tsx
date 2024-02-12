@@ -1,13 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useCandidateWithApplicationsQuery } from "../../graphql/generated/graphql";
-import NavBar from "../../components/navBar/navBar";
 import PersonalCard from "../../components/personalCard/personalCard";
 import CandidateSkeleton from "../../components/skeleton/candidate";
 import EvaluateModal from "../../components/evaluateModal/evaluateModal";
 import person from "../../image/person.png";
 import Button from "../../components/button/button";
 import EmptyPage from "../../components/emptyPage/page";
+import CandidateNav from "../../components/navBar/candidateNav";
 
 export default function Candidate() {
   const { id } = useParams<{ id: string }>();
@@ -48,7 +48,7 @@ export default function Candidate() {
         <EmptyPage />
       ) : (
         <>
-          <NavBar name={candidateJobs} />
+          <CandidateNav name={candidateJobs} />
           <div className="sm:h-11/12 max-sm:w-screen max-w-lg mx-auto sm:border sm:mt-8 sm:rounded-lg sm:items-center sm:shadow-lg">
             <PersonalCard
               key={candidateId}
