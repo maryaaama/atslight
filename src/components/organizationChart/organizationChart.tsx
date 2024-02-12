@@ -33,6 +33,7 @@ export default function OrganizationChart() {
   const publicJobs = jobsData?.jobs?.nodes.filter(
     (job) => job.status === JobStatus.Published
   );
+  console.log("publicjob", publicJobs);
 
   const handleManagerChange = (event: { target: { value: string } }) => {
     const newValue = event.target.value;
@@ -68,23 +69,34 @@ export default function OrganizationChart() {
         />
       </div>
       <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
-
-      {jobsError
-        ? ""
-        : publicJobs && publicJobs.length > 0
-        ? publicJobs.map((job) => (
-            <>
-              <button
-                key={job.id}
-                className="mb-2 w-full border-2 border-gray2 rounded-lg p-6 h-11 text-gray2 flex items-center justify-center hover:bg-opacity-80"
-                onClick={() => navigate(`/candidates/`)}
-              >
-                {job?.translations.nodes[0].title}
-              </button>
-              <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
-            </>
-          ))
-        : "n/a"}
+      {jobsError ? (
+        <>error</>
+      ) : jobsLoading ? (
+        <div className="flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500 "></div>
+        </div>
+      ) : publicJobs && publicJobs.length > 0 ? (
+        publicJobs?.map((job) => (
+          <>
+            <button
+              key={job.id}
+              className="mb-2 w-full border-2 border-gray2 rounded-lg p-2 h-11 text-gray2 flex items-center justify-center hover:bg-opacity-80"
+              onClick={() =>
+                navigate(
+                  `/candidates/?title=${encodeURIComponent(
+                    job.translations.nodes[0].title
+                  )}`
+                )
+              }
+            >
+              {job?.translations.nodes[0].title}
+            </button>
+            <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
+          </>
+        ))
+      ) : (
+        "n/a"
+      )}
       <button
         onClick={() => setModalOpen(true)}
         className="w-full border-2 border-gray2 rounded-lg p-6 h-11 bg-opacity-80 text-gray2 flex items-center justify-center"
@@ -97,10 +109,12 @@ export default function OrganizationChart() {
         </div>
         {jobsLoading ? (
           <JobSkeleton />
-        ) : !jobsData || !jobsData.jobs || jobsData?.jobs.nodes[0].id === 0 ? (
+        ) : !jobsData || !jobsData.jobs || jobsData?.jobs.nodes[0]?.id === 0 ? (
           <EmptyState />
         ) : (
-          jobsData?.jobs?.nodes.map((job) => <JobCard key={job.id} job={job} />)
+          jobsData?.jobs?.nodes?.map((job) => (
+            <JobCard key={job.id} job={job} />
+          ))
         )}
       </Modal>
     </div>

@@ -7,7 +7,7 @@ import {
 import NavBar from "../../components/navBar/navBar";
 import CandidateCard from "../../components/candidateCard/candidateCard";
 import CandidatesSkeleton from "../../components/skeleton/candidates";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import person from "../../image/person.png";
 import EmptyState from "../../components/emptyState/emptyState";
 
@@ -35,6 +35,17 @@ export default function Candidates() {
   }, [evaluationsData]);
 
   if (candidatesLoading) return <CandidatesSkeleton />;
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const jobTitle = queryParams.get("title");
+
+  const candidatesData =
+    (jobTitle
+      ? data?.candidates?.nodes.filter((node) => {
+          return node.jobs.nodes[0]?.translations.nodes[0]?.title === jobTitle;
+        })
+      : data?.candidates?.nodes) || [];
 
   return (
     <main className="md:h-screen">
