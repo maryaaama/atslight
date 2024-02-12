@@ -341,3 +341,65 @@ export const GET_CANDIDATES_WITH_APPLICATIONS = gql`
   }
   ${FULL_CANDIDATE}
 `;
+export const GET_EVALUATIONS = gql`
+  query Evaluations(
+    $first: Int
+    $offset: Int
+    $orderBy: [EvaluationsOrderBy!]
+    $filter: EvaluationFilter
+  ) {
+    evaluations(
+      first: $first
+      offset: $offset
+      orderBy: $orderBy
+      filter: $filter
+    ) {
+      nodes {
+        id
+        nodeId
+        createdAt
+        point
+        candidate {
+          id
+          nodeId
+          canEdit
+          translations {
+            nodes {
+              nodeId
+              lang
+              name
+            }
+          }
+        }
+        job {
+          nodeId
+          id
+          translations {
+            nodes {
+              nodeId
+              lang
+              title
+            }
+          }
+        }
+        user {
+          id
+          nodeId
+          translations {
+            nodes {
+              nodeId
+              lang
+              fullname
+              initials
+            }
+          }
+        }
+      }
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+  }
+`;

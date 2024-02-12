@@ -14,7 +14,7 @@ export default function NavBar({ name }: data) {
             <div className="my-auto">
               <FaArrowRight />
             </div>
-            <p className="mr-2">{name}</p>
+            <p className="mr-2 text-sm">{name}</p>
           </div>
         </button>
       </div>

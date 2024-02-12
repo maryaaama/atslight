@@ -34012,6 +34012,16 @@ export type CandidatesWithApplicationsQueryVariables = Exact<{
 
 export type CandidatesWithApplicationsQuery = { __typename?: 'Query', candidates?: { __typename?: 'CandidatesConnection', totalCount: number, nodes: Array<{ __typename?: 'Candidate', nodeId: string, id: number, canEdit?: boolean | null, photoUrl?: string | null, resumeUrl?: string | null, language: Language, gender?: Gender | null, emails?: Array<string | null> | null, phones?: Array<string | null> | null, socialLinks?: Array<string | null> | null, links?: Array<string | null> | null, militaryStatus?: MilitaryStatus | null, birthday?: any | null, createdAt: any, translations: { __typename?: 'CandidateTranslationsConnection', nodes: Array<{ __typename?: 'CandidateTranslation', lang: Language, nodeId: string, name: string }> }, tags: { __typename?: 'CandidateTagsConnection', nodes: Array<{ __typename?: 'CandidateTag', nodeId: string, tag?: { __typename?: 'Tag', nodeId: string, title: string } | null }> }, sources: { __typename?: 'CandidateTagsConnection', nodes: Array<{ __typename?: 'CandidateTag', nodeId: string, tag?: { __typename?: 'Tag', nodeId: string, title: string } | null }> }, jobsApplications: { __typename?: 'JobsApplicationsConnection', nodes: Array<{ __typename?: 'JobsApplication', nodeId: string, disqualifyReasonId?: number | null, evaluation?: number | null, pipelineStage?: { __typename?: 'PipelineStage', nodeId: string, type: PipelineStageType, translations: { __typename?: 'PipelineStageTranslationsConnection', nodes: Array<{ __typename?: 'PipelineStageTranslation', lang: Language, nodeId: string, title: string }> } } | null, job?: { __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', lang: Language, nodeId: string, title: string }> } } | null }> }, evaluations: { __typename?: 'EvaluationsConnection', nodes: Array<{ __typename?: 'Evaluation', id: number, nodeId: string, point: number, createdAt: any, user?: { __typename?: 'User', nodeId: string, id: number, translations: { __typename?: 'UserTranslationsConnection', nodes: Array<{ __typename?: 'UserTranslation', nodeId: string, lang: Language, fullname?: string | null, initials?: string | null }> } } | null, job?: { __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', nodeId: string, lang: Language, title: string }> } } | null, draftEvaluation?: { __typename?: 'DraftEvaluation', nodeId: string, pipelineStage?: { __typename?: 'PipelineStage', nodeId: string, translations: { __typename?: 'PipelineStageTranslationsConnection', nodes: Array<{ __typename?: 'PipelineStageTranslation', nodeId: string, lang: Language, title: string }> } } | null } | null, scorecards: { __typename?: 'EvaluationScorecardsByEvaluationScorecardEvaluationIdAndScorecardIdManyToManyConnection', nodes: Array<{ __typename?: 'Scorecard', nodeId: string, translations: { __typename?: 'ScorecardTranslationsConnection', nodes: Array<{ __typename?: 'ScorecardTranslation', nodeId: string, lang: Language, title: string }> } }> }, eventDraftEvaluation?: { __typename?: 'EventDraftEvaluation', nodeId: string, id: number, event?: { __typename?: 'Event', nodeId: string, id: number, title: string } | null } | null }> }, candidateDraftEvaluations: { __typename?: 'DraftEvaluationsConnection', nodes: Array<{ __typename?: 'DraftEvaluation', nodeId: string, id: number, userIds: Array<number | null>, scorecardIds: Array<number | null>, jobId: number, candidateId: number, createdAt: any, job?: { __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', nodeId: string, lang: Language, title: string }> } } | null, pipelineStage?: { __typename?: 'PipelineStage', nodeId: string, translations: { __typename?: 'PipelineStageTranslationsConnection', nodes: Array<{ __typename?: 'PipelineStageTranslation', nodeId: string, lang: Language, title: string }> } } | null, scorecards: { __typename?: 'ScorecardsConnection', nodes: Array<{ __typename?: 'Scorecard', nodeId: string, translations: { __typename?: 'ScorecardTranslationsConnection', nodes: Array<{ __typename?: 'ScorecardTranslation', nodeId: string, lang: Language, title: string }> } }> } }> }, candidateEventDraftEvaluations: { __typename?: 'EventDraftEvaluationsConnection', nodes: Array<{ __typename?: 'EventDraftEvaluation', id: number, nodeId: string, userIds: Array<number | null>, scorecardIds: Array<number | null>, createdAt: any, event?: { __typename?: 'Event', nodeId: string, title: string, startTime: any, endTime: any, type: EventType, description?: string | null } | null, scorecards: { __typename?: 'ScorecardsConnection', nodes: Array<{ __typename?: 'Scorecard', nodeId: string, translations: { __typename?: 'ScorecardTranslationsConnection', nodes: Array<{ __typename?: 'ScorecardTranslation', nodeId: string, lang: Language, title: string }> } }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean } } | null };
 
+export type EvaluationsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<EvaluationsOrderBy> | EvaluationsOrderBy>;
+  filter?: InputMaybe<EvaluationFilter>;
+}>;
+
+
+export type EvaluationsQuery = { __typename?: 'Query', evaluations?: { __typename?: 'EvaluationsConnection', totalCount: number, nodes: Array<{ __typename?: 'Evaluation', id: number, nodeId: string, createdAt: any, point: number, candidate?: { __typename?: 'Candidate', id: number, nodeId: string, canEdit?: boolean | null, translations: { __typename?: 'CandidateTranslationsConnection', nodes: Array<{ __typename?: 'CandidateTranslation', nodeId: string, lang: Language, name: string }> } } | null, job?: { __typename?: 'Job', nodeId: string, id: number, translations: { __typename?: 'JobTranslationsConnection', nodes: Array<{ __typename?: 'JobTranslation', nodeId: string, lang: Language, title: string }> } } | null, user?: { __typename?: 'User', id: number, nodeId: string, translations: { __typename?: 'UserTranslationsConnection', nodes: Array<{ __typename?: 'UserTranslation', nodeId: string, lang: Language, fullname?: string | null, initials?: string | null }> } } | null }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean } } | null };
+
 export const FullCandidateFragmentDoc = gql`
     fragment FullCandidate on Candidate {
   id
@@ -35113,3 +35123,91 @@ export type CandidatesWithApplicationsQueryHookResult = ReturnType<typeof useCan
 export type CandidatesWithApplicationsLazyQueryHookResult = ReturnType<typeof useCandidatesWithApplicationsLazyQuery>;
 export type CandidatesWithApplicationsSuspenseQueryHookResult = ReturnType<typeof useCandidatesWithApplicationsSuspenseQuery>;
 export type CandidatesWithApplicationsQueryResult = Apollo.QueryResult<CandidatesWithApplicationsQuery, CandidatesWithApplicationsQueryVariables>;
+export const EvaluationsDocument = gql`
+    query Evaluations($first: Int, $offset: Int, $orderBy: [EvaluationsOrderBy!], $filter: EvaluationFilter) {
+  evaluations(first: $first, offset: $offset, orderBy: $orderBy, filter: $filter) {
+    nodes {
+      id
+      nodeId
+      createdAt
+      point
+      candidate {
+        id
+        nodeId
+        canEdit
+        translations {
+          nodes {
+            nodeId
+            lang
+            name
+          }
+        }
+      }
+      job {
+        nodeId
+        id
+        translations {
+          nodes {
+            nodeId
+            lang
+            title
+          }
+        }
+      }
+      user {
+        id
+        nodeId
+        translations {
+          nodes {
+            nodeId
+            lang
+            fullname
+            initials
+          }
+        }
+      }
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+    }
+  }
+}
+    `;
+
+/**
+ * __useEvaluationsQuery__
+ *
+ * To run a query within a React component, call `useEvaluationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEvaluationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEvaluationsQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      offset: // value for 'offset'
+ *      orderBy: // value for 'orderBy'
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function useEvaluationsQuery(baseOptions?: Apollo.QueryHookOptions<EvaluationsQuery, EvaluationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EvaluationsQuery, EvaluationsQueryVariables>(EvaluationsDocument, options);
+      }
+export function useEvaluationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EvaluationsQuery, EvaluationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EvaluationsQuery, EvaluationsQueryVariables>(EvaluationsDocument, options);
+        }
+export function useEvaluationsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<EvaluationsQuery, EvaluationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<EvaluationsQuery, EvaluationsQueryVariables>(EvaluationsDocument, options);
+        }
+export type EvaluationsQueryHookResult = ReturnType<typeof useEvaluationsQuery>;
+export type EvaluationsLazyQueryHookResult = ReturnType<typeof useEvaluationsLazyQuery>;
+export type EvaluationsSuspenseQueryHookResult = ReturnType<typeof useEvaluationsSuspenseQuery>;
+export type EvaluationsQueryResult = Apollo.QueryResult<EvaluationsQuery, EvaluationsQueryVariables>;

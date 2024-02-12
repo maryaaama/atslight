@@ -17,7 +17,7 @@ const StarRating = ({ starClick }: StarRatingProps) => {
   return (
     <>
       <StarRatingComponent
-        name="star"
+        name={0}
         starCount={5}
         value={rate}
         onStarClick={onClickHandler}
