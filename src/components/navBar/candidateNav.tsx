@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 interface data {
   name: string | undefined;
 }
-export default function NavBar({ name }: data) {
+export default function CandidateNav({ name }: data) {
   const navigate = useNavigate();
 
   return (
     <nav className="flex justify-start p-2 bg-white border-b">
       <div className="flex">
-        <button type="button" onClick={() => navigate(-1)}>
+        <button type="button" onClick={() => navigate(-2)}>
           <div className="flex">
             <div className="my-auto">
               <FaArrowRight />

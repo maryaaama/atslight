@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import StarRating from "../starRating/starRating";
+import DisabledStarRating from "../starRating/disabledStarRating";
 
 interface CandidateCardProps {
   id: number;
   name: string;
   job: string;
   photo: string;
+  averageEvaluation: number;
 }
 
 const CandidateCard: React.FC<CandidateCardProps> = ({
@@ -14,6 +15,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
   name,
   job,
   photo,
+  averageEvaluation,
 }) => {
   const navigate = useNavigate();
 
@@ -33,14 +35,14 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
       />
       <div className="w-[46%] m-1 py-1 items-center flex-col">
         <h2 className="pb-2 font-semibold text-lg">{name} </h2>
-        <p className="text-sm text-gray2 font-normal">{job}</p>
+        <p className="text-[13px] text-gray2 font-normal">{job}</p>
       </div>
       <div className="w-[26%] h-[90px] md:w-[20%] m-1 py-2 border rounded-xl shadow-sm bg-white">
         <h1 className="w-full text-center m-auto text-xl py-2 font-medium">
           70%
         </h1>
         <div className="w-full md:text-xl text-center m-auto p-0.5">
-          <StarRating starClick={undefined} />
+          <DisabledStarRating rating={averageEvaluation} />
         </div>
       </div>
     </span>

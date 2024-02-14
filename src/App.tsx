@@ -13,12 +13,12 @@ function App() {
     <Routes>
       <Route path="/" element={<Slider />} />
       <Route path="/candidate/:id" Component={Candidate} />
-      <Route path="/candidates/" element={<Candidates />} />
-      <Route path="Company" element={<Company />} />
-      <Route path="Organization" element={<Organization />} />
-      <Route path="Signin" element={<Signin />} />
-      <Route path="Verify" element={<Verify />} />
-      <Route path="privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/candidates" element={<Candidates />} />
+      <Route path="/Company" element={<Company />} />
+      <Route path="/Organization" element={<Organization />} />
+      <Route path="/Signin" element={<Signin />} />
+      <Route path="/Verify" element={<Verify />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
     </Routes>
   );
 }

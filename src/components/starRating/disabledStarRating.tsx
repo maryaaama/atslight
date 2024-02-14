@@ -1,11 +1,19 @@
+import React from "react";
 import StarRatingComponent from "react-star-rating-component";
 
-const disabledStarRating = () => {
+interface DisabledStarRatingProps {
+  rating: number;
+}
+
+const DisabledStarRating: React.FC<DisabledStarRatingProps> = ({ rating }) => {
   return (
-    <div className="px-1 mt-[1.5%] ">
-      <StarRatingComponent name="star" starCount={5} value={0} />
-    </div>
+    <StarRatingComponent
+      name={0}
+      starCount={5}
+      value={rating}
+      editing={false}
+    />
   );
 };
 
-export default disabledStarRating;
+export default DisabledStarRating;
