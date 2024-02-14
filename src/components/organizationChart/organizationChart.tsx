@@ -33,7 +33,6 @@ export default function OrganizationChart() {
   const publicJobs = jobsData?.jobs?.nodes.filter(
     (job) => job.status === JobStatus.Published
   );
-  console.log("publicjob", publicJobs);
 
   const handleManagerChange = (event: { target: { value: string } }) => {
     const newValue = event.target.value;

@@ -55,12 +55,12 @@ export default function Candidates() {
         }
       />
       <div className="w-full border-b">
-        <div className="w-2/3 mx-auto my-2 py-1.5 text-center border rounded-lg bg-gray-100 hover:bg-opacity-80 shadow-sm hover:shadow">
-          <button>ویرایش آگهی استخدام</button>
+        <div className="w-2/3 md:w-1/3 mx-auto my-2 py-1.5 text-center border rounded-lg bg-gray-100 hover:bg-opacity-80 shadow-sm hover:shadow">
+          <button disabled>ویرایش آگهی استخدام</button>
         </div>
       </div>
-      <div className="sm:h-11/12 md:p-4 md:h-[85%] md:overflow-auto max-sm:w-screen max-w-xl mx-auto sm:border sm:mt-8 sm:rounded-lg sm:items-center sm:shadow-lg">
-        {data?.candidates?.nodes.length === 0 ? (
+      <div className="sm:h-11/12 md:p-4 p-2 md:h-[85%] md:overflow-auto max-sm:w-screen max-w-xl mx-auto sm:border sm:mt-8 sm:rounded-lg sm:items-center sm:shadow-lg">
+        {candidatesData?.length === 0 ? (
           <EmptyState />
         ) : (
           candidatesData?.map((candidate) => (
