@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import DisabledStarRating from "../starRating/disabledStarRating";
+import { FaArrowLeft } from "react-icons/fa";
 
 interface CandidateCardProps {
   id: number;
@@ -37,10 +38,11 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
         <h2 className="pb-2 font-semibold text-lg">{name} </h2>
         <p className="text-[13px] text-gray2 font-normal">{job}</p>
       </div>
-      <div className="w-[26%] h-[90px] md:w-[20%] m-1 py-2 border rounded-xl shadow-sm bg-white">
-        <h1 className="w-full text-center m-auto text-xl py-2 font-medium">
-          70%
-        </h1>
+      <div className="w-[26%] h-[90px] md:w-[20%] m-1 py-2 border rounded-xl shadow-sm bg-white flex-col">
+        <div className="w-full text-center m-auto text-gray2 text-lg py-2 font-normal flex justify-center items-center">
+          <div className="pl-2 text-base">جزئیات</div>
+          <FaArrowLeft />
+        </div>
         <div className="w-full md:text-xl text-center m-auto p-0.5">
           <DisabledStarRating rating={averageEvaluation} />
         </div>
