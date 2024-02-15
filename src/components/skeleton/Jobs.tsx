@@ -1,5 +1,5 @@
 import JobCardSkeleton from "./JobCard";
-const JobSkeleton = () => {
+const JobsSkeleton = () => {
   const cardCount = Array.from({ length: 12 });
 
   return (
@@ -13,4 +13,4 @@ const JobSkeleton = () => {
   );
 };
 
-export default JobSkeleton;
+export default JobsSkeleton;

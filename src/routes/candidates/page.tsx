@@ -8,7 +8,7 @@ import CandidateCard from "../../components/candidateCard/candidateCard";
 import CandidatesSkeleton from "../../components/skeleton/candidates";
 import { Link, useLocation } from "react-router-dom";
 import person from "../../image/person.png";
-import EmptyState from "../../components/emptyState/emptyState";
+import EmptyState from "../../components/empty/emptyState";
 
 export default function Candidates() {
   const { data, loading: candidatesLoading } = useCandidatesQuery();

@@ -3,7 +3,7 @@ import "./App.css";
 import Candidate from "./routes/candidate/page";
 import Candidates from "./routes/candidates/page";
 import Company from "./routes/company/page";
-import Organization from "./routes/organization/page";
+import Jobs from "./routes/jobs/page";
 import Signin from "./routes/signin/page";
 import Verify from "./routes/verify/page";
 import Slider from "./components/slider/slider";
@@ -14,8 +14,8 @@ function App() {
       <Route path="/" element={<Slider />} />
       <Route path="/candidate/:id" Component={Candidate} />
       <Route path="/candidates" element={<Candidates />} />
-      <Route path="/Company" element={<Company />} />
-      <Route path="/Organization" element={<Organization />} />
+      <Route path="/company" element={<Company />} />
+      <Route path="/Jobs" element={<Jobs />} />
       <Route path="/Signin" element={<Signin />} />
       <Route path="/Verify" element={<Verify />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />

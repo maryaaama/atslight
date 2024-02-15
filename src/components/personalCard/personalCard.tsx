@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Modal from "../../components/modal/modal";
-import PersonalCardList from "../personalCardList/personalCardList";
+import PersonalModal from "../personalModal/personalModal";
 import { useCandidateWithApplicationsQuery } from "../../graphql/generated/graphql";
-import EmptyState from "../emptyState/emptyState";
+import EmptyState from "../empty/emptyState";
 
 interface PersonalCardProps {
   photo: string;
@@ -96,7 +96,7 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
         ) : !data || !data.candidate || questionnaires.length === 0 ? (
           <EmptyState />
         ) : (
-          <PersonalCardList questionnaires={questionnaires} />
+          <PersonalModal questionnaires={questionnaires} />
         )}
       </Modal>
     </div>
