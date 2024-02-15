@@ -64,10 +64,10 @@ export default function OrganizationChart() {
           value={currentUser || Logo}
           id="name"
           disabled={user !== ""}
-          className="w-full px-4 peer outline-none font-medium border-2 border-gray2 rounded-lg py-3 text-center text-base text-gray-700"
+          className="w-full px-4 peer outline-none font-semibold border-2 border-gray2 text-gray2 rounded-lg py-3 text-center text-base "
         />
       </div>
-      <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
+      <div className="h-12 w-[0.1rem] bg-gray-200 m-auto"></div>
       {jobsError ? (
         <>error</>
       ) : jobsLoading ? (
@@ -79,7 +79,7 @@ export default function OrganizationChart() {
           <>
             <button
               key={job.id}
-              className="mb-2 w-full border-2 border-gray2 rounded-lg p-2 h-11 text-gray2 flex items-center justify-center hover:bg-opacity-80"
+              className="w-full border-2 border-gray2 rounded-lg p-2 h-11 text-gray2 flex items-center justify-center hover:bg-opacity-80"
               onClick={() =>
                 navigate(
                   `/candidates/?title=${encodeURIComponent(
@@ -90,7 +90,7 @@ export default function OrganizationChart() {
             >
               {job?.translations.nodes[0].title}
             </button>
-            <div className="h-14 w-[0.1rem] bg-gray-200 m-auto"></div>
+            <div className="h-12 w-[0.1rem] bg-gray-200 m-auto"></div>
           </>
         ))
       ) : (
@@ -98,7 +98,7 @@ export default function OrganizationChart() {
       )}
       <button
         onClick={() => setModalOpen(true)}
-        className="w-full border-2 border-gray2 rounded-lg p-6 h-11 bg-opacity-80 text-gray2 flex items-center justify-center"
+        className="w-full border-2 border-gray2 rounded-lg p-2 h-11 bg-opacity-80 font-semibold text-gray2 flex items-center justify-center"
       >
         افزودن شغل جدید +
       </button>
