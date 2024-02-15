@@ -40,7 +40,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
       </div>
       <div className="w-[26%] h-[90px] md:w-[20%] m-1 py-2 border rounded-xl shadow-sm bg-white flex-col">
         <div className="w-full text-center m-auto text-gray2 text-lg py-2 font-normal flex justify-center items-center">
-          <div className="pl-2 text-base">جزئیات</div>
+          <div className="pl-1 text-base">جزئیات</div>
           <FaArrowLeft />
         </div>
         <div className="w-full md:text-xl text-center m-auto p-0.5">
