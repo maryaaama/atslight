@@ -48,12 +48,7 @@ export default function Candidates() {
 
   return (
     <main className="md:h-screen">
-      <NavBar
-        name={
-          data?.candidates?.nodes[0]?.jobs.nodes[0]?.translations.nodes[0]
-            ?.title || "loading..."
-        }
-      />
+      <NavBar name={`${jobTitle}`} />
       <div className="w-full border-b">
         <div className="w-2/3 md:w-1/3 mx-auto my-2 py-1.5 text-center border rounded-lg bg-gray-100 hover:bg-opacity-80 shadow-sm hover:shadow">
           <button disabled>ویرایش آگهی استخدام</button>

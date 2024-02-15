@@ -67,7 +67,7 @@ const PersonalCard: React.FC<PersonalCardProps> = ({
           className="flex h-32 sm:h-40 w-1/2 flex-col mx-6 border rounded-2xl justify-between shadow-sm shadow-slate-200 cursor-pointer"
         >
           <h1 className="text-lg my-auto text-gray2 justify-center text-center leading-7 font-bold">
-            سایر <br />
+            نمایش <br />
             توضیحات
           </h1>
         </div>
