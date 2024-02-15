@@ -6,12 +6,12 @@ import {
 } from "../../graphql/generated/graphql";
 import Modal from "../modal/modal";
 import Logo from "../../image/logo.png";
-import JobSkeleton from "../../components/skeleton/Job";
-import JobCard from "../../components/jobCard/JobCard";
-import EmptyState from "../emptyState/emptyState";
+import JobsSkeleton from "../skeleton/Jobs";
+import JobCard from "../jobCard/JobCard";
+import EmptyState from "../empty/emptyState";
 import { JobStatus } from "../../graphql/generated/graphql";
 
-export default function OrganizationChart() {
+export default function JobsList() {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
@@ -107,7 +107,7 @@ export default function OrganizationChart() {
           <h3 className="text-center text-xl font-bold mb-2">آگهی های شغلی</h3>
         </div>
         {jobsLoading ? (
-          <JobSkeleton />
+          <JobsSkeleton />
         ) : !jobsData || !jobsData.jobs || jobsData?.jobs.nodes[0]?.id === 0 ? (
           <EmptyState />
         ) : (

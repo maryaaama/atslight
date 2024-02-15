@@ -15,9 +15,7 @@ interface PersonalCardListProps {
   questionnaires: Questionnaire[];
 }
 
-const PersonalCardList: React.FC<PersonalCardListProps> = ({
-  questionnaires,
-}) => {
+const PersonalModal: React.FC<PersonalCardListProps> = ({ questionnaires }) => {
   return (
     <div>
       {questionnaires.map((questionnaire, index) => (
@@ -42,4 +40,4 @@ const PersonalCardList: React.FC<PersonalCardListProps> = ({
   );
 };
 
-export default PersonalCardList;
+export default PersonalModal;
