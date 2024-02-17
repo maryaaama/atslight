@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { FULL_JOB } from "./fragments";
 
 export const UPDATE_COMPANY = gql`
   mutation UpdateCompany($input: UpdateCompanyInput!) {
@@ -41,4 +42,27 @@ export const CREATE_PRESIGND_UPLOAD_LINK = gql`
       fileKey
     }
   }
+`;
+export const UPDATE_JOB = gql`
+  mutation UpdateJob($input: UpdateJobInput!) {
+    updateJob(input: $input) {
+      job {
+        nodeId
+        ...FullJob
+      }
+    }
+  }
+  ${FULL_JOB}
+`;
+
+export const UPDATE_JOB_ALTERNATIVE = gql`
+  mutation UpdateJobAlternative($input: UpdateJobInput__!) {
+    updateJob__(input: $input) {
+      job {
+        nodeId
+        ...FullJob
+      }
+    }
+  }
+  ${FULL_JOB}
 `;

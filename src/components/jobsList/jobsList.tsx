@@ -44,6 +44,7 @@ export default function JobsList() {
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500  "></div>
       </div>
     );
+
   return (
     <div className="relative z-0 px-2 m-auto lg:max-w-[30%] max-w-[90%] my-10">
       <img
@@ -88,7 +89,7 @@ export default function JobsList() {
                 )
               }
             >
-              {job?.translations.nodes[0].title}
+              {job.translations.nodes[0]?.title}
             </button>
             <div className="h-12 w-[0.1rem] bg-gray-200 m-auto"></div>
           </>
