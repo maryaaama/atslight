@@ -47,7 +47,7 @@ const AddressComponent: React.FC = () => {
         <select
           disabled
           value={selectedCountry.value}
-          className="w-full my-1 border rounded-sm px-1 shadow-sm"
+          className="w-full my-1 border rounded-sm shadow-sm p-0.5"
         >
           <option key={selectedCountry.value} value={selectedCountry.value}>
             {selectedCountry.label}
@@ -68,7 +68,7 @@ const AddressComponent: React.FC = () => {
           onFocus={() => setShowStateSuggestions(true)}
           onBlur={() => setTimeout(() => setShowStateSuggestions(false), 200)}
           placeholder="استان خود را انتخاب کنید"
-          className="w-full border shadow-sm my-1 rounded-sm px-1 text-slate-700"
+          className="w-full border shadow-sm my-1 rounded-sm p-0.5 text-slate-700"
         />
         {showStateSuggestions &&
           cityStates
@@ -98,7 +98,7 @@ const AddressComponent: React.FC = () => {
           onFocus={() => setShowCitySuggestions(true)}
           onBlur={() => setTimeout(() => setShowCitySuggestions(false), 200)}
           placeholder="شهر خود را انتخاب کنید"
-          className="w-full border shadow-sm my-1 rounded-sm px-1 text-slate-700"
+          className="w-full border shadow-sm my-1 rounded-sm p-0.5 text-slate-700"
         />
         {showCitySuggestions &&
           selectedState &&
@@ -122,7 +122,7 @@ const AddressComponent: React.FC = () => {
         <input
           type="text"
           id="address"
-          className="w-full border shadow-sm my-1 rounded-sm px-1 text-slate-700"
+          className="w-full border shadow-sm my-1 rounded-sm p-0.5 text-slate-700"
           placeholder="آدرس خود را وارد کنید"
         />
       </div>

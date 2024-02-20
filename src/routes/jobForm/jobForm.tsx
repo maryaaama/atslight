@@ -37,7 +37,7 @@ export default function JobForm() {
             عنوان
           </label>
           <input
-            className="w-[100%] border shadow-sm my-3 mt-1 rounded-sm"
+            className="w-[100%] border shadow-sm my-3 mt-1 rounded-sm p-0.5"
             type="text"
             id="title"
             required={true}
@@ -47,7 +47,7 @@ export default function JobForm() {
             توضیحات
           </label>
           <textarea
-            className="w-[100%] border shadow-sm mt-1 rounded-sm"
+            className="w-[100%] border shadow-sm mt-1 rounded-sm p-0.5"
             name="desc"
             id="desc"
             cols={30}
@@ -61,7 +61,7 @@ export default function JobForm() {
               رشته
             </label>
             <input
-              className="w-[100%] border shadow-sm mx-auto mt-1 rounded-sm"
+              className="w-[100%] border shadow-sm mx-auto mt-1 rounded-sm p-0.5"
               type="text"
               id="title"
             />
@@ -101,7 +101,7 @@ export default function JobForm() {
               گرایش
             </label>
             <input
-              className="w-[100%] border shadow-sm mx-auto mt-1 rounded-sm"
+              className="w-[100%] border shadow-sm mx-auto mt-1 rounded-sm p-0.5"
               type="text"
               id="Orientation"
             />
@@ -120,7 +120,7 @@ export default function JobForm() {
             سابقه کاری
           </label>
           <input
-            className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm"
+            className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
             type="number"
             id="experience"
             name=""
@@ -133,7 +133,7 @@ export default function JobForm() {
               دانش
             </label>
             <input
-              className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm"
+              className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
               type="text"
               id="knowledge"
               name=""
@@ -145,7 +145,7 @@ export default function JobForm() {
               مهارت
             </label>
             <input
-              className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm"
+              className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
               type="text"
               id="skill"
               name=""
@@ -157,7 +157,7 @@ export default function JobForm() {
               شایستگی
             </label>
             <input
-              className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm"
+              className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
               type="text"
               id="competency"
               name=""
@@ -169,7 +169,7 @@ export default function JobForm() {
             برچسب ها
           </label>
           <input
-            className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm"
+            className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
             type="text"
             id="tag"
             name=""
