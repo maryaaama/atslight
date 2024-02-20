@@ -10,6 +10,14 @@ import {
   InvoiceStatus,
   EventType,
 } from "./graphql/generated/graphql";
+import {
+  IdentificationIcon,
+  ChatBubbleLeftEllipsisIcon,
+  ShieldCheckIcon,
+  MapPinIcon,
+  UserCircleIcon,
+  CalendarDaysIcon,
+} from "@heroicons/react/24/outline";
 
 export const genderOptions = [
   { label: "نامشخص", value: "" },
@@ -82,26 +90,26 @@ export const pipelineStagesTypes = {
 export const jobFieldTypes = {
   [JobField.Gender]: {
     title: "جنسیت",
-    //icon: ProfileMajorMonotone,
+    icon: UserCircleIcon,
   },
   [JobField.MilitaryStatus]: {
     title: "وضعیت نظام وظیفه",
-    //icon: SecureMajorMonotone,
+    icon: ShieldCheckIcon,
   },
   [JobField.Resume]: {
-    //icon: BuyButtonHorizontalLayoutMajorMonotone,
+    icon: IdentificationIcon,
     title: "رزومه",
   },
   [JobField.CoverLetter]: {
-    //icon: EmailNewsletterMajorMonotone,
+    icon: ChatBubbleLeftEllipsisIcon,
     title: "پیام",
   },
   [JobField.Birthday]: {
-    //icon: CalendarMajorMonotone,
+    icon: CalendarDaysIcon,
     title: "تاریخ تولد",
   },
   [JobField.Address]: {
-    //icon: LocationMajorMonotone,
+    icon: MapPinIcon,
     title: "آدرس",
   },
 };
@@ -906,46 +914,6 @@ export const CompanyCategoryTypes = {
   [CompanyCategory.Other]: "دیگر",
 };
 
-export const companySizeTypes = {
-  [CompanySize["1To_10"]]: "۱ تا ۱۰ نفر",
-  [CompanySize["11To_50"]]: "۱۱ تا ۵۰ نفر",
-  [CompanySize["51To_200"]]: "۵۰ تا ۲۰۰ نفر",
-  [CompanySize.MoreThan_200]: "بیشتر از ۲۰۰ نفر",
-};
-
-export const languageTypes = {
-  [Language.Fa]: {
-    title: "فارسی",
-    topBarTitle: "فارسی",
-    logoutTitle: "خروج",
-    jobBoardTitle: "جاب‌بورد",
-  },
-  [Language.En]: {
-    title: "انگلیسی",
-    topBarTitle: "English",
-    logoutTitle: "Logout",
-    jobBoardTitle: "Job Board",
-  },
-  [Language.Ar]: {
-    title: "عربی",
-    topBarTitle: "العربیة",
-    logoutTitle: "تسجیل‌الخروج",
-    jobBoardTitle: "لوحةالعمل",
-  },
-  [Language.Ku]: {
-    title: "کردی",
-    topBarTitle: "Kurdî",
-    logoutTitle: "Derkeve",
-    jobBoardTitle: "Desteya Kar",
-  },
-  [Language.Tr]: {
-    title: "ترکی",
-    topBarTitle: "Türkçe",
-    logoutTitle: "Çıkış Yap",
-    jobBoardTitle: "İş Panosu",
-  },
-};
-
 export const jobStatusTypes = {
   [JobStatus.Draft]: "پیشنویس",
   [JobStatus.Archived]: "آرشیو شده",
@@ -1018,253 +986,6 @@ export const evaluationRatesTypes = {
   4: "چهار",
   5: "پنج",
 };
-
-export const eventDuration = [
-  {
-    label: "نا‌مشخص",
-    value: "",
-  },
-  {
-    label: "5 دقیقه",
-    value: "5",
-  },
-  {
-    label: "10 دقیقه",
-    value: "10",
-  },
-  {
-    label: "15 دقیقه",
-    value: "15",
-  },
-  {
-    label: "20 دقیقه",
-    value: "20",
-  },
-  {
-    label: "25 دقیقه",
-    value: "25",
-  },
-  {
-    label: "30 دقیقه",
-    value: "30",
-  },
-  {
-    label: "35 دقیقه",
-    value: "35",
-  },
-  {
-    label: "40 دقیقه",
-    value: "40",
-  },
-  {
-    label: "45 دقیقه",
-    value: "45",
-  },
-  {
-    label: "50 دقیقه",
-    value: "50",
-  },
-  {
-    label: "55 دقیقه",
-    value: "55",
-  },
-  {
-    label: "60 دقیقه",
-    value: "60",
-  },
-  {
-    label: "65 دقیقه",
-    value: "65",
-  },
-  {
-    label: "70 دقیقه",
-    value: "70",
-  },
-  {
-    label: "75 دقیقه",
-    value: "75",
-  },
-  {
-    label: "80 دقیقه",
-    value: "80",
-  },
-  {
-    label: "85 دقیقه",
-    value: "85",
-  },
-  {
-    label: "90 دقیقه",
-    value: "90",
-  },
-  {
-    label: "95 دقیقه",
-    value: "95",
-  },
-  {
-    label: "100 دقیقه",
-    value: "100",
-  },
-  {
-    label: "105 دقیقه",
-    value: "105",
-  },
-  {
-    label: "110 دقیقه",
-    value: "110",
-  },
-  {
-    label: "115 دقیقه",
-    value: "115",
-  },
-  {
-    label: "120 دقیقه",
-    value: "120",
-  },
-  {
-    label: "125 دقیقه",
-    value: "125",
-  },
-  {
-    label: "130 دقیقه",
-    value: "130",
-  },
-  {
-    label: "135 دقیقه",
-    value: "135",
-  },
-  {
-    label: "140 دقیقه",
-    value: "140",
-  },
-  {
-    label: "145 دقیقه",
-    value: "145",
-  },
-  {
-    label: "150 دقیقه",
-    value: "150",
-  },
-  {
-    label: "155 دقیقه",
-    value: "155",
-  },
-  {
-    label: "160 دقیقه",
-    value: "160",
-  },
-  {
-    label: "165 دقیقه",
-    value: "165",
-  },
-  {
-    label: "170 دقیقه",
-    value: "170",
-  },
-  {
-    label: "175 دقیقه",
-    value: "175",
-  },
-  {
-    label: "180 دقیقه",
-    value: "180",
-  },
-  {
-    label: "185 دقیقه",
-    value: "185",
-  },
-  {
-    label: "190 دقیقه",
-    value: "190",
-  },
-  {
-    label: "195 دقیقه",
-    value: "195",
-  },
-  {
-    label: "200 دقیقه",
-    value: "200",
-  },
-  {
-    label: "205 دقیقه",
-    value: "205",
-  },
-  {
-    label: "210 دقیقه",
-    value: "210",
-  },
-  {
-    label: "215 دقیقه",
-    value: "215",
-  },
-  {
-    label: "220 دقیقه",
-    value: "220",
-  },
-  {
-    label: "225 دقیقه",
-    value: "225",
-  },
-  {
-    label: "230 دقیقه",
-    value: "230",
-  },
-  {
-    label: "235 دقیقه",
-    value: "235",
-  },
-  {
-    label: "240 دقیقه",
-    value: "240",
-  },
-  {
-    label: "245 دقیقه",
-    value: "245",
-  },
-  {
-    label: "250 دقیقه",
-    value: "250",
-  },
-  {
-    label: "255 دقیقه",
-    value: "255",
-  },
-  {
-    label: "260 دقیقه",
-    value: "260",
-  },
-  {
-    label: "265 دقیقه",
-    value: "265",
-  },
-  {
-    label: "270 دقیقه",
-    value: "270",
-  },
-  {
-    label: "275 دقیقه",
-    value: "275",
-  },
-  {
-    label: "280 دقیقه",
-    value: "280",
-  },
-  {
-    label: "285 دقیقه",
-    value: "285",
-  },
-  {
-    label: "290 دقیقه",
-    value: "290",
-  },
-  {
-    label: "295 دقیقه",
-    value: "295",
-  },
-  {
-    label: "300 دقیقه",
-    value: "300",
-  },
-];
 
 export const eventType = [
   { label: "روی  سایت", value: EventType.OnSite },
