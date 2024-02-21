@@ -4,6 +4,7 @@ import AddressComponent from "../../components/jobFields/address";
 import GenderComponent from "../../components/jobFields/gender";
 import FieldComponent from "../../components/jobFields/fields";
 import { JobField } from "../../graphql/generated/graphql";
+import { EntryForm } from "../../components/jobFields/entryForm";
 
 // interface JobData {
 //   title: string;
@@ -66,7 +67,7 @@ export default function JobForm() {
               id="title"
             />
           </div>
-          <div className="">
+          <div className="mt-2 p-2  bg-white border rounded-lg">
             <label className="font-medium" htmlFor="desc">
               مقطع
             </label>
@@ -108,14 +109,14 @@ export default function JobForm() {
           </div>
         </div>
 
-        <div className="border shadow px-2 m-2 py-4 bg-slate-50 rounded-lg">
+        <div className="border shadow px-2 m-2 py-3 bg-slate-50 rounded-lg">
           <label className="my-auto" htmlFor="age">
             بازه سنی
           </label>
           <RangeSlider className="w-full mt-3 h-9 " defaultValue={[25, 75]} />
         </div>
         <GenderComponent />
-        <div className="border shadow m-2 px-2 py-4 bg-slate-50 rounded-lg">
+        <div className="border shadow m-2 px-2 py-3 bg-slate-50 rounded-lg">
           <label className="" htmlFor="experience">
             سابقه کاری
           </label>
@@ -164,7 +165,7 @@ export default function JobForm() {
             />
           </div>
         </div>
-        <div className="px-2 py-4 m-2 border shadow bg-slate-50 rounded-lg">
+        <div className="px-2 py-3 m-2 border shadow bg-slate-50 rounded-lg">
           <label className="" htmlFor="tag">
             برچسب ها
           </label>
@@ -176,25 +177,26 @@ export default function JobForm() {
             placeholder="باریستا, صندوقدار, آشپز"
           />
         </div>
-        <FieldComponent fieldKeys={fieldsToShow} />
-        <div className="px-2 py-4 m-2 border shadow bg-slate-50 rounded-lg">
-          <span className="text-lg">فرم های ورودی</span>
+        <div className="border shadow m-2 p-2 bg-slate-50 rounded-lg">
+          <AddressComponent />
         </div>
-        <div className="px-2 py-4 m-2 border shadow bg-slate-50 rounded-lg">
-          <label className="" htmlFor="tag">
+        <FieldComponent fieldKeys={fieldsToShow} />
+        <div className="px-2 py-3 m-2 border shadow bg-slate-50 rounded-lg">
+          <h1 className="font-medium text-lg">فرم های ورودی</h1>
+          <EntryForm />
+        </div>
+        <div className="px-2 py-3 m-2 border shadow bg-slate-50 rounded-lg">
+          <label className="font-medium my-2 text-lg" htmlFor="step">
             مراحل استخدام
           </label>
           <input
-            className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
+            className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5 text-slate-700"
             type="text"
             id="step"
             value={"پیش فرض"}
             name=""
             disabled
           />
-        </div>
-        <div className="border shadow m-2 p-2 bg-slate-50 rounded-lg">
-          <AddressComponent />
         </div>
         <div className="flex gap-2">
           <button className="w-[46%] bg-primary text-white text-lg font-medium py-2 border shadow m-auto rounded-lg">

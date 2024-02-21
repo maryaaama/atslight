@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import { countries, cityStates, cities } from "../../options";
-
-interface ICountry {
-  value: string;
-  label: string;
-}
+import { cityStates, cities } from "../../options";
 
 interface ICityState {
   value: string;
@@ -12,10 +7,6 @@ interface ICityState {
 }
 
 const AddressComponent: React.FC = () => {
-  const defaultCountry =
-    countries.find((country) => country.label === "ایران") || countries[0];
-
-  const [selectedCountry] = useState<ICountry>(defaultCountry);
   const [selectedState, setSelectedState] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [stateInput, setStateInput] = useState("");
@@ -44,17 +35,14 @@ const AddressComponent: React.FC = () => {
         <label htmlFor="country" className="font-medium">
           کشور
         </label>
-        <select
+        <input
+          type="text"
+          className="w-full border shadow-sm my-1 rounded-sm p-0.5 text-slate-700"
+          value={"ایران"}
           disabled
-          value={selectedCountry.value}
-          className="w-full my-1 border rounded-sm shadow-sm p-0.5"
-        >
-          <option key={selectedCountry.value} value={selectedCountry.value}>
-            {selectedCountry.label}
-          </option>
-        </select>
+        />
       </div>
-      <div className="my-2">
+      <div className="my-3">
         <label htmlFor="state" className="font-medium">
           استان
         </label>
@@ -84,7 +72,7 @@ const AddressComponent: React.FC = () => {
               </div>
             ))}
       </div>
-      <div className="my-2">
+      <div className="my-3">
         <label htmlFor="city" className="font-medium">
           شهر
         </label>
