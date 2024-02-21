@@ -1,4 +1,3 @@
-import React from "react";
 import RangeSlider from "../../components/rangeSlider/rangeSlider";
 import AddressComponent from "../../components/jobFields/address";
 import GenderComponent from "../../components/jobFields/gender";

@@ -1,4 +1,3 @@
-// FieldComponent.tsx
 import React from "react";
 import { jobFieldTypes } from "../../options";
 import { JobField } from "../../graphql/generated/graphql";
@@ -14,13 +13,13 @@ const FieldComponent: React.FC<FieldComponentProps> = ({ fieldKeys }) => {
       {fieldKeys.map((key, index) => {
         const field = jobFieldTypes[key];
         if (!field) {
-          return <div key={index}>Unknown Field: {key}</div>;
+          return <div key={index}>اطلاعاتی وارد نشده {key}</div>;
         }
         const { icon: Icon, title } = field;
         return (
           <div key={index} className="flex mx-1 my-1 items-center">
             <Icon className="w-6 h-6 my-0.5" aria-label={title} />
-            <div className="mx-2">{title}</div>
+            <div className="mx-2 text-slate-700">{title}</div>
           </div>
         );
       })}
