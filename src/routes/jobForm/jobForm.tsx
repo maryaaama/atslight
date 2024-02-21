@@ -177,6 +177,22 @@ export default function JobForm() {
           />
         </div>
         <FieldComponent fieldKeys={fieldsToShow} />
+        <div className="px-2 py-4 m-2 border shadow bg-slate-50 rounded-lg">
+          <span className="text-lg">فرم های ورودی</span>
+        </div>
+        <div className="px-2 py-4 m-2 border shadow bg-slate-50 rounded-lg">
+          <label className="" htmlFor="tag">
+            مراحل استخدام
+          </label>
+          <input
+            className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
+            type="text"
+            id="step"
+            value={"پیش فرض"}
+            name=""
+            disabled
+          />
+        </div>
         <div className="border shadow m-2 p-2 bg-slate-50 rounded-lg">
           <AddressComponent />
         </div>
