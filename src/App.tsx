@@ -8,7 +8,6 @@ import Signin from "./routes/signin/page";
 import Verify from "./routes/verify/page";
 import Slider from "./components/slider/slider";
 import PrivacyPolicy from "./routes/privacy-policy/page";
-import JobForm from "./routes/jobForm/jobForm";
 function App() {
   return (
     <Routes>
@@ -17,7 +16,6 @@ function App() {
       <Route path="/candidates" element={<Candidates />} />
       <Route path="/company" element={<Company />} />
       <Route path="/Jobs" element={<Jobs />} />
-      <Route path="/JobForm" element={<JobForm />} />
       <Route path="/Signin" element={<Signin />} />
       <Route path="/Verify" element={<Verify />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />

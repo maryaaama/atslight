@@ -1,9 +1,9 @@
-import RangeSlider from "../../components/rangeSlider/rangeSlider";
-import AddressComponent from "../../components/jobFields/address";
-import GenderComponent from "../../components/jobFields/gender";
-import FieldComponent from "../../components/jobFields/fields";
+import RangeSlider from "../rangeSlider/rangeSlider";
+import AddressComponent from "../jobFields/address";
+import GenderComponent from "../jobFields/gender";
+import FieldComponent from "../jobFields/fields";
 import { JobField } from "../../graphql/generated/graphql";
-import { EntryForm } from "../../components/jobFields/entryForm";
+import { EntryForm } from "../jobFields/entryForm";
 
 // interface JobData {
 //   title: string;
@@ -18,7 +18,7 @@ import { EntryForm } from "../../components/jobFields/entryForm";
 //   knowledge: string;
 // }
 
-export default function JobForm() {
+const JobForm = () => {
   const fieldsToShow: JobField[] = [
     JobField.Gender,
     JobField.MilitaryStatus,
@@ -30,8 +30,8 @@ export default function JobForm() {
 
   return (
     <>
-      <h1 className="text-xl mx-4 my-2">موقعیت شغلی جدید</h1>
-      <form className="m-1 p-1" action="">
+      <h1 className="text-xl mx-4 my-2 text-right">موقعیت شغلی جدید</h1>
+      <form className="m-1 p-1 text-right" action="">
         <div className="border shadow-sm m-2 p-2 bg-slate-50 rounded-lg">
           <label className="" htmlFor="title">
             عنوان
@@ -208,4 +208,5 @@ export default function JobForm() {
       </form>
     </>
   );
-}
+};
+export default JobForm;
