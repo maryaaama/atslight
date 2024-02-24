@@ -1,38 +1,57 @@
 import React, { useState } from "react";
 import Modal from "../modal/modal";
-import JobForm from "../../components/jobForm/jobForm"; // Import the JobForm component
-import { Language } from "../../graphql/generated/graphql";
+import JobForm from "../../components/jobForm/jobForm";
+import { JobStatus, Language } from "../../graphql/generated/graphql";
 
-interface JobData {
-  // Other properties...
+export interface JobData {
+  __typename?: "Job";
+  nodeId: string;
+  id: number;
+  status: JobStatus;
+  canManageCandidates?: boolean | null;
+  education?: string;
+  isRemote?: boolean;
+  country?: string;
+  state?: string;
+  city?: string;
+  address?: string;
+  hoursPerWeek?: {
+    start: { value: number };
+    end: { value: number };
+  };
+  languages?: string[];
   translations: {
     nodes: {
-      lang: string | Language; // Use Language if it's an enum you have defined
-      nodeId: string;
       title: string;
-      __typename?: "JobTranslation";
+      description?: string;
+      lang: Language;
     }[];
   };
-  // Include any other properties from your actual job object that are missing from JobData
 }
+
 const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
   const [open, setOpen] = useState(false);
-  const jobTitle = job?.translations?.nodes[0]?.title;
+
+  const jobTitle = job?.translations?.nodes[0]?.title || "";
 
   return (
-    <div
-      onClick={() => setOpen(true)}
-      className="cursor-pointer flex w-auto m-1 border rounded-md bg-back shadow-sm hover:bg-gray-100 hover:shadow-lg items-center justify-between py-2"
-      role="button"
-      tabIndex={0}
-    >
-      <div className="text">
-        <h2 className="pr-2 font-medium text-lg">{jobTitle}</h2>
+    <>
+      <div
+        onClick={() => setOpen(true)}
+        className="cursor-pointer flex w-auto m-1 border rounded-md bg-back shadow-sm hover:bg-gray-100 hover:shadow-lg items-center justify-between py-2"
+        role="button"
+        tabIndex={0}
+      >
+        <div className="text">
+          <h2 className="pr-2 font-medium text-lg">{jobTitle}</h2>
+        </div>
       </div>
-      <Modal open={open} setOpen={setOpen} request={undefined}>
-        <JobForm />
-      </Modal>
-    </div>
+      {open && (
+        <Modal open={open} setOpen={setOpen} request={undefined}>
+          <JobForm job={job} />
+        </Modal>
+      )}
+    </>
   );
 };
 

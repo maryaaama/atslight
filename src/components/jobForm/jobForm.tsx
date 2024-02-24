@@ -2,23 +2,70 @@ import RangeSlider from "../rangeSlider/rangeSlider";
 import AddressComponent from "../jobFields/address";
 import GenderComponent from "../jobFields/gender";
 import FieldComponent from "../jobFields/fields";
-import { JobField } from "../../graphql/generated/graphql";
+import {
+  JobField,
+  Language,
+  useUpdateJobAlternativeMutation,
+} from "../../graphql/generated/graphql";
 import { EntryForm } from "../jobFields/entryForm";
+import { useState, useEffect } from "react";
+import { JobData } from "../jobCard/JobCard";
+import Education from "../jobFields/education";
 
-// interface JobData {
-//   title: string;
-//   decription: string;
-//   field: string;
-//   grade: string;
-//   gender: string;
-//   experience: number;
-//   skill: string;
-//   competency: string;
-//   label: string;
-//   knowledge: string;
-// }
+interface JobFormProps {
+  job: JobData;
+}
 
-const JobForm = () => {
+const JobForm: React.FC<JobFormProps> = ({ job }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  // const [education, setEducation] = useState("");
+  // const [isRemote, setIsRemote] = useState(false);
+  // const [country, setCountry] = useState("");
+  const [updateJob] = useUpdateJobAlternativeMutation();
+
+  useEffect(() => {
+    if (job && job.translations.nodes.length > 0) {
+      const firstTranslation = job.translations.nodes[0];
+      setTitle(firstTranslation.title || "");
+      setDescription(firstTranslation?.description || "");
+      // Log the description safely
+      console.log(firstTranslation?.description || "");
+      // setEducation(job.education);
+      // setIsRemote(job.isRemote);
+      // setCountry(job.country);
+    }
+  }, [job]);
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    try {
+      await updateJob({
+        variables: {
+          input: {
+            id: job.id,
+            patch: {
+              departmentId: undefined,
+              genders: undefined,
+              gradeConditions: undefined,
+              jobQuestionnairesIds: undefined,
+              maxAgeCondition: undefined,
+              minAgeCondition: undefined,
+              ownerIds: undefined,
+              translations: job.translations.nodes.map((node) => ({
+                lang: node.lang as Language,
+                title: node.title,
+                description: node.description || "",
+              })),
+              workExperienceCondition: undefined,
+            },
+          },
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const fieldsToShow: JobField[] = [
     JobField.Gender,
     JobField.MilitaryStatus,
@@ -31,28 +78,25 @@ const JobForm = () => {
   return (
     <>
       <h1 className="text-xl mx-4 my-2 text-right">موقعیت شغلی جدید</h1>
-      <form className="m-1 p-1 text-right" action="">
+      <form className="m-1 p-1 text-right" onSubmit={handleSubmit}>
         <div className="border shadow-sm m-2 p-2 bg-slate-50 rounded-lg">
-          <label className="" htmlFor="title">
-            عنوان
-          </label>
+          <label htmlFor="title">عنوان</label>
           <input
-            className="w-[100%] border shadow-sm my-3 mt-1 rounded-sm p-0.5"
-            type="text"
+            className="w-[100%] border shadow-sm mx-auto mt-1 rounded-sm p-0.5"
             id="title"
-            required={true}
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
-          <br />
-          <label className="ml-1" htmlFor="desc">
-            توضیحات
-          </label>
+          <label htmlFor="description">توضیحات</label>
           <textarea
-            className="w-[100%] border shadow-sm mt-1 rounded-sm p-0.5"
-            name="desc"
-            id="desc"
-            cols={30}
-            rows={3}
-          ></textarea>
+            className="w-[100%] border shadow-sm mx-auto mt-1 rounded-sm p-0.5"
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          >
+            {description}
+          </textarea>
         </div>
         <div className="border shadow m-2 p-2 bg-slate-50 rounded-lg">
           <h2 className="my-3 font-medium text-lg">شرایط احراز</h2>
@@ -66,36 +110,7 @@ const JobForm = () => {
               id="title"
             />
           </div>
-          <div className="mt-2 p-2  bg-white border rounded-lg">
-            <label className="font-medium" htmlFor="desc">
-              مقطع
-            </label>
-            <br />
-            <input className="mx-2 my-2" type="checkbox" id="1" />
-            <label className="mx-1 text-sm" htmlFor="1">
-              دیپلم
-            </label>
-            <br />
-            <input className="mx-2" type="checkbox" id="2" value={""} name="" />
-            <label className="mx-1 text-sm" htmlFor="2">
-              لیسانس
-            </label>
-            <br />
-            <input className="mx-2" type="checkbox" id="3" value={""} name="" />
-            <label className="mx-1 text-sm" htmlFor="3">
-              فوق لیسانس
-            </label>
-            <br />
-            <input className="mx-2" type="checkbox" id="4" value={""} name="" />
-            <label className="mx-1 text-sm" htmlFor="4">
-              دکتری
-            </label>
-            <br />
-            <input className="mx-2" type="checkbox" id="5" value={""} name="" />
-            <label className="mx-1 text-sm" htmlFor="5">
-              فوق دکتری
-            </label>
-          </div>
+          <Education />
           <div className="my-3">
             <label className="" htmlFor="Orientation">
               گرایش
@@ -198,7 +213,11 @@ const JobForm = () => {
           />
         </div>
         <div className="flex gap-2">
-          <button className="w-[46%] bg-primary text-white text-lg font-medium py-2 border shadow m-auto rounded-lg">
+          <button
+            onSubmit={handleSubmit}
+            type="submit"
+            className="w-[46%] bg-primary text-white text-lg font-medium py-2 border shadow m-auto rounded-lg"
+          >
             ذخیره
           </button>
           <button className="w-[46%] bg-gray1 text-white text-lg font-medium py-2 border shadow m-auto rounded-lg">
