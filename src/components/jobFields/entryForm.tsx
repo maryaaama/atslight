@@ -1,7 +1,7 @@
 import React from "react";
 
-export const Fields = (props: { brand: string }) => {
-  return <li className="my-0.5 mx-2 text-slate-700">{props.brand}</li>;
+export const Fields = (props: { value: string }) => {
+  return <li className="my-0.5 mx-2 text-slate-700">{props.value}</li>;
 };
 
 const EntryForm: React.FC = () => {
@@ -16,7 +16,7 @@ const EntryForm: React.FC = () => {
       <h1 className="text-base mx-2">کافه و رستوران</h1>
       <ul className="list-disc list-inside mt-2">
         {options.map((option) => (
-          <Fields key={option.id} brand={option.value} />
+          <Fields key={option.id} value={option.value} />
         ))}
       </ul>
     </div>

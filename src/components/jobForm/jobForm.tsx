@@ -3,9 +3,10 @@ import AddressComponent from "../jobFields/address";
 import GenderComponent from "../jobFields/gender";
 import FieldComponent from "../jobFields/fields";
 import {
+  Gender,
+  JobEducation,
   JobField,
-  Language,
-  useUpdateJobAlternativeMutation,
+  useUpdateJobMutation,
 } from "../../graphql/generated/graphql";
 import { EntryForm } from "../jobFields/entryForm";
 import { useState, useEffect } from "react";
@@ -17,55 +18,68 @@ interface JobFormProps {
 }
 
 const JobForm: React.FC<JobFormProps> = ({ job }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  // const [education, setEducation] = useState("");
-  // const [isRemote, setIsRemote] = useState(false);
-  // const [country, setCountry] = useState("");
-  const [updateJob] = useUpdateJobAlternativeMutation();
+  const [title, setTitle] = useState(job?.translations.nodes[0]?.title || "");
+  const [description, setDescription] = useState(
+    job?.translations.nodes[0]?.description || ""
+  );
+  const [gender, setGender] = useState<Gender | null>(job?.gender as Gender);
+  const [ageRange, setAgeRange] = useState({
+    minAge: job?.minAge || 18,
+    maxAge: job?.maxAge || 65,
+  });
+  const [selectedEducation, setSelectedEducation] =
+    useState<JobEducation | null>(job?.education as JobEducation | null);
+
+  const [updateJob] = useUpdateJobMutation();
 
   useEffect(() => {
-    if (job && job.translations.nodes.length > 0) {
-      const firstTranslation = job.translations.nodes[0];
-      setTitle(firstTranslation.title || "");
-      setDescription(firstTranslation?.description || "");
-      // Log the description safely
-      console.log(firstTranslation?.description || "");
-      // setEducation(job.education);
-      // setIsRemote(job.isRemote);
-      // setCountry(job.country);
+    if (job) {
+      const firstTranslation = job.translations.nodes[0] || {
+        title: "",
+        description: "",
+      };
+      setTitle(firstTranslation.title);
+      setDescription(firstTranslation.description || "");
+      setGender(job.gender as Gender);
+      setSelectedEducation(job.education as JobEducation);
+      setAgeRange({ minAge: job.minAge || 18, maxAge: job.maxAge || 65 });
     }
   }, [job]);
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleAgeRangeChange = (newRange: [number, number]) => {
+    setAgeRange({ minAge: newRange[0], maxAge: newRange[1] });
+  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const gendersArray = gender ? [gender] : null;
+    const translationsInput = {
+      create: job.translations.nodes.map((translation) => ({
+        lang: translation.lang,
+        title: translation.title,
+        description: translation.description,
+      })),
+    };
+
     try {
       await updateJob({
         variables: {
           input: {
             id: job.id,
             patch: {
-              departmentId: undefined,
-              genders: undefined,
-              gradeConditions: undefined,
-              jobQuestionnairesIds: undefined,
-              maxAgeCondition: undefined,
-              minAgeCondition: undefined,
-              ownerIds: undefined,
-              translations: job.translations.nodes.map((node) => ({
-                lang: node.lang as Language,
-                title: node.title,
-                description: node.description || "",
-              })),
-              workExperienceCondition: undefined,
+              translations: translationsInput,
+              genders: gendersArray,
+              education: selectedEducation,
+              minAgeCondition: ageRange.minAge,
+              maxAgeCondition: ageRange.maxAge,
             },
           },
         },
       });
     } catch (error) {
-      console.error(error);
+      console.error("Failed to update job:", error);
     }
   };
+
   const fieldsToShow: JobField[] = [
     JobField.Gender,
     JobField.MilitaryStatus,
@@ -110,7 +124,11 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
               id="title"
             />
           </div>
-          <Education />
+          <Education
+            selectedEducation={selectedEducation}
+            setSelectedEducation={setSelectedEducation}
+          />
+
           <div className="my-3">
             <label className="" htmlFor="Orientation">
               گرایش
@@ -127,9 +145,16 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
           <label className="my-auto" htmlFor="age">
             بازه سنی
           </label>
-          <RangeSlider className="w-full mt-3 h-9 " defaultValue={[25, 75]} />
+          <RangeSlider
+            className="w-full mt-3 h-9"
+            defaultValue={[25, 75]}
+            onChange={handleAgeRangeChange}
+          />
         </div>
-        <GenderComponent />
+        <GenderComponent
+          selectedGender={gender}
+          setSelectedGender={setGender}
+        />
         <div className="border shadow m-2 px-2 py-3 bg-slate-50 rounded-lg">
           <label className="" htmlFor="experience">
             سابقه کاری
@@ -214,7 +239,6 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
         </div>
         <div className="flex gap-2">
           <button
-            onSubmit={handleSubmit}
             type="submit"
             className="w-[46%] bg-primary text-white text-lg font-medium py-2 border shadow m-auto rounded-lg"
           >

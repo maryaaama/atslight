@@ -1,46 +1,49 @@
-import React, { useState } from "react";
+import React from "react";
 import { JobEducation } from "../../graphql/generated/graphql";
 
-const educationLabels = {
+interface EducationProps {
+  selectedEducation: JobEducation | null;
+  setSelectedEducation: React.Dispatch<
+    React.SetStateAction<JobEducation | null>
+  >;
+}
+
+const educationLabels: { [key in JobEducation]: string } = {
   [JobEducation.Diploma]: "دیپلم",
-  [JobEducation.Master]: "لیسانس",
-  [JobEducation.Bachelor]: "فوق لیسانس",
+  [JobEducation.Bachelor]: "لیسانس",
+  [JobEducation.Master]: "فوق لیسانس",
   [JobEducation.Phd]: "دکترا",
   [JobEducation.Associate]: "فوق دکترا",
 };
 
-const Education = () => {
-  const [selectedEducations, setSelectedEducations] = useState<JobEducation[]>(
-    []
-  );
-
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = event.target;
-    const educationValue = value as JobEducation;
-
-    setSelectedEducations((prev) =>
-      checked
-        ? [...prev, educationValue]
-        : prev.filter((eduValue) => eduValue !== educationValue)
-    );
+const Education: React.FC<EducationProps> = ({
+  selectedEducation,
+  setSelectedEducation,
+}) => {
+  const handleEducationChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = event.target;
+    if (Object.values(JobEducation).includes(value as JobEducation)) {
+      setSelectedEducation(value as JobEducation);
+    } else {
+      setSelectedEducation(null);
+    }
   };
 
   return (
-    <div className="mt-2 p-2  bg-white border rounded-lg">
-      <div className="font-medium mb-2">مقطع</div>
-      {Object.values(JobEducation).map((value) => (
-        <div key={value}>
+    <div>
+      {Object.entries(educationLabels).map(([key, label]) => (
+        <div key={key}>
           <input
-            className="mx-2 my-2"
-            type="checkbox"
-            id={value}
-            value={value}
-            checked={selectedEducations.includes(value)}
-            onChange={handleCheckboxChange}
+            type="radio"
+            id={key}
+            name="education"
+            value={key}
+            checked={selectedEducation === key}
+            onChange={handleEducationChange}
           />
-          <label className="mx-1 text-sm" htmlFor={value}>
-            {educationLabels[value]}
-          </label>
+          <label htmlFor={key}>{label}</label>
         </div>
       ))}
     </div>

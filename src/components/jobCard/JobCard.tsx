@@ -4,22 +4,19 @@ import JobForm from "../../components/jobForm/jobForm";
 import { JobStatus, Language } from "../../graphql/generated/graphql";
 
 export interface JobData {
-  __typename?: "Job";
   nodeId: string;
   id: number;
   status: JobStatus;
-  canManageCandidates?: boolean | null;
   education?: string;
   isRemote?: boolean;
   country?: string;
   state?: string;
   city?: string;
   address?: string;
-  hoursPerWeek?: {
-    start: { value: number };
-    end: { value: number };
-  };
   languages?: string[];
+  gender?: string;
+  minAge?: number;
+  maxAge?: number;
   translations: {
     nodes: {
       title: string;
