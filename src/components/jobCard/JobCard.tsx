@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../modal/modal";
 import JobForm from "../../components/jobForm/jobForm";
 import { JobStatus, Language } from "../../graphql/generated/graphql";
+import { useNavigate } from "react-router-dom";
 
 export interface JobData {
   nodeId: string;
@@ -30,11 +31,16 @@ const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
   const [open, setOpen] = useState(false);
 
   const jobTitle = job?.translations?.nodes[0]?.title || "";
+  const navigate = useNavigate();
+
+  const handleOpenJobForm = () => {
+    navigate("/jobs/", { state: { job } });
+  };
 
   return (
     <>
       <div
-        onClick={() => setOpen(true)}
+        onClick={handleOpenJobForm}
         className="cursor-pointer flex w-auto m-1 border rounded-md bg-back shadow-sm hover:bg-gray-100 hover:shadow-lg items-center justify-between py-2"
         role="button"
         tabIndex={0}

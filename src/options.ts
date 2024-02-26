@@ -90,26 +90,26 @@ export const pipelineStagesTypes = {
 export const jobFieldTypes = {
   [JobField.Gender]: {
     title: "جنسیت",
-    icon: UserCircleIcon,
+    Icon: UserCircleIcon,
   },
   [JobField.MilitaryStatus]: {
     title: "وضعیت نظام وظیفه",
-    icon: ShieldCheckIcon,
+    Icon: ShieldCheckIcon,
   },
   [JobField.Resume]: {
-    icon: IdentificationIcon,
+    Icon: IdentificationIcon,
     title: "رزومه",
   },
   [JobField.CoverLetter]: {
-    icon: ChatBubbleLeftEllipsisIcon,
+    Icon: ChatBubbleLeftEllipsisIcon,
     title: "پیام",
   },
   [JobField.Birthday]: {
-    icon: CalendarDaysIcon,
+    Icon: CalendarDaysIcon,
     title: "تاریخ تولد",
   },
   [JobField.Address]: {
-    icon: MapPinIcon,
+    Icon: MapPinIcon,
     title: "آدرس",
   },
 };

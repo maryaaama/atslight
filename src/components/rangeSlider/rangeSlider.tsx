@@ -1,5 +1,6 @@
 import ReactSlider, { ReactSliderProps } from "react-slider";
 import cn from "classnames";
+
 const RangeSlider = <T extends number | readonly number[]>(
   _props: ReactSliderProps<T>
 ) => {

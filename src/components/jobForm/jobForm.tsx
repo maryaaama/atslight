@@ -1,56 +1,74 @@
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import RangeSlider from "../rangeSlider/rangeSlider";
 import AddressComponent from "../jobFields/address";
 import GenderComponent from "../jobFields/gender";
 import FieldComponent from "../jobFields/fields";
+import Education from "../jobFields/education";
+import { EntryForm } from "../jobFields/entryForm";
 import {
   Gender,
   JobEducation,
   JobField,
   useUpdateJobMutation,
 } from "../../graphql/generated/graphql";
-import { EntryForm } from "../jobFields/entryForm";
-import { useState, useEffect } from "react";
 import { JobData } from "../jobCard/JobCard";
-import Education from "../jobFields/education";
 
 interface JobFormProps {
   job: JobData;
 }
 
 const JobForm: React.FC<JobFormProps> = ({ job }) => {
+  const { id } = useParams(); // Access the job ID from the URL
+  const location = useLocation();
+  const navigate = useNavigate();
+  // Assuming job data is passed through route state; adjust based on actual implementation
+  const jobLoc = location.state?.job as JobData;
   const [title, setTitle] = useState(job?.translations.nodes[0]?.title || "");
   const [description, setDescription] = useState(
     job?.translations.nodes[0]?.description || ""
   );
-  const [gender, setGender] = useState<Gender | null>(job?.gender as Gender);
+  const [gender, setGender] = useState<Gender | null>(
+    (job?.gender as Gender) || null
+  );
   const [ageRange, setAgeRange] = useState({
     minAge: job?.minAge || 18,
     maxAge: job?.maxAge || 65,
   });
   const [selectedEducation, setSelectedEducation] =
-    useState<JobEducation | null>(job?.education as JobEducation | null);
-
+    useState<JobEducation | null>((job?.education as JobEducation) || null);
+  const [titleError, setTitleError] = useState("");
   const [updateJob] = useUpdateJobMutation();
 
   useEffect(() => {
     if (job) {
-      const firstTranslation = job.translations.nodes[0] || {
-        title: "",
-        description: "",
-      };
-      setTitle(firstTranslation.title);
-      setDescription(firstTranslation.description || "");
+      setTitle(job.translations.nodes[0]?.title || "");
+      setDescription(job.translations.nodes[0]?.description || "");
       setGender(job.gender as Gender);
       setSelectedEducation(job.education as JobEducation);
       setAgeRange({ minAge: job.minAge || 18, maxAge: job.maxAge || 65 });
     }
-  }, [job]);
+  }, [job, jobLoc, id]);
 
   const handleAgeRangeChange = (newRange: [number, number]) => {
     setAgeRange({ minAge: newRange[0], maxAge: newRange[1] });
   };
+
+  const validateTitle = () => {
+    if (!title.trim()) {
+      setTitleError("Title is required.");
+      return false;
+    }
+    setTitleError("");
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const isTitleValid = validateTitle();
+
+    if (!isTitleValid) return;
+
     const gendersArray = gender ? [gender] : null;
     const translationsInput = {
       create: job.translations.nodes.map((translation) => ({
@@ -75,8 +93,10 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
           },
         },
       });
+      navigate("/your-success-route");
     } catch (error) {
       console.error("Failed to update job:", error);
+      // Show an error message to the user
     }
   };
 
@@ -88,7 +108,6 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
     JobField.Birthday,
     JobField.CoverLetter,
   ];
-
   return (
     <>
       <h1 className="text-xl mx-4 my-2 text-right">موقعیت شغلی جدید</h1>
@@ -96,21 +115,20 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
         <div className="border shadow-sm m-2 p-2 bg-slate-50 rounded-lg">
           <label htmlFor="title">عنوان</label>
           <input
-            className="w-[100%] border shadow-sm mx-auto mt-1 rounded-sm p-0.5"
+            className="w-full border mx-auto mt-1 rounded-sm p-1"
             id="title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          {titleError && <div className="text-red-500">{titleError}</div>}
           <label htmlFor="description">توضیحات</label>
           <textarea
-            className="w-[100%] border shadow-sm mx-auto mt-1 rounded-sm p-0.5"
+            className="w-full border mx-auto mt-1 rounded-sm p-1"
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          >
-            {description}
-          </textarea>
+          />
         </div>
         <div className="border shadow m-2 p-2 bg-slate-50 rounded-lg">
           <h2 className="my-3 font-medium text-lg">شرایط احراز</h2>

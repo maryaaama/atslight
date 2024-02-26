@@ -1,6 +1,6 @@
 import React from "react";
-import { jobFieldTypes } from "../../options";
 import { JobField } from "../../graphql/generated/graphql";
+import { jobFieldTypes } from "../../options";
 
 interface FieldComponentProps {
   fieldKeys: JobField[];
@@ -15,10 +15,10 @@ const FieldComponent: React.FC<FieldComponentProps> = ({ fieldKeys }) => {
         if (!field) {
           return <div key={index}>اطلاعاتی وارد نشده {key}</div>;
         }
-        const { icon: Icon, title } = field;
+        const { Icon, title } = field;
         return (
           <div key={index} className="flex mx-1 my-1 items-center">
-            <Icon className="w-6 h-6 my-0.5" aria-label={title} />
+            {Icon && <Icon className="w-6 h-6 my-0.5" aria-label={title} />}
             <div className="mx-2 text-slate-700">{title}</div>
           </div>
         );
