@@ -19,10 +19,9 @@ interface JobFormProps {
 }
 
 const JobForm: React.FC<JobFormProps> = ({ job }) => {
-  const { id } = useParams(); // Access the job ID from the URL
+  const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  // Assuming job data is passed through route state; adjust based on actual implementation
   const jobLoc = location.state?.job as JobData;
   const [title, setTitle] = useState(job?.translations.nodes[0]?.title || "");
   const [description, setDescription] = useState(
@@ -93,10 +92,9 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
           },
         },
       });
-      navigate("/your-success-route");
+      navigate("/jobs");
     } catch (error) {
       console.error("Failed to update job:", error);
-      // Show an error message to the user
     }
   };
 
