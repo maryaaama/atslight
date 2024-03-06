@@ -37,7 +37,7 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
   const [selectedEducation, setSelectedEducation] =
     useState<JobEducation | null>((job?.education as JobEducation) || null);
   const [titleError, setTitleError] = useState("");
-  const [updateJob] = useUpdateJobMutation();
+  const [updateJob] = useUpdateJobMutation({});
 
   useEffect(() => {
     if (job) {
