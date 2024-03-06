@@ -8,7 +8,7 @@ interface DisabledStarRatingProps {
 const DisabledStarRating: React.FC<DisabledStarRatingProps> = ({ rating }) => {
   return (
     <StarRatingComponent
-      name={0}
+      name={""}
       starCount={5}
       value={rating}
       editing={false}

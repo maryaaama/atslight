@@ -7,14 +7,16 @@ import {
 import Modal from "../modal/modal";
 import Logo from "../../image/logo.png";
 import JobsSkeleton from "../skeleton/Jobs";
-import JobCard from "../jobCard/JobCard";
+import JobCard, { JobData } from "../jobCard/JobCard";
 import EmptyState from "../empty/emptyState";
 import { JobStatus } from "../../graphql/generated/graphql";
+import JobForm from "../jobForm/jobForm";
 
 export default function JobsList() {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<JobData | null>(null);
 
   const { data: sessionData } = useCurrentSessionQuery();
   const {
@@ -33,7 +35,10 @@ export default function JobsList() {
   const publicJobs = jobsData?.jobs?.nodes.filter(
     (job) => job.status === JobStatus.Published
   );
-
+  const handleJobClick = (job: JobData) => {
+    setSelectedJob(job);
+    setModalOpen(true);
+  };
   const handleManagerChange = (event: { target: { value: string } }) => {
     const newValue = event.target.value;
     setUser(newValue);
@@ -44,6 +49,7 @@ export default function JobsList() {
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500  "></div>
       </div>
     );
+
   return (
     <div className="relative z-0 px-2 m-auto lg:max-w-[30%] max-w-[90%] my-10">
       <img
@@ -88,7 +94,7 @@ export default function JobsList() {
                 )
               }
             >
-              {job?.translations.nodes[0].title}
+              {job.translations.nodes[0]?.title}
             </button>
             <div className="h-12 w-[0.1rem] bg-gray-200 m-auto"></div>
           </>
@@ -97,7 +103,10 @@ export default function JobsList() {
         "n/a"
       )}
       <button
-        onClick={() => setModalOpen(true)}
+        onClick={() => {
+          setSelectedJob(null);
+          setModalOpen(true);
+        }}
         className="w-full border-2 border-gray2 rounded-lg p-2 h-11 bg-opacity-80 font-semibold text-gray2 flex items-center justify-center"
       >
         افزودن شغل جدید +
@@ -108,11 +117,15 @@ export default function JobsList() {
         </div>
         {jobsLoading ? (
           <JobsSkeleton />
-        ) : !jobsData || !jobsData.jobs || jobsData?.jobs.nodes[0]?.id === 0 ? (
+        ) : !jobsData || !jobsData.jobs || jobsData?.jobs.nodes.length === 0 ? (
           <EmptyState />
+        ) : selectedJob ? (
+          <JobForm job={selectedJob} />
         ) : (
           jobsData?.jobs?.nodes?.map((job) => (
-            <JobCard key={job.id} job={job} />
+            <span key={job.id} onClick={() => handleJobClick(job)}>
+              <JobCard job={job} />
+            </span>
           ))
         )}
       </Modal>
