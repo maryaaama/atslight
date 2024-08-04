@@ -54,6 +54,16 @@ export const UPDATE_JOB = gql`
   }
   ${FULL_JOB}
 `;
+export const CREATE_JOB = gql`
+  mutation CreateJob($input: CreateJobInput!) {
+    createJob(input: $input) {
+      job {
+        nodeId
+        id
+      }
+    }
+  }
+`;
 
 export const UPDATE_JOB_ALTERNATIVE = gql`
   mutation UpdateJobAlternative($input: UpdateJobInput__!) {
