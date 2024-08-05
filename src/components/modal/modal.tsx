@@ -15,7 +15,9 @@ export default function Modal({
   request,
   children,
 }: ModalProps) {
+  console.log('Modal')
   return (
+
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
@@ -64,5 +66,6 @@ export default function Modal({
         </div>
       </Dialog>
     </Transition.Root>
+
   );
 }

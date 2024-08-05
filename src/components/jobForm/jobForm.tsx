@@ -1,3 +1,4 @@
+// JobForm.tsx
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import RangeSlider from "../rangeSlider/rangeSlider";
@@ -14,40 +15,37 @@ import {
 } from "../../graphql/generated/graphql";
 import { JobData } from "../jobCard/JobCard";
 
-interface JobFormProps {
-  job: JobData;
-}
-
-const JobForm: React.FC<JobFormProps> = ({ job }) => {
-  const { id } = useParams();
+const JobForm: React.FC = () => {
+  console.log('JobForm')
+  // const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const jobLoc = location.state?.job as JobData;
-  const [title, setTitle] = useState(job?.translations.nodes[0]?.title || "");
+  const [title, setTitle] = useState(jobLoc?.translations.nodes[0]?.title || "");
   const [description, setDescription] = useState(
-    job?.translations.nodes[0]?.description || ""
+    jobLoc?.translations.nodes[0]?.description || ""
   );
   const [gender, setGender] = useState<Gender | null>(
-    (job?.gender as Gender) || null
+    (jobLoc?.gender as Gender) || null
   );
   const [ageRange, setAgeRange] = useState({
-    minAge: job?.minAge || 18,
-    maxAge: job?.maxAge || 65,
+    minAge: jobLoc?.minAge || 18,
+    maxAge: jobLoc?.maxAge || 65,
   });
   const [selectedEducation, setSelectedEducation] =
-    useState<JobEducation | null>((job?.education as JobEducation) || null);
+    useState<JobEducation | null>((jobLoc?.education as JobEducation) || null);
   const [titleError, setTitleError] = useState("");
   const [updateJob] = useUpdateJobMutation({});
 
   useEffect(() => {
-    if (job) {
-      setTitle(job.translations.nodes[0]?.title || "");
-      setDescription(job.translations.nodes[0]?.description || "");
-      setGender(job.gender as Gender);
-      setSelectedEducation(job.education as JobEducation);
-      setAgeRange({ minAge: job.minAge || 18, maxAge: job.maxAge || 65 });
+    if (jobLoc) {
+      setTitle(jobLoc.translations.nodes[0]?.title || "");
+      setDescription(jobLoc.translations.nodes[0]?.description || "");
+      setGender(jobLoc.gender as Gender);
+      setSelectedEducation(jobLoc.education as JobEducation);
+      setAgeRange({ minAge: jobLoc.minAge || 18, maxAge: jobLoc.maxAge || 65 });
     }
-  }, [job, jobLoc, id]);
+  }, [jobLoc]);
 
   const handleAgeRangeChange = (newRange: [number, number]) => {
     setAgeRange({ minAge: newRange[0], maxAge: newRange[1] });
@@ -70,7 +68,7 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
 
     const gendersArray = gender ? [gender] : null;
     const translationsInput = {
-      create: job.translations.nodes.map((translation) => ({
+      create: jobLoc.translations.nodes.map((translation) => ({
         lang: translation.lang,
         title: translation.title,
         description: translation.description,
@@ -81,7 +79,7 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
       await updateJob({
         variables: {
           input: {
-            id: job.id,
+            id: jobLoc.id,
             patch: {
               translations: translationsInput,
               genders: gendersArray,
@@ -106,6 +104,7 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
     JobField.Birthday,
     JobField.CoverLetter,
   ];
+
   return (
     <>
       <h1 className="text-xl mx-4 my-2 text-right">موقعیت شغلی جدید</h1>
@@ -268,4 +267,5 @@ const JobForm: React.FC<JobFormProps> = ({ job }) => {
     </>
   );
 };
+
 export default JobForm;

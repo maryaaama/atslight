@@ -13,11 +13,13 @@ import { JobStatus } from "../../graphql/generated/graphql";
 import JobForm from "../jobForm/jobForm";
 
 export default function JobsList() {
+
+  console.log('JobsList');
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<JobData | null>(null);
-
+  const [formVisible, setFormVisible] = useState(false);
   const { data: sessionData } = useCurrentSessionQuery();
   const {
     data: jobsData,
@@ -35,6 +37,7 @@ export default function JobsList() {
   const publicJobs = jobsData?.jobs?.nodes.filter(
     (job) => job.status === JobStatus.Published
   );
+
   const handleJobClick = (job: JobData) => {
     setSelectedJob(job);
     setModalOpen(true);
@@ -49,6 +52,7 @@ export default function JobsList() {
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500  "></div>
       </div>
     );
+
 
   return (
     <div className="relative z-0 px-2 m-auto lg:max-w-[30%] max-w-[90%] my-10">
@@ -106,29 +110,20 @@ export default function JobsList() {
         onClick={() => {
           setSelectedJob(null);
           setModalOpen(true);
+
         }}
         className="w-full border-2 border-gray2 rounded-lg p-2 h-11 bg-opacity-80 font-semibold text-gray2 flex items-center justify-center"
       >
         افزودن شغل جدید +
       </button>
+
       <Modal open={isModalOpen} setOpen={setModalOpen} request={undefined}>
-        <div className="w-full mb-5 border-b">
-          <h3 className="text-center text-xl font-bold mb-2">آگهی های شغلی</h3>
-        </div>
-        {jobsLoading ? (
-          <JobsSkeleton />
-        ) : !jobsData || !jobsData.jobs || jobsData?.jobs.nodes.length === 0 ? (
-          <EmptyState />
-        ) : selectedJob ? (
-          <JobForm job={selectedJob} />
-        ) : (
-          jobsData?.jobs?.nodes?.map((job) => (
-            <span key={job.id} onClick={() => handleJobClick(job)}>
-              <JobCard job={job} />
-            </span>
-          ))
-        )}
+        <JobForm />
       </Modal>
+
+
+
+
     </div>
   );
 }

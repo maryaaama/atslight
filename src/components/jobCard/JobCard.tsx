@@ -28,6 +28,7 @@ export interface JobData {
 }
 
 const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
+  console.log('JobCard')
   const [open, setOpen] = useState(false);
 
   const jobTitle = job?.translations?.nodes[0]?.title || "";
@@ -51,7 +52,7 @@ const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
       </div>
       {open && (
         <Modal open={open} setOpen={setOpen} request={undefined}>
-          <JobForm job={job} />
+          <JobForm />
         </Modal>
       )}
     </>

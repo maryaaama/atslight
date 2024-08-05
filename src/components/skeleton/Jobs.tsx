@@ -1,5 +1,6 @@
 import JobCardSkeleton from "./JobCard";
 const JobsSkeleton = () => {
+  console.log('JobsSkeleton');
   const cardCount = Array.from({ length: 12 });
 
   return (
