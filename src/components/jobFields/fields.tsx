@@ -4,9 +4,16 @@ import { jobFieldTypes } from "../../options";
 
 interface FieldComponentProps {
   fieldKeys: JobField[];
+  setFieldValue: (field: string, value: any) => void;
 }
 
-const FieldComponent: React.FC<FieldComponentProps> = ({ fieldKeys }) => {
+const FieldComponent: React.FC<FieldComponentProps> = ({ fieldKeys, setFieldValue }) => {
+  // Assuming 'fields' represents the selected fields that should be passed back to Formik
+  React.useEffect(() => {
+    // Update Formik value when fieldKeys change
+    setFieldValue("field", fieldKeys);
+  }, [fieldKeys, setFieldValue]);
+
   return (
     <div className="border shadow m-2 p-2 bg-slate-50 rounded-lg">
       <h2 className="font-medium text-lg my-2">فیلد های ورودی</h2>

@@ -92,8 +92,8 @@ const AddressComponent: React.FC = () => {
           selectedState &&
           (
             cities[
-              cityStates.find((state) => state.label === selectedState)
-                ?.value as keyof typeof cities
+            cityStates.find((state) => state.label === selectedState)
+              ?.value as keyof typeof cities
             ] || []
           )
             .filter((city) =>
