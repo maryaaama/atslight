@@ -1,238 +1,74 @@
 // JobForm.tsx
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import RangeSlider from "../rangeSlider/rangeSlider";
 import AddressComponent from "../jobFields/address";
 import GenderComponent from "../jobFields/gender";
 import FieldComponent from "../jobFields/fields";
 import Education from "../jobFields/education";
 import { EntryForm } from "../jobFields/entryForm";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Field } from "formik";
 import {
   Gender,
   JobEducation,
   JobField,
-  useUpdateJobMutation,
   Language,
   useCreateJobMutation,
-  CreateJobInput,
   JobStatus,
-  JobFieldsJobIdFkeyInverseInput
+  JobTranslationsJobIdFkeyInverseInput,
 } from "../../graphql/generated/graphql";
-interface FormValues {
-  title: string;
-  description: string;
-  field: string[];
-  gender: Gender | null;
-  ageRange: [number, number],
-  education: JobEducation | null;
-  experience: string;
-  knowledge: string;
-  skill: string;
-  competency: string;
-  tag: string;
-  address: string;
-  city: string;
-  country: undefined;
-  isRemote: false;
-  pipelineId: undefined;
-  state: undefined;
-  status: JobStatus;
-  languages: string[];
-}
-
-//import { JobData } from "../jobCard/JobCard";
+import { FormValues } from './types';
 
 const JobForm: React.FC = () => {
-  const [createJobMutation, { data, loading, error }] = useCreateJobMutation();
-  const navigate = useNavigate();
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-  const [gender, setGender] = useState<Gender | null>(null);
-  const [ageRange, setAgeRange] = useState({ minAge: 18, maxAge: 65 });
-  const [education, setEducation] = useState<JobEducation | null>(null);
-  const [titleError, setTitleError] = useState("");
+  const [createJobMutation, { loading, error }] = useCreateJobMutation();
   const [fieldsToShow, setFieldsToShow] = useState<JobField[]>([]);
-  const [updateJob] = useUpdateJobMutation({});
-
-
   const initialValues: FormValues = {
-    title: '',
-    description: '',
-    field: [],
-    gender: '' as Gender | null,
-    ageRange: [25, 75] as [number, number],
-    education: null as JobEducation | null,
-    experience: '',
-    knowledge: '',
-    skill: '',
-    competency: '',
-    tag: '',
-    address: '',
-    city: '',
-    country: undefined,
+    status: JobStatus.Draft,
+    departmentId: null,
     isRemote: false,
-    pipelineId: undefined,
-    state: undefined,
-    status: 'Draft' as JobStatus,
-    languages: [],
-  };
-  // console.log('JobForm')
-
-
-
-  /*const formik = useFormik({
-    initialValues: {
-      title: '',
-      description: '',
-      field: [],
-      gender: '' as Gender | null,
-      ageRange: [25, 75] as [number, number],
-      education: null as JobEducation | null,
-      experience: '',
-      knowledge: '',
-      skill: '',
-      competency: '',
-      tag: '',
-      address: '',
-      city: '',
-      country: undefined,
-      isRemote: false,
-      pipelineId: undefined,
-      state: undefined,
-      status: 'DRAFT' as JobStatus,
-      languages: [],
-    },
-    onSubmit: async (values) => {
-       try {
-         const jobInput: CreateJobInput = {
-           clientMutationId: "some-unique-id", // Optional
-           job: {
-             address: values.address,
-             city: values.city,
-             country: values.country,
-             isRemote: values.isRemote,
-             pipelineId: values.pipelineId,
-             state: values.state,
-             status: values.status,
-             languages: values.languages,
-             position: 1, // Required but not included in the formik values; you should adjust accordingly
-             title: values.title,
-             description: values.description,
-             education: values.education,
-             competencies: values.competency ? [values.competency] : [],
-             tags: values.tag ? [values.tag] : [],
-             fields: {
-               
-               fieldName: values.field.join(', '), // Adjust if necessary
-             } as JobFieldsJobIdFkeyInverseInput,
-             genders: values.gender ? [values.gender] : [],
-             // Include other fields as needed, based on your schema
-           },
-         };
- 
-         const response = await createJobMutation({
-           variables: { input: jobInput },
-         });
- 
-         if (response.data?.createJob?.job) {
-           navigate("/jobs");
-         }
-       } catch (error) {
-         console.error("Failed to create job:", error);
-       }
-
-      if (loading) return "Loading...";
-      if (error) return <pre>{error.message}</pre>
-    },
-
-  });*/
-
-
-
-
-  /* useEffect(() => {
-   if (jobLoc) {
-  setTitle(jobLoc.translations.nodes[0]?.title || "");
-   setDescription(jobLoc.translations.nodes[0]?.description || "");
-  setGender(jobLoc.gender as Gender);
-   setSelectedEducation(jobLoc.education as JobEducation);
-  setAgeRange({ minAge: jobLoc.minAge || 18, maxAge: jobLoc.maxAge || 65 });
-  }
-  }, [jobLoc]);
-
-
-  const handleEducationChange = (newEducation: JobEducation | null) => {
-    formik.setFieldValue('education', newEducation);
-  };
-  
-  const handleAgeRangeChange = (newRange: [number, number]) => {
-    formik.setFieldValue("ageRange", newRange);
-  };
-  const handleGenderChange = (gender: Gender) => {
-    formik.setFieldValue("gender", gender);
-    setGender(gender);
-  };
-  const validateTitle = () => {
-    if (!title.trim()) {
-      setTitleError("Title is required.");
-      return false;
-    }
-    setTitleError("");
-    return true;
-  };
-  const setSelectedEducationWrapper: React.Dispatch<React.SetStateAction<JobEducation | null>> = (value) => {
-    if (typeof value === 'function') {
-      const getValue = value as (prevState: JobEducation | null) => JobEducation | null;
-      handleEducationChange(getValue(props.values.education));
-    } else {
-      handleEducationChange(value);
-    }
-  };
- const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const isTitleValid = validateTitle();
-    console.log(e);
-    if (!isTitleValid) return;
-
-    const gendersArray = gender ? [gender] : null;
-    const translationsInput = {
-      create: jobLoc.translations.nodes.map((translation) => ({
-        lang: translation.lang,
-        title: translation.title,
-        description: translation.description,
-      })),
-    };
- 
-    try {
-      await updateJob({
-        variables: {
-          input: {
-            id:  "default-id",
-            patch: {
-              translations: translationsInput,
-              genders: gendersArray,
-              education: selectedEducation,
-              minAgeCondition: ageRange.minAge,
-              maxAgeCondition: ageRange.maxAge,
-            },
-          },
-        },
-      });
-      navigate("/jobs");
-    } catch (error) {
-      console.error("Failed to update job:", error);
-    }
+    address: '',
+    country: null,
+    state: null,
+    city: 'Tehran',
+    education: null,
+    position: 1,
+    pipelineId: 2254,
+    languages: [Language.Fa, Language.En],
+    translations: [
+      {
+        create: [
+          {
+            lang: Language.Fa,
+            title: '',
+            description: '',
+            requirements: ''
+          }
+        ]
+      },
+      {
+        create: [
+          {
+            lang: Language.En,
+            title: '',
+            description: '',
+            requirements: ''
+          }
+        ]
+      }
+    ] as JobTranslationsJobIdFkeyInverseInput[],
+    tags: [],
+    owners: [],
+    fields: [],
+    jobQuestionnaires: [],
+    workExperienceCondition: null,
+    ageCondition: [25, 75],
+    gradeConditions: null,
+    knowledges: [],
+    skills: [],
+    competencies: [],
+    genders: null,
   };
 
-  const fieldsToShow: JobField[] = [
-    JobField.Gender,
-    JobField.MilitaryStatus,
-    JobField.Resume,
-    JobField.Address,
-    JobField.Birthday,
-    JobField.CoverLetter,
-  ];*/
+
   const handleEducationChange = (
     setFieldValue: (field: string, value: any) => void,
     newEducation: JobEducation | null
@@ -259,12 +95,10 @@ const JobForm: React.FC = () => {
     setFieldValue('ageRange', newRange);
   };
 
-  const handleGenderChange = (
-    setFieldValue: (field: string, value: any) => void,
-    gender: Gender
-  ) => {
-    setFieldValue('gender', gender);
+  const handleGenderChange = (setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void, newGenders: Gender[]) => {
+    setFieldValue("genders", newGenders);
   };
+
 
   return (
     <>
@@ -272,17 +106,18 @@ const JobForm: React.FC = () => {
 
         initialValues={initialValues}
 
-        onSubmit={async (_, actions) => {
+        onSubmit={async (values, actions) => {
+          console.log(values);
           try {
             const response = await createJobMutation({
               variables: {
                 input: {
                   job: {
-                    address: '',
-                    city: 'Tehran',
-                    languages: [],
-                    position: 1,
-                    status: JobStatus.Draft,
+
+                    city: values.city,
+                    languages: values.languages,
+                    position: values.position,
+                    status: values.status,
 
                   },
                   clientMutationId: 'unique-id',
@@ -291,8 +126,7 @@ const JobForm: React.FC = () => {
             });
 
             console.log('Response:', response);
-
-            if (response.data) {
+            if (response && response.data) {
               alert('Connection to API is successful!');
             } else {
               alert('API connection failed!');
@@ -304,43 +138,43 @@ const JobForm: React.FC = () => {
             actions.setSubmitting(false);
           }
         }}
+
       >
         {props => (
           <form className="m-1 p-1 text-right" onSubmit={props.handleSubmit}>
             <h1 className="text-xl mx-4 my-2 text-right">موقعیت شغلی جدید</h1>
 
             <div className="border shadow-sm m-2 p-2 bg-slate-50 rounded-lg">
-              <label htmlFor="title">عنوان</label>
-              <input
-                className="w-full border mx-auto mt-1 rounded-sm p-1"
-                id="title"
-                name="title"
+              <Field
                 type="text"
+                name="title"
+                className="shadow-sm border-2 border-gray1 rounded-lg p-2 outline-none focus:border-gray2"
                 onChange={props.handleChange}
-                value={props.values.title}
-              />
-              {titleError && <div className="text-red-500">{titleError}</div>}
-              <label htmlFor="description">توضیحات</label>
-              <textarea
-                className="w-full border mx-auto mt-1 rounded-sm p-1"
-                id="description"
-                name="description"
-                onChange={props.handleChange}
-                value={props.values.description}
+                value={props.values.translations}
               />
             </div>
+            <label htmlFor="description">توضیحات</label>
+            <Field
+              className="w-full border mx-auto mt-1 rounded-sm p-1"
+              id="address"
+              name="address"
+              onChange={props.handleChange}
+              value={props.values.address}
+            />
+
             <div className="border shadow m-2 p-2 bg-slate-50 rounded-lg">
               <h2 className="my-3 font-medium text-lg">شرایط احراز</h2>
               <div className="my-3">
                 <label className="" htmlFor="title">
                   رشته
                 </label>
-                <input
+                <Field
                   className="w-[100%] border shadow-sm mx-auto mt-1 rounded-sm p-0.5"
                   type="text"
                   id="field"
+                  name="fields"
                   onChange={props.handleChange}
-                  value={props.values.field}
+                  value={props.values.fields}
                 />
               </div>
               <Education
@@ -357,10 +191,10 @@ const JobForm: React.FC = () => {
                 <input
                   className="w-[100%] border shadow-sm mx-auto mt-1 rounded-sm p-0.5"
                   type="text"
-                  id="Orientation"
-                  name="Orientation"
+                  id="knowledges"
+                  name="knowledges"
                   onChange={props.handleChange}
-
+                  value={props.values.knowledges}
                 />
               </div>
             </div>
@@ -369,31 +203,32 @@ const JobForm: React.FC = () => {
               <label className="my-auto" htmlFor="age">
                 بازه سنی
               </label>
+
               <RangeSlider
                 className="w-full mt-3 h-9"
-                defaultValue={props.values.ageRange}
-                onChange={(newRange) =>
-                  handleAgeRangeChange(props.setFieldValue, newRange)
+                defaultValue={props.values.ageCondition || [25, 75]} // مقدار پیش‌فرض
+                onChange={(newAgeCondition) =>
+                  handleAgeRangeChange(props.setFieldValue, newAgeCondition as [number, number])
                 }
               />
             </div>
+
             <GenderComponent
-              gender={props.values.gender}
-              onChange={(gender) =>
-                handleGenderChange(props.setFieldValue, gender)
-              }
+              gender={(props.values.genders || []).filter(gender => gender !== null) as Gender[]}
+              onChange={(newGenders) => handleGenderChange(props.setFieldValue, newGenders)}
             />
+
             <div className="border shadow m-2 px-2 py-3 bg-slate-50 rounded-lg">
               <label className="" htmlFor="experience">
                 سابقه کاری
               </label>
-              <input
+              <Field
                 className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
                 type="number"
-                id="experience"
-                name="experience"
+                id="education"
+                name="education"
                 onChange={props.handleChange}
-                value={props.values.experience}
+                value={props.values.education}
               />
             </div>
             <div className="border shadow m-2 p-2 bg-slate-50 rounded-lg">
@@ -408,7 +243,7 @@ const JobForm: React.FC = () => {
                   id="knowledge"
                   name="knowledge"
                   onChange={props.handleChange}
-                  value={props.values.knowledge}
+                  value={props.values.knowledges}
                 />
               </div>
               <br />
@@ -419,10 +254,10 @@ const JobForm: React.FC = () => {
                 <input
                   className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
                   type="text"
-                  id="skill"
-                  name="skill"
+                  id="skills"
+                  name="skills"
                   onChange={props.handleChange}
-                  value={props.values.skill}
+                  value={props.values.skills}
                 />
               </div>
               <br />
@@ -433,10 +268,10 @@ const JobForm: React.FC = () => {
                 <input
                   className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
                   type="text"
-                  id="competency"
-                  name="competency"
+                  id="competencies"
+                  name="competencies"
                   onChange={props.handleChange}
-                  value={props.values.competency}
+                  value={props.values.competencies}
                 />
               </div>
             </div>
@@ -447,11 +282,11 @@ const JobForm: React.FC = () => {
               <input
                 className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5"
                 type="text"
-                id="tag"
-                name="tag"
+                id="tags"
+                name="tags"
                 placeholder="باریستا, صندوقدار, آشپز"
                 onChange={props.handleChange}
-                value={props.values.tag}
+                value={props.values.tags}
               />
             </div>
             <div className="border shadow m-2 p-2 bg-slate-50 rounded-lg">

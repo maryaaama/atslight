@@ -7,10 +7,9 @@ const genderOptions = [
   { value: Gender.Other, label: "نامشخص" },
 ];
 
-
 interface GenderComponentProps {
-  gender: Gender | null;
-  onChange: (gender: Gender) => void;
+  gender: Gender[] | null; // به روز شده برای پشتیبانی از آرایه
+  onChange: (gender: Gender[]) => void; // تابع تغییر برای آرایه
 }
 
 const GenderComponent: React.FC<GenderComponentProps> = ({
@@ -18,9 +17,13 @@ const GenderComponent: React.FC<GenderComponentProps> = ({
   onChange,
 }) => {
   const handleGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value as Gender);
+    const value = event.target.value as Gender;
+    if (gender?.includes(value)) {
+      onChange(gender.filter((g) => g !== value)); // حذف جنسیت از آرایه
+    } else {
+      onChange([...(gender || []), value]); // اضافه کردن جنسیت به آرایه
+    }
   };
-
 
   return (
     <div className="border shadow m-2 p-2 bg-slate-50 rounded-lg">
@@ -29,11 +32,11 @@ const GenderComponent: React.FC<GenderComponentProps> = ({
         <div key={option.value}>
           <input
             className="mx-1 my-1"
-            type="radio"
+            type="checkbox" // تغییر از radio به checkbox برای پشتیبانی از انتخاب چندگانه
             id={option.value}
             value={option.value}
             name="gender"
-            checked={gender === option.value}
+            checked={gender?.includes(option.value)}
             onChange={handleGenderChange}
           />
           <label className="ml-4" htmlFor={option.value}>
