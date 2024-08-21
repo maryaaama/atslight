@@ -1,4 +1,10 @@
-import { Language } from "../graphql/generated/graphql";
+import {
+  JobTranslationsJobIdFkeyInverseInput,
+  JobTranslationsJobIdFkeyJobTranslationsCreateInput,
+  JobTranslationJobTranslationsPkeyDelete,
+  JobTranslationOnJobTranslationForJobTranslationsJobIdFkeyUsingJobTranslationsPkeyUpdate,
+  Language,
+} from "../graphql/generated/graphql";
 
 export const languages = [
   Language.Ar,
@@ -29,24 +35,47 @@ export function prepareLanguagesForFormik<T extends {}>(
   });
 }
 
+
+
 export function prepareTranslationsForMutation<T extends {}>(
   translations: Translation<T>[] | undefined,
   oldTranslations: Translation<T>[] | undefined,
-  isValid: (translation: T) => boolean
-) {
-  const _translations: TranslationInput<T> = {
-    delete: [],
-    update: [],
+  isValid: (translation: T) => boolean,
+  jobId: number // شناسه شغل که باید به صورت داینامیک ارسال شود
+): JobTranslationsJobIdFkeyInverseInput {
+  const _translations: JobTranslationsJobIdFkeyInverseInput = {
+    deleteByJobIdAndLang: [],
+    updateByJobIdAndLang: [],
     create: [],
   };
 
   translations?.forEach((translation) => {
     if (!isValid(translation)) {
-      _translations.delete.push(translation.lang);
+      _translations.deleteByJobIdAndLang!.push({
+        jobId: jobId,
+        lang: translation.lang,
+      } as JobTranslationJobTranslationsPkeyDelete);
     } else if (oldTranslations?.find((t) => t.lang === translation.lang)) {
-      _translations.update.push(translation);
+      _translations.updateByJobIdAndLang!.push({
+        jobId: jobId,
+        lang: translation.lang,
+        patch: {
+          title: (translation as any).title, // باید مشخص کنید که کدام فیلدها باید به‌روزرسانی شوند
+          description: (translation as any).description,
+          requirements: (translation as any).requirements,
+          fieldOfStudy: (translation as any).fieldOfStudy,
+          orientation: (translation as any).orientation,
+        },
+      } as JobTranslationOnJobTranslationForJobTranslationsJobIdFkeyUsingJobTranslationsPkeyUpdate);
     } else {
-      _translations.create.push(translation);
+      _translations.create!.push({
+        lang: translation.lang,
+        title: (translation as any).title,
+        description: (translation as any).description,
+        requirements: (translation as any).requirements,
+        fieldOfStudy: (translation as any).fieldOfStudy,
+        orientation: (translation as any).orientation,
+      } as JobTranslationsJobIdFkeyJobTranslationsCreateInput);
     }
   });
 

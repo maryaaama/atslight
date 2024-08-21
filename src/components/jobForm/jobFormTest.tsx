@@ -6,7 +6,6 @@ import GenderComponent from "../jobFields/gender";
 import FieldComponent from "../jobFields/fields";
 import Education from "../jobFields/education";
 import { EntryForm } from "../jobFields/entryForm";
-
 import { Formik, Field } from "formik";
 import {
   Gender,
@@ -22,27 +21,13 @@ import { useLang } from '../../contexts/languageContext';
 import { getTranslation } from '../../utils/translate';
 import { prepareLanguagesForFormik } from '../../utils/languages';
 import { safeParseInt } from '../../utils/safeParseInt';
-import { PipelineSelect } from './PipelineSelect';
-
-const translations = prepareLanguagesForFormik({
-  title: '',
-  description: '',
-  requirements: ''
-}).map((translation) => ({
-  create: [{
-    lang: translation.lang || [Language.Fa, Language.En],
-    title: translation.title || 'Default Title',
-    description: translation.description || 'Default Description',
-    requirements: translation.requirements || 'Default Requirements'
-  }]
-})) as JobTranslationsJobIdFkeyInverseInput[];
 
 
 const JobForm: React.FC = () => {
   const [createJobMutation, { loading, error }] = useCreateJobMutation();
   const [fieldsToShow, setFieldsToShow] = useState<JobField[]>([]);
   const lang = useLang();
-  const selectedTranslation = translations.length > 0 ? translations[0] : null;
+
 
 
 
@@ -55,10 +40,31 @@ const JobForm: React.FC = () => {
     state: null,
     city: 'Tehran',
     education: null,
-    position: 0,
+    position: 1,
     pipelineId: 2254,
     languages: [Language.Fa, Language.En],
-    translations,
+    translations: [
+      {
+        create: [
+          {
+            lang: Language.Fa,
+            title: '',
+            description: '',
+            requirements: ''
+          }
+        ]
+      },
+      {
+        create: [
+          {
+            lang: Language.En,
+            title: '',
+            description: '',
+            requirements: ''
+          }
+        ]
+      }
+    ] as JobTranslationsJobIdFkeyInverseInput[],
     tags: [],
     owners: [],
     fields: [],
@@ -107,7 +113,9 @@ const JobForm: React.FC = () => {
   return (
     <>
       <Formik
+
         initialValues={initialValues}
+
         onSubmit={async (values, actions) => {
           console.log(values);
           try {
@@ -115,39 +123,12 @@ const JobForm: React.FC = () => {
               variables: {
                 input: {
                   job: {
-                    city: values.city || null,
+
+                    city: values.city,
                     languages: values.languages,
                     position: values.position,
                     status: values.status,
-                    translations: {
-                      create: [
-                        {
-                          lang: Language.Fa,
-                          title: 'Default Title',
-                          description: 'Default Description',
-                          requirements: 'Default Requirements',
-                        }
-                      ],
-                    },
-                    pipelineId: values.pipelineId, // استفاده از مقدار pipelineId از فرم
-                    departmentId: values.departmentId || null, // اضافه کردن فیلد departmentId
-                    competencies: values.competencies || [],
-                    isRemote: values.isRemote, // اضافه کردن فیلد isRemote
-                    address: values.address, // اضافه کردن فیلد address
-                    country: values.country, // اضافه کردن فیلد country
-                    state: values.state, // اضافه کردن فیلد state
-                    education: values.education, // اضافه کردن فیلد education
-                    tags: values.tags, // اضافه کردن فیلد tags
-                    owners: null, // اضافه کردن فیلد owners
-                    fields: null, // اضافه کردن فیلد fields
-                    jobQuestionnaires: null, // اضافه کردن فیلد jobQuestionnaires
-                    workExperienceCondition: values.workExperienceCondition, // اضافه کردن فیلد workExperienceCondition
-                    maxAgeCondition: values.ageCondition ? values.ageCondition[1] : null, // بیشترین سن
-                    minAgeCondition: values.ageCondition ? values.ageCondition[0] : null, // اضافه کردن فیلد ageCondition
-                    gradeConditions: values.gradeConditions, // اضافه کردن فیلد gradeConditions
-                    knowledges: values.knowledges, // اضافه کردن فیلد knowledges
-                    skills: values.skills, // اضافه کردن فیلد skills
-                    genders: values.genders, // اضافه کردن فیلد genders
+
                   },
                   clientMutationId: 'unique-id',
                 },
@@ -161,21 +142,14 @@ const JobForm: React.FC = () => {
               alert('API connection failed!');
             }
           } catch (e) {
-            if (e instanceof Error) {
-              console.error('GraphQL Error:', e.message);
-              console.error('Full error:', e);
-              alert('Network Error: Could not connect to the API. Please try again.');
-            } else {
-              console.error('An unknown error occurred:', e);
-              alert('An unknown error occurred. Please try again.');
-            }
+            console.error('Error connecting to API:', e);
+            alert('API connection failed!');
           } finally {
             actions.setSubmitting(false);
           }
         }}
+
       >
-
-
         {props => (
           <form className="m-1 p-1 text-right" onSubmit={props.handleSubmit}>
             <h1 className="text-xl mx-4 my-2 text-right">موقعیت شغلی جدید</h1>
@@ -340,7 +314,14 @@ const JobForm: React.FC = () => {
               <label className="font-medium my-2 text-lg" htmlFor="step">
                 مراحل استخدام
               </label>
-              <PipelineSelect />
+              <input
+                className="w-[100%] border shadow-sm m-auto mt-1 rounded-sm p-0.5 text-slate-700"
+                type="text"
+                id="step"
+                value={"پیش فرض"}
+                name=""
+                disabled
+              />
             </div>
             <div className="flex gap-2">
               <button
